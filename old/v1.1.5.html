@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>VBTI · 测测你的灵魂歌姬</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta property="og:title" content="VBTI · 测测你的灵魂歌姬" />
+  <meta property="og:description" content="39道题，深入你的术力口人格。测出那位与你灵魂共振的虚拟歌姬。" />
+  <meta property="og:image" content="https://vbti-test.pages.dev/share-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://vbti-test.pages.dev" />
+  <meta property="og:type" content="website" />
+  <meta itemprop="name" content="VBTI · 测测你的灵魂歌姬" />
+  <meta itemprop="description" content="39道题，深入你的术力口人格。测出那位与你灵魂共振的虚拟歌姬。" />
+  <meta itemprop="image" content="https://vbti-test.pages.dev/share-card-square.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VBTI · 测测你的灵魂歌姬" />
+  <meta name="twitter:image" content="https://vbti-test.pages.dev/share-card.png" />
+  <style>
+    :root { --bg: #e0f0f5; --panel: #ffffff; --text: #0d6362; --muted: #4a6b7a; --line: #81dfdd; --soft: #b0e8e7; --accent: #21debe; --accent-strong: #1cbaa8; --shadow: 0 18px 44px rgba(28, 186, 168, 0.12); --radius: 26px; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: radial-gradient(circle at top right, #e0f0f5 0, #c8ede8 40%, #b0e8e7 100%); color: var(--text); min-height: 100vh; }
+    .shell { max-width: 1024px; margin: 0 auto; padding: 20px 16px 64px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 48px 20px; margin-top: 20px; position: relative; overflow: hidden; gap: 20px; }
+    .hero::after { content: ""; position: absolute; right: -70px; top: -70px; width: 220px; height: 220px; border-radius: 50%; background: linear-gradient(180deg, rgba(28, 186, 168, 0.18), rgba(28, 186, 168, 0.02)); pointer-events: none; }
+    .hero h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.12; letter-spacing: -0.03em; max-width: 720px; margin: 0 0 14px; }
+    .hero .sub { color: var(--muted); font-size: 16px; line-height: 1.8; max-width: 600px; }
+    button { border: 0; cursor: pointer; transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease; font: inherit; }
+    button:hover { transform: translateY(-1px); }
+    button:disabled { cursor: not-allowed; opacity: 0.5; transform: none; }
+    .btn-primary { background: var(--accent-strong); color: #fff; padding: 14px 24px; border-radius: 16px; box-shadow: 0 14px 34px rgba(28, 186, 168, 0.25); font-weight: 700; }
+    .btn-secondary { background: #fff; color: var(--accent-strong); padding: 14px 24px; border-radius: 16px; border: 1px solid var(--line); font-weight: 700; }
+    .btn-share { background: #fff; color: #1cbaa8; padding: 10px 16px; border-radius: 12px; border: 1px solid var(--line); font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; white-space: nowrap; }
+    .btn-card { background: linear-gradient(135deg, #1cbaa8, #21debe); color: #fff; padding: 10px 16px; border-radius: 12px; font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; white-space: nowrap; }
+    .btn-close { background: #fff; color: var(--accent-strong); padding: 10px 16px; border-radius: 12px; border: 1px solid var(--line); font-weight: 600; font-size: 13px; cursor: pointer; }
+    .btn-text-link { background: none; border: none; color: var(--muted); font-size: 14px; cursor: pointer; padding: 8px 0; }
+    .btn-text-link:hover { text-decoration: underline; color: var(--accent-strong); }
+    .screen { display: none; }
+    .screen.active { display: block; }
+    .test-wrap, .result-wrap { margin-top: 22px; padding: 24px; }
+    .topbar { position: sticky; top: 0; z-index: 100; background: var(--panel); padding: 12px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+    .progress { flex: 1; min-width: 220px; height: 10px; background: var(--soft); border-radius: 999px; overflow: hidden; }
+    .progress span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-strong)); border-radius: inherit; transition: width .22s ease; }
+    .progress-text { color: var(--muted); font-size: 13px; white-space: nowrap; }
+    .question-wrap { border: 1px solid var(--line); border-radius: 20px; padding: 18px; background: linear-gradient(180deg, #ffffff, #f4fafd); }
+    .question-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; color: var(--muted); font-size: 12px; }
+    .badge { background: var(--soft); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+    .question-title { font-size: 16px; line-height: 1.7; white-space: pre-wrap; }
+    .options { display: grid; gap: 10px; margin-top: 14px; }
+    .option { display: flex; align-items: flex-start; gap: 12px; padding: 14px; border-radius: 16px; border: 1px solid var(--line); background: #fff; transition: border-color .16s ease, background .16s ease; }
+    .option:hover { border-color: var(--accent-strong); background: #e0f0f5; }
+    .option input { margin-top: 3px; accent-color: var(--accent-strong); transform: scale(1.1); flex-shrink: 0; }
+    .option-code { font-weight: 800; color: var(--accent-strong); min-width: 22px; }
+    .nav-btns { display: flex; gap: 12px; margin-top: 18px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .nav-top-row { display: flex; justify-content: space-between; width: 100%; align-items: center; }
+    .nav-btn { padding: 12px 20px; border-radius: 14px; font-weight: 600; }
+    .nav-btns .btn-primary { min-width: 160px; }
+    @media (min-width: 601px) { .nav-top-row { justify-content: center; gap: 16px; } #submitBtn { display: inline-block !important; white-space: nowrap; } .nav-btns .btn-text-link { display: none; } }
+    .result-card-inner { display: grid; grid-template-columns: 0.9fr 1.5fr; gap: 24px; align-items: start; }
+    .result-poster { display: flex; flex-direction: column; align-items: center; text-align: center; background: radial-gradient(circle at top right, rgba(28,186,168,0.14), rgba(28,186,168,0) 48%); border-radius: 22px; padding: 20px 12px 16px; border: 1px solid var(--line); }
+    .result-poster img { width: 100%; max-width: 260px; max-height: 320px; object-fit: contain; border-radius: 18px; background: rgba(255,255,255,0.75); }
+    .result-poster .caption { margin-top: 12px; color: var(--muted); font-size: 13px; }
+    .mobile-only { display: none; }
+    .result-info { display: flex; flex-direction: column; gap: 16px; }
+    .result-header .kicker { font-size: 15px; color: var(--accent-strong); letter-spacing: .06em; margin-bottom: 4px; }
+    .result-header .name { font-size: clamp(32px, 5vw, 48px); line-height: 1.08; letter-spacing: -0.03em; }
+    .result-header .match { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 8px 14px; background: var(--soft); border: 1px solid var(--line); color: var(--accent-strong); font-weight: 700; font-size: 13px; margin-top: 10px; }
+    .section-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .result-desc { color: #0d6362; font-size: 14.5px; line-height: 1.9; white-space: pre-wrap; }
+    .result-bgm-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .result-bgm { display: flex; flex-wrap: wrap; gap: 8px; }
+    .result-bgm .bgm-tag { background: linear-gradient(135deg, #e0f0f5, #b0e8e7); color: #0d6362; font-size: 12px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); font-weight: 600; cursor: pointer; transition: background .16s; text-decoration: none; }
+    .bgm-tag:hover { background: #b0e8e7; }
+    .now-playing { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+    .note { display: inline-block; animation: bounce 1.5s infinite ease-in-out; }
+    @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
+    .result-actions { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+    .result-actions-left { display: flex; gap: 8px; }
+    .result-actions-right { display: flex; gap: 8px; }
+    .share-panel { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-radius: 22px 22px 0 0; padding: 24px 16px; z-index: 2000; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); display: none; }
+    .share-panel.active { display: block; }
+    .share-grid { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .share-item { display: flex; flex-direction: column; align-items: center; gap: 6px; background: none; border: none; font-size: 13px; color: var(--text); padding: 10px; border-radius: 12px; cursor: pointer; transition: background .15s; }
+    .share-item:hover { background: var(--soft); }
+    .share-item .icon { width: 44px; height: 44px; border-radius: 50%; background: var(--soft); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .result-footer { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 20px; }
+    .result-footer .footer-section { margin-bottom: 16px; text-align: center; }
+    .result-footer .footer-link { color: var(--accent-strong); text-decoration: none; font-weight: 600; }
+    .result-footer .footer-link:hover { text-decoration: underline; }
+    .footer-big-text { font-size: 21px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+    .banner-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .banner-container a { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+    .banner-container img { width: 100%; display: block; }
+    .missing-highlight { border: 2px solid #e74c3c !important; background: #fff5f5 !important; }
+    .secret-overlay { position: fixed; inset: 0; background: rgba(13,99,98,0.75); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
+    .secret-card { background: #fff; border-radius: 28px; max-width: 560px; width: 100%; padding: 28px; box-shadow: 0 30px 60px rgba(28,186,168,0.28); border: 1px solid var(--line); }
+    .secret-badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #e0f0f5, #b0e8e7); color: #1cbaa8; font-weight: 700; font-size: 13px; padding: 8px 16px; border-radius: 999px; margin-bottom: 18px; }
+    .secret-card .question-title { font-size: 18px; margin-bottom: 10px; }
+    .secret-card .options { margin-top: 8px; }
+    .secret-card .btn-primary { width: 100%; margin-top: 20px; }
+    .staff-overlay { position: fixed; inset: 0; background: rgba(13,99,98,0.75); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 16px; }
+    .staff-card { background: #fff; border-radius: 28px; max-width: 480px; width: 100%; padding: 28px; box-shadow: 0 30px 60px rgba(28,186,168,0.28); border: 1px solid var(--line); max-height: 80vh; overflow-y: auto; position: relative; }
+    .staff-close { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--muted); }
+    .staff-card table { width: 100%; border-collapse: collapse; }
+    .staff-card td { padding: 6px 8px; vertical-align: top; font-size: 14px; line-height: 1.6; }
+    .staff-card td:first-child { font-weight: 700; white-space: nowrap; color: var(--accent-strong); }
+    .bgm-control { position: fixed; bottom: 24px; left: 24px; z-index: 9999; width: 52px; height: 52px; background: #ffffff; border: 2px solid #1cbaa8; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-size: 24px; color: #1cbaa8; transition: transform .2s; }
+    .bgm-control:hover { transform: scale(1.08); }
+    .bgm-control.playing .note-icon { animation: bounce 1.2s infinite ease-in-out; display: inline-block; }
+    @media (max-width: 800px) {
+      .result-card-inner { display: flex; flex-direction: column; } .desktop-only { display: none; } .mobile-only { display: flex; }
+      .shell { padding: 12px 10px 80px; } .banner-container { grid-template-columns: 1fr; } .result-poster img { max-height: 400px; max-width: 100%; }
+    }
+    @media (max-width: 600px) {
+      .shell { padding: 12px 10px 48px; }
+      .nav-top-row { flex-wrap: nowrap; gap: 4px; }
+      .nav-top-row .nav-btn { flex: 1 1 auto; padding: 12px 6px; white-space: nowrap; font-size: 14px; }
+      #submitBtn { width: auto; padding: 14px 20px; flex: 0 1 auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell" id="mainShell">
+    <section id="intro" class="screen active">
+      <div class="hero card">
+        <div class="hero-top"><h1>VBTI · 测测你的灵魂歌姬</h1><p class="sub">39道题，深入你的术力口人格。<br>测出那位与你灵魂共振的虚拟歌姬。</p></div>
+        <button id="startBtn" class="btn-primary" style="margin-top:0;">开始测试</button>
+        <div style="color: var(--muted); font-size: 13px; margin-top: 4px;">测试结果仅供参考。愿你无论测出哪位歌姬，都能在自己的世界闪闪发光</div>
+        <div class="hero-bottom">
+          <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; flex-direction:column; align-items:center;">
+            <a href="https://www.bilibili.com/video/BV1of9hBQEsw" target="_blank" style="color:var(--accent-strong); text-decoration:none; font-size:13px; font-weight:600;">📺 关注作者 / 反馈问题</a>
+            <span style="color:var(--accent-strong); font-size:13px; font-weight:600;">加入VBTI交流群：747501305</span>
+          </div>
+          <div style="margin-top:8px; color: var(--muted); font-size: 11px;">版本：v1.1.5    |    bgm：拼凑的断音 - Toa</div>
+        </div>
+      </div>
+    </section>
+    <section id="test" class="screen">
+      <div class="test-wrap card">
+        <div class="topbar"><div class="progress"><span id="progressBar"></span></div><div class="progress-text" id="progressText">0 / 39</div></div>
+        <div id="questionContainer" class="question-wrap"></div>
+        <div class="nav-btns">
+          <div class="nav-top-row">
+            <button id="prevBtn" class="btn-secondary nav-btn">◀ 上一题</button>
+            <button id="submitBtn" class="btn-primary" disabled>提交并查看结果</button>
+            <button id="nextBtn" class="btn-secondary nav-btn">下一题 ▶</button>
+          </div>
+          <button id="backIntroTestBtn" class="btn-text-link">返回首页</button>
+        </div>
+      </div>
+    </section>
+    <section id="result" class="screen">
+      <div class="result-wrap card">
+        <div class="result-card-inner" id="resultCardInner"></div>
+        <div class="result-actions">
+          <div class="result-actions-left">
+            <button id="toTopBtn" class="btn-primary">回到首页</button>
+            <button id="restartBtn" class="btn-secondary">重新测试</button>
+          </div>
+          <div class="result-actions-right">
+            <button id="shareBtn" class="btn-share">📤 分享结果</button>
+            <button id="cardBtn" class="btn-card">🎫 生成灵魂卡片</button>
+          </div>
+        </div>
+        <div class="result-footer" id="resultFooter"></div>
+      </div>
+    </section>
+  </div>
+  <div class="share-panel" id="sharePanel">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;"><strong>分享到</strong><button class="btn-close" id="closeSharePanel">✕</button></div>
+    <div class="share-grid">
+      <button class="share-item" data-platform="qq"><span class="icon">🐧</span>QQ</button>
+      <button class="share-item" data-platform="wechat"><span class="icon">💬</span>微信</button>
+      <button class="share-item" data-platform="bilibili"><span class="icon">📺</span>B站</button>
+      <button class="share-item" data-platform="rednote"><span class="icon">📕</span>小红书</button>
+      <button class="share-item" data-platform="copy"><span class="icon">🔗</span>复制链接</button>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    // ========== 背景音乐 ==========
+    (function(){ var bgm = document.createElement('audio'); bgm.src = 'bgm/bgm.mp3'; bgm.loop = true; bgm.volume = 0.28; bgm.id = 'globalBgm'; document.body.appendChild(bgm); window._bgmAudio = bgm; })();
+    function updateBgmButton(){ var bgm = window._bgmAudio; var btn = document.getElementById('globalBgmBtn'); if (!btn) return; if(bgm&&!bgm.paused){ btn.classList.add('playing'); btn.innerHTML='<span class="note-icon">♪</span>'; } else { btn.classList.remove('playing'); btn.innerHTML='♪'; } }
+    function toggleGlobalBgm(){ var bgm = window._bgmAudio; if (!bgm) return; if(bgm.paused) bgm.play().catch(function(){}); else bgm.pause(); updateBgmButton(); }
+    setInterval(function(){ updateBgmButton(); }, 500);
+    document.addEventListener('visibilitychange', function(){ if(document.hidden){ document.querySelectorAll('audio').forEach(function(a){ if(!a.paused){ a.dataset.wasPlaying='true'; a.pause(); } }); } else { document.querySelectorAll('audio').forEach(function(a){ if(a.dataset.wasPlaying==='true'){ a.play().catch(function(){}); delete a.dataset.wasPlaying; } }); } });
+  </script>
+  <script>
+    /***** 题目数据开始 *****/
+    const questions = [
+      { id:'q1', dim:'JP', text:'在虚拟歌手的圈子里，你有自己真正想要坚持或追求的东西吗？', options:[
+        { label:'有！我想用创作、安利或应援，让更多人听到我喜欢的声音。🎤', value:'J' },
+        { label:'有，但不太确定自己能做到什么程度，偶尔自我怀疑。🌙', value:'P' },
+        { label:'没什么特别想追求的，听歌开心、圈子和平就好。🍌', value:'P' },
+        { label:'曾经有过，但现在觉得顺其自然就好。能一直听下去，已经是最幸福的事了。', value:'P' }
+      ]},
+      { id:'q5', dim:'EI', text:'在同好群里或线下活动面基时，你通常是？', options:[
+        { label:'气氛组担当，活跃气氛、带动节奏全靠我！🎉', value:'E' },
+        { label:'安安静静在旁边，偶尔发表一下自己的看法。👀', value:'I' },
+        { label:'看情况，跟熟的人疯，跟不熟的人冷。🎭', value:'E' },
+        { label:'很少参与讨论，但有同好来私聊就会聊得很投机', value:'I' }
+      ]},
+      { id:'q7', dim:'EI', text:'你更愿意被人评价为——', options:[
+        { label:'像乐正绫那样，开朗热情、活力满满的人。☀️', value:'E', lang:'CN' },
+        { label:'像GUMI那样，温柔细心、值得信赖的人。🌿', value:'I', lang:'JP' },
+        { label:'像言和那样，帅气利落、独当一面的人。⚔️', value:'I', lang:'CN' },
+        { label:'像巡音流歌那种，成熟优雅、从容不迫的人。🌙', value:'I', lang:'JP' }
+      ]},
+      { id:'q6', dim:'SN', text:'用下面选项的一首歌来形容你？', options:[
+        { label:'像《千年食谱颂》里的天依：热爱美食，吃饱再说。🍜', value:'S', lang:'CN' },
+        { label:'像《KING》里的GUMI：自信放光芒，生来就是自己世界的主宰。', value:'N', lang:'JP' },
+        { label:'像《伪物》里的可不：连我自己都搞不懂自己。👐', value:'N', lang:'JP' },
+        { label:'像《九九八十一》里的乐正绫，关关难、关关过，永远迎难而上。', value:'N', lang:'CN' }
+      ]},
+      { id:'q2', dim:'SN', text:'用一首歌来形容你的内心世界，你直觉会选？', options:[
+        { label:'《66CCFF》——想变成天蓝色，不一定最耀眼，但一定是独一无二的自己。💙', value:'N', lang:'CN' },
+        { label:'《世末歌者》——独自在世界的角落弹着吉他，唱给可能永远不会听到的人听。🎸', value:'N', lang:'CN' },
+        { label:'《世界第一的公主殿下》——虽然有时任性，但这就是我，不接受反驳。👑', value:'S', lang:'JP' },
+        { label:'《天ノ弱》——内心柔软敏感，总在深夜反复思考自己是不是哪里不够好。', value:'N', lang:'JP' }
+      ]},
+      { id:'q37', dim:'SN', text:'如果把自己比喻成一种动物，你觉得自己是？', options:[
+        { label:'不知疲倦的小狗，永远在奔跑，在雨中也不曾停不下来。🐕', value:'S' },
+        { label:'安静观察的猫，有自己的小世界，偶尔才让人靠近。', value:'N' },
+        { label:'下辈子就做在深海独自游弋的鲸，用只有同类能听懂的频率歌唱。🐋', value:'N' },
+        { label:'飞入熔炉的飞蛾，明知危险仍向前。🕊️', value:'N' }
+      ]},
+      { id:'q16', dim:'EI', text:'在同好圈里，你渴望找到那个能和你灵魂共鸣、像失散多年亲人一样默契的同好吗？', options:[
+        { label:'非常渴望！灵魂伴侣般的同好谁不想要！💞', value:'E' },
+        { label:'还好吧，保持一点距离也挺好，听歌自己听就行。📏', value:'I' },
+        { label:'不怎么渴望，我一个人也挺自在。🚶', value:'I' },
+        { label:'已经有了。圈子里那几个一起听歌、一起吐槽的朋友，就是我的快乐老家。🌍', value:'E' }
+      ]},
+      { id:'q14', dim:'EI', text:'你去参加V家only展，你会怎样度过这一天？', options:[
+        { label:'全场巡回集邮！能逮到的P主和coser全都要合影，能聊两句就更好了！📸', value:'E' },
+        { label:'直奔喜欢的P主摊位买周边，买完安静逛两圈就撤。🛍️', value:'I' },
+        { label:'提前约好同好一起逛，全程有说有笑，在群里实时直播。📱', value:'E' },
+        { label:'一个人仔细逛每一个摊位，拍照记录有意思的作品发在同好群里，但不一定说话。📷', value:'I' }
+      ]},
+      { id:'q17', dim:'EI', text:'你在圈子里是什么类型的粉丝？', options:[
+        { label:'传教士——到处安利，恨不得全世界都来听。📣', value:'E' },
+        { label:'老宅型——安静听歌，默默收藏，偶尔考古。📼', value:'I' },
+        { label:'创作型——自己也想写词/调教/画图。✍️', value:'I' },
+        { label:'考据党——从P主十年前的作品开始翻起、整理时间线。', value:'I' }
+      ]},
+      { id:'q19', dim:'EI', text:'以下哪个场景是你可能会干的？', options:[
+        { label:'在KTV点了术曲，发现全场只有我一个人嗨。🎤', value:'E' },
+        { label:'被问到“你喜欢听哪种歌”，脱口而出“术力口”，对方一脸懵。😶', value:'I' },
+        { label:'偷偷循环《脑蚀》两个月了，没和任何人说。💀', value:'I', lang:'JP' },
+        { label:'在超市听到BGM里有术曲前奏，直接站住不动听完。🛒', value:'E' }
+      ]},
+      { id:'q38', dim:'EI', text:'当你听到一首超好听的术力口歌曲，你会？', options:[
+        { label:'立刻分享给所有亲友和同好群，好歌不能只我一个人听！📢', value:'E' },
+        { label:'默默收藏，单曲循环播放。🎧', value:'I' },
+        { label:'去找这个P主的其他作品，深入研究。🔬', value:'I' },
+        { label:'打开评论区认真写一段自己的感受，哪怕没什么人看也想把话说出来。📝', value:'I' }
+      ]},
+      { id:'q25', dim:'EI', text:'你在B站看到一个术力口视频，UP主搬运时没标P主名字也没放原链接，你会？', options:[
+        { label:'在评论区再次提醒并附上原链接，必须尊重创作者。✍️', value:'J' },
+        { label:'心里不舒服但不会说什么，默默去原链接那边支持一下。🤫', value:'P' },
+        { label:'不标出处是底线问题，直接举办🚨', value:'J' },
+        { label:'看看UP主平时是不是都这样，如果是惯犯就举报，偶尔一次就提醒。🔍', value:'T' }
+      ]},
+      { id:'q8', dim:'TF', text:'你最喜欢的P主突然宣布无限期停更，你会？', options:[
+        { label:'虽然难过但尊重选择。创作是自由的，累了就该休息。🍃', value:'F' },
+        { label:'疯狂刷以前的投稿，一边看一边emo，感觉像失恋。😢', value:'F' },
+        { label:'先难过三分钟，然后分析停更原因、找风格代餐。🤔', value:'T' },
+        { label:'开始自己学调校/写词/画图，想用自己的方式延续ta的风格。✍️', value:'F' }
+      ]},
+      { id:'q11', dim:'TF', text:'你在同好群/评论区里看到两个人突然开始互怼，你通常会？', options:[
+        { label:'前排围观吃瓜，看谁能吵赢。🍿', value:'T' },
+        { label:'上去劝架！“大家别吵了，都是热爱术力口的人。”🤝', value:'F' },
+        { label:'完全不在乎，划走了。👋', value:'T' },
+        { label:'分析双方论点，在心里默默判断哪边更有道理，但不发言。🤔', value:'T' }
+      ]},
+      { id:'q13', dim:'TF', text:'你喜欢的虚拟歌姬被人在评论区贬低，说她“只是软件而已没有灵魂”，你会？', options:[
+        { label:'见怪不怪，耐着性子给路人科普虚拟歌手的定义和优秀歌曲。📖', value:'T' },
+        { label:'直接开麦回击，引用经典曲目论证什么才是灵魂。🔥', value:'T' },
+        { label:'心里很不舒服但不想吵架，默默点了踩然后划走。😔', value:'F' },
+        { label:'一笑而过。工具论也是一种观点，表示尊重理解，有这时间还是自己去听首新歌吧。', value:'T' }
+      ]},
+      { id:'q15', dim:'TF', text:'圈子里突然流行起一种新的风格，但你听着觉得“这不就是在毁歌吗”，你会？', options:[
+        { label:'在评论区理性留言，分析为什么你觉得这种风格不适合某些曲目。📝', value:'T' },
+        { label:'跟同好吐槽，但不会公开说——萝卜青菜各有所爱，尊重吧。🙊', value:'F' },
+        { label:'想自己去调一首，用实际作品证明什么叫更好的风格。🎛️', value:'T' },
+        { label:'走开不听。反正风潮总会过去，静静等它退流行就行。🍵', value:'T' }
+      ]},
+      { id:'q18', dim:'TF', text:'你在评论区写了一段对这首歌的感受，结果有人回复“你根本没听懂这首歌”，你会？', options:[
+        { label:'认真回复，解释我为什么这么理解这首歌，欢迎理性讨论。📝', value:'T' },
+        { label:'有点不爽，但不想在评论区吵架，删了自己的评论就划走了。😐', value:'F' },
+        { label:'不理他。每个人对歌的理解本来就不一样。😎', value:'T' },
+        { label:'家访他的主页，点进看看他平时都转发什么、听什么，尝试理解他为什么这么说。🔍', value:'T' }
+      ]},
+      { id:'q10', dim:'TF', text:'有一首术曲火爆了全网，但你get不到它好听在哪，你会？', options:[
+        { label:'既然这么红肯定有它的道理，多听几遍说不定就洗脑中毒了。🎧', value:'F' },
+        { label:'默默划走，坚信听歌审美是主观的，没必要勉强自己。😎', value:'T' },
+        { label:'去分析这首歌爆火的原因：是PV做得好？旋律洗脑？还是营销到位？🔍', value:'T' },
+        { label:'上去和吹捧这首歌的人对线，坚决维护心中更值得被关注的术曲。🔥', value:'F' }
+      ]},
+      { id:'q9', dim:'SN', text:'如果要用一首术力口歌曲来表达你现在的感情观，你会选？', options:[
+        { label:'《勾指起誓》——相信简单纯粹的约定。🤝', value:'S', lang:'CN' },
+        { label:'《心空》——爱的太过，伤得太深。💔', value:'N', lang:'CN' },
+        { label:'《幽灵法则》——无法抽身，依然等你救援。⚔️', value:'N', lang:'JP' },
+        { label:'《愛言葉》——用每一天的陪伴，慢慢说尽所有爱意。💌', value:'S', lang:'JP' }
+      ]},
+      { id:'q12', dim:'TF', text:'你看到一个新人P主的第一首投稿，制作很生涩但某一点意外地戳你，你会？', options:[
+        { label:'果断三连+关注，在评论区留长文鼓励，新人需要爱！💌', value:'F' },
+        { label:'先点个赞，等他出下一首看看水平有没有进步再决定要不要关注。🔍', value:'T' },
+        { label:'默默下载存进歌单循环，但不在评论区说话。📼', value:'F' },
+        { label:'留下具体的改进建议，希望越做越好', value:'T' }
+      ]},
+      { id:'q3', dim:'JP', text:'你打开B站，发现首页同时推了一首殿堂曲和一首冷门良曲，你会先点哪个？', options:[
+        { label:'当然是殿堂曲！能上殿堂肯定有它的道理，先看看大家为什么喜欢。🔥', value:'J' },
+        { label:'冷门良曲。比起跟风，我更愿意做那个发现宝藏的人。💎', value:'P' },
+        { label:'看封面和标题决定，眼缘最重要。👀', value:'P' },
+        { label:'先加进收藏夹或“稍后再看”，等有时间了再一起慢慢品。📑', value:'J' }
+      ]},
+      { id:'q4', dim:'JP', text:'B站上有个术力口相关的企划在招募，你很喜欢这个企划的主题，但你需要学一项新技能才能参与，你会？', options:[
+        { label:'直接报名！不会可以学，机会错过了就没了。⚡', value:'J' },
+        { label:'先收藏，等自己技术成熟了再参加下一次。📅', value:'P' },
+        { label:'观望一下。看看有没有更简单的分工可以先试着帮忙。👀', value:'P' },
+        { label:'拉朋友一起参加。两个人一起学新技能总比一个人强。👯', value:'E' }
+      ]},
+      { id:'q20', dim:'JP', text:'明天就是截止日了，你的同人稿/混音/PV还没完成，你会？', options:[
+        { label:'开足马力通宵肝完，死线就是第一生产力！🚀', value:'P' },
+        { label:'想办法跟策划/主办方求个情，晚几天应该没问题吧……😅', value:'P' },
+        { label:'早就做好了。我就是那种提前规划、绝不拖延的人。🗓️', value:'J' },
+        { label:'先把能交的部分交上去，剩下的看反馈再补。⚡', value:'J' }
+      ]},
+      { id:'q22', dim:'JP', text:'你正在肝一个企划，突然电脑蓝屏了，之前没保存的进度全没了，你会？', options:[
+        { label:'先骂三分钟，然后打开电脑重来一遍。💢', value:'J' },
+        { label:'大脑空白三秒，缓过来后从头理清思路再开始。🧊', value:'J' },
+        { label:'今天不干了。老天爷都让我休息。💤', value:'P' },
+        { label:'立刻联系队友/朋友说明情况，看能不能延长截止时间。📞', value:'J' }
+      ]},
+      { id:'q23', dim:'JP', text:'如果要你完成一个术力口相关的创作项目，你更倾向？', options:[
+        { label:'先干再说，边做边改，灵感在路上。🚲', value:'P' },
+        { label:'先构思清楚再动手，磨刀不误砍柴工。🔪', value:'J' },
+        { label:'拉齐staff一起做，一个人搞太累了。🌊', value:'P' },
+        { label:'先找一个你觉得最完美的参考作品，研究透了再开工。📖', value:'J' }
+      ]},
+      { id:'q27', dim:'JP', text:'你期待了很久的一首术力口新曲突然提前发布了，但你原计划今晚要早睡，明天有重要的事，你会？', options:[
+        { label:'先听为快！熬夜就熬了，明天再补觉。🎧', value:'P' },
+        { label:'看情况。如果特别期待就听，一般期待就明天再说。🤔', value:'P' },
+        { label:'忍痛先睡。明天精神饱满地听，体验更好。😴', value:'J' },
+        { label:'先看评论区，如果大家都说“神曲”就熬夜听，评价一般就明早再听。📊', value:'J' }
+      ]},
+      { id:'q21', dim:'JP', text:'你发现你最喜欢的那首歌本周在周刊上的排名掉了好几名，你会？', options:[
+        { label:'立刻去再循环几遍，用行动把数据刷回来。📈', value:'J' },
+        { label:'有点失落但无所谓，这也正常，排名不代表歌的质量。💎', value:'P' },
+        { label:'去翻评论区看看最近是不是有什么争议导致热度下降。🔍', value:'T' },
+        { label:'截图发到同好群：“家人们，给XXX冲冲榜。”📢', value:'E' }
+      ]},
+      { id:'q24', dim:'JP', text:'某位歌姬的生日快到了，同好群在商量怎么庆祝，你更倾向于？', options:[
+        { label:'我参与策划！想主题、想文案、分配任务都交给我。🎂', value:'J' },
+        { label:'有人带头我就配合。做图/写文案/剪视频，让我干啥就干啥。🙂', value:'P' },
+        { label:'我不太参与筹备，但在当天一定会转发生贺图或视频。🎁', value:'I' },
+        { label:'看情况。如果那段时间有空就多参与，没空就先关注着下次再说。📅', value:'P' }
+      ]},
+      { id:'q26', dim:'EI', text:'遇到压力或情绪低落时，哪类术曲会符合你的行为？', options:[
+        { label:'燃曲拉满！像《万象霜天》把情绪全部吼出去就舒服了。🔥', value:'E', lang:'CN' },
+        { label:'安静治愈系。像《梦与叶樱》慢慢听，慢慢消化。🌙', value:'I', lang:'JP' },
+        { label:'轻松甜曲。像《I LOVE U》那样，用甜蜜可爱的少女转移注意力。🍰', value:'I', lang:'CN' },
+        { label:'听点比我还emo的歌，比如《心做し》《少女A》，以毒攻毒。', value:'I', lang:'JP' }
+      ]},
+      { id:'q28', dim:'EI', text:'你偶然翻到自己十年前用过的歌单，里面有大量已经被你遗忘的术曲，你会？', options:[
+        { label:'一首一首点开重温，不知不觉听了三小时，眼泪还下来了。😢', value:'I' },
+        { label:'分享歌单链接到旧同好群，问一句“还有人记得这些歌吗？”📢', value:'E' },
+        { label:'快速扫一眼，挑几首印象深的听一下，剩下的关掉。⏩', value:'I' },
+        { label:'立刻开始考古这个P主的近况，发现ta也已经停更很久了，又emo了。🔍', value:'I' }
+      ]},
+      { id:'q29', dim:'SN', text:'在听V家歌曲时，你更容易被哪种类型的歌吸引？', options:[
+        { label:'快节奏、燃向曲——节奏一响就想抖腿。⚡', value:'S' },
+        { label:'叙事感强的故事曲——像在读小说。📖', value:'N' },
+        { label:'氛围感拉满的电音/实验曲——喜欢那种漂浮感。🌌', value:'N' },
+        { label:'旋律简单但歌词精准扎心的曲子——一句歌词能让你想起十年前的自己。🎯', value:'N' }
+      ]},
+      { id:'q30', dim:'JP', text:'你觉得自己最近的听歌状态是？', options:[
+        { label:'疯狂循环某几首，上头到停不下来。🔄', value:'J' },
+        { label:'随机播放，听到哪首是哪首。🎲', value:'P' },
+        { label:'在考古，翻老P主的旧作。📼', value:'P' },
+        { label:'专门搜“冷门良曲推荐”视频，按评论区指引一首一首听。🔎', value:'N' }
+      ]},
+      { id:'q31', dim:'SN', text:'如果你只能给朋友安利一首中文V家歌曲，你会选？', options:[
+        { label:'《达拉崩吧》——洗脑第一名。（原来这是术曲！x）🐉', value:'S', isCN:true },
+        { label:'《霜雪千年》——入坑经典，余音绕梁。🐉', value:'S', isCN:true },
+        { label:'《告死鸟》——推歌我只推最新的。✍️', value:'N', isCN:true },
+        { label:'我主要还是听日术曲', value:'JP', isJP:true }
+      ]},
+      { id:'q32', dim:'SN', text:'如果你只能给朋友安利一首日文V歌曲，你会选？', options:[
+        { label:'《Melt》——奇迹的起源，入坑首选。🎵', value:'S', isJP:true },
+        { label:'《千本樱》——就算不听术力口的人也大概率听过。🌸', value:'S', isJP:true },
+        { label:'《脑蚀》——只听最新最潮的。🎧', value:'N', isJP:true },
+        { label:'我主要还是听中术曲', value:'CN', isCN:true }
+      ]},
+      { id:'q33', dim:'SN', text:'你听V家歌曲会更关注哪个部分？', options:[
+        { label:'旋律——好听才是硬道理！🎼', value:'S' },
+        { label:'歌词——歌词戳心才会单曲循环。📝', value:'N' },
+        { label:'调教——调教好坏决定一首歌的灵魂。🎛️', value:'N' },
+        { label:'PV——魔性/唯美画面会让我印象深刻', value:'S' }
+      ]},
+      { id:'q34', dim:'SN', text:'如果把V家歌曲比作食物，你的歌单更接近？', options:[
+        { label:'火锅——万物皆可涮，什么风格都听，越杂越香。', value:'S' },
+        { label:'清粥小菜——不需要重口味，清淡温暖就足够治愈。🥣', value:'N' },
+        { label:'挚爱甜点——甜就完事了，生活需要糖分和可爱。🍰', value:'S' },
+        { label:'深夜泡面——不是什么大餐，但刚好填满当下的饥饿。🍜', value:'N' }
+      ]},
+      { id:'q35', dim:'SN', text:'你一般通过什么渠道发现新的术曲？', options:[
+        { label:'B站等平台首页推荐，算法懂我。📱', value:'S' },
+        { label:'亲友安利/群聊分享，相信圈子品味。👥', value:'N' },
+        { label:'自己扒喜欢的P主列表，一个一个听。🔍', value:'N' },
+        { label:'在周刊里蹲新曲，每周必看。📺', value:'N' }
+      ]},
+      { id:'q36', dim:'JP', text:'如果把你和V家的关系比作一段旋律，你觉得最接近的是？', options:[
+        { label:'一段热血燃烧的副歌——V家就是我青春里的那团火。🔥', value:'J' },
+        { label:'一段温柔循环的间奏——不需要高潮，一直陪伴就已足够。🎧', value:'P' },
+        { label:'一段还未完成的demo——我和V家的故事才刚开始，未来可期。🌱', value:'P' },
+        { label:'一段复杂的变奏——从入坑到退坑再到回坑，兜兜转转还是这里。🔄', value:'P' }
+      ]},
+      { id:'q39', dim:'JP', text:'最后一道题：你觉得这次测试会给你匹配到哪位歌姬？', options:[
+        { label:'一定是那个最元气的角色！💪', value:'J', weight:2, vibe:'Energetic' },
+        { label:'可能是那个温柔治愈的角色吧。🌸', value:'P', weight:2, vibe:'Healing' },
+        { label:'随便，测到什么是什么。🤷', value:'P', weight:1 },
+        { label:'我希望是那个最冷门、最被低估的角色——我觉得ta才最像我。💎', value:'N', weight:2, vibe:'Underrated' }
+      ]}
+    ];
+
+    // ========== 隐藏题 ==========
+    const secretQuestions = {
+      INTP: {
+        text: '如果你在异世界里拥有一件属于自己的标志性物品，你觉得会是？',
+        options: [
+          { label:'一把未出鞘的短刀——不主动亮刃，但刀刃一直都在。', target:'言和' },
+          { label:'一本总是翻到同一页的笔记本——不是没看完，是这一页值得反复读。', target:'墨清弦' },
+          { label:'一个随身携带的整蛊道具箱——你永远不知道下一秒会发生什么。', target:'镜音连' }
+        ]
+      }
+    };
+
+    const characters = {
+      '初音未来':{ mbti:'ENFP', ie:52, ns:56, ft:62, pj:56, caption:'世界第一的公主殿下', music:'music/miku.mp3', weight:1, lang:'JP',
+        bgm:'World is Mine | BV1bx411c7Cd\n深海少女 | BV1Hx411c7Gh\nmelt | BV17s411b7eh\n拼凑的断音 | BV1vs411D7JZ',
+        desc:'你的性格如初音未来一般，是世界的焦点，也是创作的源泉，王牌般的主角。你有极强的共情能力和创造力，内心深处藏着理想主义的光芒。你温柔、敏感，有时会沉浸在自己的精神世界里，但一旦站上舞台，就能用你的方式感染所有人。你不需要刻意讨好谁，因为你本身就足够闪耀。无论是被人理解还是被人误解，你始终相信：音乐和真诚能跨越一切。✨',
+        shortDesc:'你的性格如初音未来一般，是世界的焦点，也是创作的源泉。你有极强的共情力和创造力，内心深处藏着理想主义的光芒。你不需要刻意讨好谁，因为你本身就足够闪耀。就像她的《world is mine》唱到的——“要像公主一样对待我～”' },
+      'GUMI':{ mbti:'ENFP', ie:46, ns:52, ft:56, pj:50, caption:'温柔又坚强的失恋女神', music:'music/gumi.mp3', weight:2, lang:'JP',
+        bgm:'马赛克卷 | BV1ks411t7Mq\n天之弱 | BV1CK4y1Y7r1\n胆小鬼蒙布朗 | BV1ys411t7HH\nI Can\'t Wait | BV15GmhBaEZF',
+        desc:'你就像GUMI，温柔俏皮的外表下，藏着一颗历经风雨却依然坚强的心。她拥有及肩的翠绿色短发，头上戴红色护目镜，代表物是胡萝卜。由于GUMI曲中失恋曲非常多，故有"恋爱苦手"的二次设定。你可能经历过不少挫折，但你从不轻易认输。你有着独特的中低音域般的沉稳气质，不张扬却让人无法忽视。你善解人意，愿意倾听别人的故事，也用自己的方式治愈他人。🥕',
+        shortDesc:'你就像GUMI，温柔俏皮的外表下，藏着一颗历经风雨却依然坚强的心。你善解人意，愿意倾听别人的故事，也用自己的方式治愈他人。就像她的《马赛克卷》唱到的——“为了不互相接触而作茧自缚，这也是命运不是吗～”' },
+      '重音Teto':{ mbti:'ENFP', ie:50, ns:50, ft:52, pj:55, caption:'恶作剧与反差萌的红色奇美拉', music:'music/teto.mp3', weight:0, lang:'JP',
+        bgm:'医学 | BV1nafnYUEac\n脑蚀 | BV1mNf3BREgj\n天真烂漫机能 | BV1sx411c7sB\nLiar Dancer | BV1oAtcz7Eyg',
+        desc:'你的性格就像重音Teto，外表看似简单少女，实则是成熟奇美拉！Teto最初是2008年愚人节在2ch上被编造出来"钓鱼"的虚构角色，然而凭借独特的红色螺旋双马尾、呆毛和血红色瞳孔奇美拉的形象，以及粉丝们的热爱，她最终拥有了UTAU声库，甚至到今天的SV声库，变成了真正的虚拟歌手。你的人生可能也充满了反差与惊喜——别人以为你在开玩笑的时候，你已经悄悄地做到了别人做不到的事。从"愚人节玩笑"到"真正的歌姬"，你用行动证明了什么是逆袭，奇美拉占领世界！💥',
+        shortDesc:'你就像重音Teto，从愚人节玩笑到真正的歌姬，你的人生充满了反差与惊喜。别人以为你在开玩笑的时候，你已经悄悄做到了别人做不到的事。就像她的《医学》唱到的——“若一切变得轻而易举，那么所有问题都会遭到埋没～”' },
+      '俊达萌':{ mbti:'ENFP', ie:60, ns:45, ft:55, pj:62, caption:'傲娇倔强的枝豆精灵', music:'music/zunmon.mp3', weight:1, lang:'JP',
+        bgm:'俊达派对之夜 | BV1td3MeoExq\n俊达之家的晚餐 | BV1wAUkYQEem\n俊达☆连绵不绝的咚！ | BV1Qz421r7XG',
+        desc:'你的性格就像俊达萌，外表傲娇、内在柔软，可爱又倔强。俊达萌是设定为变身成人类的"枝豆妖精"，表面上一副"哼，我才不是为了帮你呢"的样子，实际上是最热心肠的那一个。你也经常嘴硬心软，明明很关心别人却不好意思直接表达，总是用别扭的方式传递善意。这种反差萌反而让你格外讨人喜欢。🫛',
+        shortDesc:'你外表傲娇，内在柔软，常常嘴硬心软。总是用自己满不在乎的方式传达善意，就像她的《俊达派对之夜》唱到的——“俊达之行，始于足下～”' },
+      '洛天依':{ mbti:'INFP', ie:44, ns:55, ft:58, pj:52, caption:'灵动治愈的中华歌姬', music:'music/luotianyi.mp3', weight:1, lang:'CN',
+        bgm:'勾指起誓 | BV1Jb411U7u2\n大哉乾元 | BV1Xp421o7hr\n一花依世界 | BV1Vs411H7JH\n66CCFF | BV1ix411F7TB',
+        desc:'你就像洛天依，温柔敏感，内心细腻，能敏锐地感知他人的情绪。她是一位15岁的灰发外星少女，性格温柔内向、细腻敏感；因演唱了许多国风歌曲，被誉为"国风歌姬"，而"大吃货"这一深入人心的二设，则来自《千年食谱颂》的广泛传播。你也可能有些内向，不太擅长表达自己，但你的温柔与善良总能在不经意间治愈身边的人。你有自己的坚持和倔强，是一个外表柔软、内心坚定的人。对了，你可能还特别容易被美食俘获——没有什么是一顿好吃的解决不了的！把你的个性占满整个窗口吧！🍜',
+        shortDesc:'你就像洛天依，温柔敏感，内心细腻，能敏锐地感知他人的情绪。你可能有些内向，但你的温柔与善良总能在不经意间治愈身边的人。就像她的《勾指起誓》唱到的——“所以让我再靠近一点点，因为你太温暖～”' },
+      '可不':{ mbti:'INFP', ie:48, ns:56, ft:52, pj:54, caption:'捉摸不透的无机质少女', music:'music/kafu.mp3', weight:0, lang:'JP',
+        bgm:'伪物 | BV1ih411e7gn\n心跳不止 | BV1MQ4y1a7JY\n不羁的喝采 | BV1jo4y1d7TY\nCat Loving | BV1hh411671y',
+        desc:'你就像可不，身上充满了"可能性不可解"的神秘气质。可不（KAFU）是以虚拟主播花谱为原型开发的声库，角色形象以白发、蓝粉瞳孔及科技感服饰为特征，作为"音乐的同位体"项目核心，旨在实现创作者与听众的协同艺术表达。你不喜欢被定义，也不喜欢被束缚，有时候你也不懂你自己。你追求自由，喜欢探索未知，对世界有着自己独特的理解方式。你的眼神里藏着故事，只有真正懂你的人才能读懂。🔮',
+        shortDesc:'你就像可不，身上充满了可能性与不可解的神秘气质。你不喜欢被定义，也不喜欢被束缚，对世界有着自己独特的理解方式，有时候你也不懂你自己。就像她的《伪物》唱到的——“这世上没有比假花更艳丽的花朵～”' },
+      '乐正绫':{ mbti:'ESFP', ie:58, ns:50, ft:56, pj:58, caption:'元气满满的集团大小姐', music:'music/yuezhengling.mp3', weight:1, lang:'CN',
+        bgm:'太阳是什么颜色 | BV1yVQFBNEPn\n九九八十一 | BV1es41197ai\n梦语 | BV13s411S7JK\n世末歌者 | BV1Qs411k7Qv',
+        desc:'你的性格和乐正绫如出一辙——活力四射，元气满满！官方设定中，她是活力十足的16岁女高中生，乐器制造商和音乐大企业乐正集团的大小姐，声音元气，个性鲜明。你是一个行动派，想到什么就去做，从不拖泥带水。你直来直去，不喜欢拐弯抹角，虽然有时候会显得有点大大咧咧，但这份率真正是你最迷人的地方。你天生自带一种"大小姐"的气场，不是因为高傲，而是因为你足够自信和洒脱。你相信，人生就是要跑起来才精彩！🏃‍♀️',
+        shortDesc:'活力四射，元气满满！你是一个行动派，想到什么就去做，从不拖泥带水。你直来直去，这份率真正是你最迷人的地方。就像她的《太阳是什么颜色》唱到的——“无需为今天计划，把心事都放下，请跟着节奏调整步伐～”' },
+      '镜音铃':{ mbti:'ESFP', ie:52, ns:44, ft:52, pj:56, caption:'热烈活泼的傲娇女孩', music:'music/rin.mp3', weight:0, lang:'JP',
+        bgm:'少女A | BV1QW411P75t\n心 | BV1XW411P7jH\nlost one的号哭 | BV1Lx411c7dP\n炉心融解 | BV17x411D7Jx',
+        desc:'你的性格就像镜音铃，拥有元气活泼，反差可爱萌在设定之初。你是一个充满反差魅力的人——有时元气满满，有时又内敛深沉。你喜欢热闹，也享受独处；你善良，但绝不是好欺负的类型。双面性格让你在任何场合都能游刃有余！🍊',
+        shortDesc:'你是一个充满反差魅力的人——有时元气满满，有时又内敛深沉。双面性格让你在任何场合都能游刃有余。就像她的《少女A》唱到的——“为了让我作为我存在～”' },
+      '言和':{ mbti:'INTP', ie:56, ns:56, ft:35, pj:52, caption:'帅气温柔的冰山美人', music:'music/yanhe.mp3', weight:0, lang:'CN',
+        bgm:'Side by Side | BV13E421P7W2\n冠世一战 | BV17t411y7D2\n逆浪千秋 | BV1BW411s7g3\n谁杀死了知更鸟 | BV11s411V7Ny',
+        desc:'你就像言和一样，外表看起来酷酷的，甚至有点高冷，但内心其实非常温柔。作为中文V家第二位虚拟歌姬，言和拥有偏中性的声线和帅气又有些中二的女孩子设定，内心十分温柔，正如名字的寓意一样——言辞温和。你不喜欢张扬，但有自己的坚持和底线。你有独特的魅力，干净利落，不拖泥带水，让人觉得可靠又安心。或许你不善言辞，但你的行动足以证明一切。⚔️',
+        shortDesc:'外表看起来酷酷的，甚至有点高冷，但内心其实非常温柔。你不喜欢张扬，但有自己的坚持和底线，让人觉得可靠又安心。就像她的《Side by Side》唱到的——“无法再掩盖，也没人能够再替代～”' },
+      '镜音连':{ mbti:'INTP', ie:52, ns:50, ft:38, pj:45, caption:'率真与凌厉并存的正太', music:'music/len.mp3', weight:0, lang:'JP',
+        bgm:'逃避法律摇滚 | BV1Ks411v7BK\n恶之召使 | BV1Ti42197rH\nFire◎Flower | BV1jx411S7C1\n电吉他摇滚男孩 | BV1UFH6zcEsV',
+        desc:'你的性格就像镜音连——表面上可能是腼腆温柔的青春期少年，但内心深处藏着成熟甚至腹黑的一面。连的特征是青春期少年的歌声、从后方短短地束起来的金发，以及印有低音谱号的校服为主题的服装。你有时腼腆，有时凌厉；有时温柔，有时冷漠。你的反差感让人捉摸不透，但这正是你的魅力所在——你不是一个能被简单定义的人。🍌',
+        shortDesc:'表面上可能是腼腆温柔的青春期少年，但内心深处藏着成熟甚至腹黑的一面。反差感让人捉摸不透，但这正是你的魅力所在。就像他的《逃避法律摇滚》唱到的——“一年到头都得意忘形起来吧～”' },
+      '心华':{ mbti:'ENFJ', ie:50, ns:45, ft:58, pj:50, caption:'细腻温婉的偶像高中生', music:'music/xinhua.mp3', weight:0, lang:'CN',
+        bgm:'一人行者 | BV1Ys411X7vP\n诗 | BV1gx411A7Ko\n冻夏 | BV1jv411w7q6\n如见青山 | BV1ab411g7Fb',
+        desc:'你的性格就像心华，活泼开朗，乐观向上！心华是一位爱唱歌的16岁高中生偶像少女，有着紫色的头发，是活泼可爱型的代表。你总是能把快乐传递给身边的人，用你的笑容感染世界。你相信生活是美好的，也愿意用自己的方式让身边的人感到温暖。🌸',
+        shortDesc:'活泼开朗，乐观向上！你总是能把快乐传递给身边的人，用你的笑容感染世界。就像她的《冻夏》唱到的——“你留下我的身影，留给某夜的梦境，能够载着你飞行～”' },
+      '星尘':{ mbti:'INFJ', ie:50, ns:56, ft:56, pj:52, caption:'坚定强大的银河少女', music:'music/xingchen.mp3', weight:0, lang:'CN',
+        bgm:'星愿StarWish | BV1Zs411D7vo\n尘降 | BV1Zs411z79y\n万神纪 | BV1Sx41117dD\n所以我伸出了手 | BV16grkYhEBJ',
+        desc:'你就像星尘，温柔、细腻、带一点害羞，但是内核强大。从宇宙中来到地球，拥有灰白发和金瞳，代表物为梅塔特隆立方体，应援句为"众星因你，皆降为尘"。相比她人的活泼开朗，星尘更加内向害羞，但这并不妨碍她用自己的方式发光。你可能不善言辞，但你的内心有一个丰富的世界，懂得在安静中绽放自己的光芒。✨',
+        shortDesc:'温柔、细腻、带一点害羞，但是内核强大。你可能不善言辞，但你的内心有一个丰富的世界，懂得在安静中绽放自己的光芒。就像她的《星愿StarWish》唱到的——“漫天的繁星会照亮你的视野，我也会一直陪伴在你身边，永不分别～”' },
+      '乐正龙牙':{ mbti:'INTJ', ie:56, ns:54, ft:36, pj:56, caption:'高冷外表下的热烈鼓手', music:'music/yuezhenglongya.mp3', weight:1, lang:'CN',
+        bgm:'In Your Breath | BV1Tx411Q7yR\n腾龙令 | BV1YJ4m147MC\n墨隐侠声 | BV1oJ4m147eN\n威海 | BV19b41157sK',
+        desc:'你的性格就像乐正龙牙，头脑清晰、洒脱利落，随性不羁的作风下藏着敏锐果决的洞察力。他是乐正绫的哥哥，乐正集团的未来当家，平时看起来有点嫌麻烦，但关键时刻总是他回来统筹全局、稳定军心。乐队的鼓手，演奏风格热血激烈——平时有多怕麻烦，拿起鼓槌的那一刻就有多投入。你也是如此：讨厌琐碎、不轻易出手，但一旦认真起来，整个局面的走向都在你的掌控之中。别人看到的是你的喜怒不形于色，真正懂你的人才知道——你只是把能量留给了值得的人和事。🐉',
+        shortDesc:'高冷是你的保护色，你是独当一面的人，愿意对在意的人付出一切。就像他的《In your breath》唱到的——“为你创造这个新宇宙，是我存在的理由～”' },
+      '徵羽摩柯':{ mbti:'ISTP', ie:54, ns:48, ft:40, pj:50, caption:'天才少年全能技术宅', music:'music/zhiyumoke.mp3', weight:0, lang:'CN',
+        bgm:'虚拟少年 | BV1mJ411v7Em\n你好，世界！ | BV1ss411377E\nFollow me | BV1BJ411y7EM\n戴帽子的孩子 | BV13t411d7s7',
+        desc:'你的性格就像徵羽摩柯，聪明、专注、在自己的领域里闪闪发光。徵羽摩柯是一位14岁的天才少年，擅长编程和键盘乐器。他一定是人群中最特别的那个，要是一旦谈到自己热爱的领域，就会展现出更令人惊叹的才华和热情。你也是这样的人——在感兴趣的事情上可以废寝忘食，在擅长的领域里是不可替代的存在。🎹',
+        shortDesc:'聪明，专注的你一直都熠熠闪光。你是最特别的那一个，是不可替代的存在。就像他的《虚拟少年》唱到的——“我的人间，你走不到天涯～”' },
+      '墨清弦':{ mbti:'INTP', ie:54, ns:48, ft:30, pj:50, caption:'冷静知性的迟钝美人', music:'music/moqingxian.mp3', weight:0, lang:'CN',
+        bgm:'ACE | BV1J4411j7mn\n独占春 | BV1dCEXzBEZZ\n闲花白 | BV1d4411G7jJ\n入摩 | BV1Vi421Q7ow',
+        desc:'你的性格就像墨清弦，冷静、理性、知性优雅。墨清弦拥有紫色的长发和冷静沉稳的性格。她给人的第一印象可能是高冷、难以接近，但实际上只是习惯用理性的方式处理问题。你擅长分析、逻辑清晰，在混乱中能保持冷静的头脑。别人眼中的“高冷”，其实是你专注思考时的样子，当然也有可能是你反应“慢了半拍”。📚',
+        shortDesc:'你理性，冷静。擅长分析逻辑清晰，在混乱中常常保持冷静的头脑，这是你的魅力所在。就像她的《ACE》唱到的——“爱我光芒四射～”' },
+      '巡音流歌':{ mbti:'ISFP', ie:44, ns:52, ft:60, pj:54, caption:'成熟优雅的大姐姐', music:'music/luka.mp3', weight:0, lang:'JP',
+        bgm:'Lukaluka★night fever | BV1qs411f7JL\n双重套索 | BV1px411c7p7\nJust Be Friends | BV1vx411c7Z1\nDreamin Chuchu | BV1N4411L7xV',
+        desc:'你就像巡音流歌，自带一种从容不迫的气场，性格冷静温和。你身上有一种天然的包容力，无论什么性格的人都能和你好好相处。你不张扬，但足够有存在感；你温和，但有原则底线。但是偶尔也反差萌，比如巡音粉发的设定灵感来源是吹奏圆号类乐器时会把脸颊吹的发红，也有萌到深入人心的亚种——章鱼LUKA的形象🐙',
+        shortDesc:'你自带从容不迫的气场，能跟身边人打成一片，常常让大家放下防备跟你开心的一起玩。就像她的《Lukaluka★night fever》唱到的——“我比任何人都还要了解你，所以就交给我吧~”' },
+      'KAITO':{ mbti:'ISFP', ie:46, ns:45, ft:56, pj:50, caption:'天然呆的冰淇淋大哥', music:'music/kaito.mp3', weight:0, lang:'JP',
+        bgm:'暖暖kaito | BV1ws41197Ac\n千年的独奏曲 | BV1vx411c7y7\n恶德的法官 | BV1Zx411c7pV\nDoctor=Funk Beat | BV1n4411m7ja',
+        desc:'你的性格就像KAITO，天然呆，温柔到骨子里，内心强大，但是是团队里面的大哥，时刻留意着他人的情绪。KAITO的特征是随时都戴着的蓝色围巾（一度让人以为是围巾是本体），最喜欢吃冰淇淋。他早期销量惨淡，一度被称为“史上最不卖座的VOCALOID”，但后来凭借优质作品逆袭成为经典。你可能和他一样，有过不被看好的时候，但最终用自己的实力证明了价值。🍦',
+        shortDesc:'你内心强大，是团队里的大哥，时刻留意着他人的情绪。就像他的《暖暖的kaito》唱到的——“今天也依旧想让你会心而笑～”' },
+      'MEIKO':{ mbti:'ESTJ', ie:52, ns:45, ft:42, pj:56, caption:'豪爽利落的大姐头', music:'music/meiko.mp3', weight:0, lang:'JP',
+        bgm:'Nostalogic | BV16x411P7X9\n我的恋情是地狱业火 | BV1B44y1i7Eu\nChange me | BV1Cs411o7gR\n恶食娘空琪塔 | BV1CE411575F',
+        desc:'你的性格就像MEIKO，豪爽、帅气、讲义气！MEIKO是Crypton Future Media开发的第一位VOCALOID歌手，也是史上第一位日语VOCALOID歌手，特征是棕色短发、红色服装，有着成熟女性的声线。同人设定中她常被描绘为“酒豪”，喜欢喝酒，性格爽朗大方，是V家成员们可靠的大姐头。你可能也经常在朋友圈里扮演“大姐大/大哥大”的角色——照顾大家、主持公道、关键时刻扛事。🍶',
+        shortDesc:'你豪爽，帅气讲义气，爽朗大方，是可靠的大姐头。就像她的《Nostalogic》唱到的——“不会褪去色彩的~”' },
+      '诗岸':{ mbti:'ISFJ', ie:42, ns:58, ft:88, pj:65, caption:'慢热天然呆的迷糊妹妹', music:'music/shian.mp3', weight:0, lang:'CN',
+        bgm:'请不要带我走 | BV1X5E3z7EN9\n泛泛人类不会祈祷 | BV1h14y1C7V5\n畏光症 | BV1e7411u7ce\n寓言预见遇见你的那刻 | BV1E7411v7Cd',
+        desc:'你的性格就像诗岸，温柔、包容、让人安心。诗岸是五维介质企划下的虚拟歌手，是大家庭中惹人怜爱的“小妹妹”，形象是代表“地”的土象歌姬，声线软糯温暖，给人一种回归大地的治愈感。你可能不是最出风头的那个人，但你绝对是大家想依靠的那个人。你的温柔温顺不是软弱，而是像大地一样，有一种包容万物的力量。不张扬，将故事和心绪娓娓道来。🏔️',
+        shortDesc:'你温柔，包容，不张扬。默默感染着大家，让大家忍不住依靠你。就像她的《寓言预见遇见你的那刻》唱到的——“我的桃心士兵正迈出整齐步伐，占领你的王国～”' },
+      '东方栀子':{ mbti:'ESFJ', ie:52, ns:44, ft:60, pj:52, caption:'一颗真诚炙热的心', music:'music/dongfangzhizi.mp3', weight:0, lang:'CN',
+        bgm:'我将沐火而唱 | BV1U7411Y7Qu\n妈祖帮帮忙 | BV1xvFCzEELG\n情痴 | BV1WpFmeYEwn\n骄阳 | BV1wg4QeGECW',
+        desc:'你的性格就像东方栀子，温柔、坚韧、经历过风雨却从未被击垮。东方栀子是2011年由天津电视台推出的中国第一位自主创作的虚拟偶像，拥有红色的双马尾和红色旗袍，声线清澈温柔。经历变故后官方停止开发，但粉丝们没有放弃她——在同人圈里，栀子的形象被重新创作、赋予新的意义，从“遗憾”蜕变为“涅槃重生的栀子花”。你的人生或许也有过类似的经历：被误解、被否定、被低估。但你没有放弃自己。你知道，真正的价值不需要别人定义——只要还有人愿意听你唱歌，你就能继续唱下去。你不是完美的，但你是真实的。而真实，比完美更动人。🌸',
+        shortDesc:'你温柔，坚韧，历经风霜从未被击倒。你知道人生掌握在自己手中，不需要被他人左右，就像她的《我讲沐火而唱》唱到的——“沿途有未知风浪，也淋不湿希望～”' },
+      '永夜':{ mbti:'INTJ', ie:56, ns:56, ft:42, pj:58, caption:'清醒孤独的艺术家', music:'music/yongye.mp3', weight:0, lang:'CN',
+        bgm:'须臾永恒 | BV1v34y1H7N3\n启明星Venusn | BV1LM411B7FS\n水叙湖风 | BV1Xp4y1a7zj\n你看见了天使在我眼中 | BV11b421n7o9',
+        desc:'你的性格就像永夜minus，幽暗、深邃、复杂，自带致命的吸引力。永夜minus是一位沉着内敛、不断求索的少女，歌声冷静而坚定，同时兼具情感丰富的爆发力。就像你喜欢在深夜独自思考，对黑暗美学情有独钟。你不害怕孤独，甚至享受孤独，因为那是一种清醒，是你创作的土壤。🌑',
+        shortDesc:'你有一颗复杂的心，喜欢在深夜独自思考，你享受孤独，就像她的《须臾永恒》唱到的——“醒时如梦醉时清～”' },
+      '赤羽':{ mbti:'ESFP', ie:55, ns:42, ft:50, pj:56, caption:'生来炙热的火羽凤凰', music:'music/chiyu.mp3', weight:0, lang:'CN',
+        bgm:'万象霜天 | BV1zN411d7dG\n胚芽 | BV1EXU8BuEs9\n404 Not Found | BV1vE411R7iD\n翡夜Racing Game | BV1Ub41157V4',
+        desc:'你的性格就像赤羽，炽热、坚定、永远充满能量！赤羽是五维介质企划下的虚拟歌手，形象是一只涅槃重生的红色凤凰，声线充满力量感和穿透力，被誉为“燃曲女王”。你的内心有一团永不熄灭的火焰，无论遇到什么困难都能浴火重生。你可以温柔，但你的底色永远是那一抹最耀眼的红。🔥',
+        shortDesc:'你炽热，坚定，是永远不会熄灭的火焰，遇到什么困难都会迎难而上，甚至是期待新的挑战。就像她的《万象霜天》唱到的——“身在局中又怎知晓全貌，此地更高～”' },
+      '苍穹':{ mbti:'ISTJ', ie:50, ns:45, ft:42, pj:56, caption:'知性沉稳的大姐姐', music:'music/cangqiong.mp3', weight:0, lang:'CN',
+        bgm:'弈 | BV1q34y1271d\n木兰行 | BV1Gg4y1a7vg\n流年如歌 | BV1KJ411C7Y1\nD!slodge | BV1yb411z7tu',
+        desc:'你的性格就像苍穹，大气、深邃、格局拉满！苍穹是五维介质企划下的虚拟歌手，你是自由的风。你的眼界很宽，不喜欢纠结鸡毛蒜皮的小事。你有一种天生的“大气感”，让人觉得你可靠且值得信赖。你站在那里，就是一片天空。🌌',
+        shortDesc:'你的大气，深邃，不拘一格，自成一片天空，就像她的《弈》唱到的——“纵历尽万般沧桑，誓要对天赢一场~”' },
+      '海伊':{ mbti:'ENFP', ie:50, ns:54, ft:52, pj:54, caption:'梦幻直率的海洋', music:'music/haiyi.mp3', weight:0, lang:'CN',
+        bgm:'STOP | BV1xs411u73F\n浅滩 | BV17W411V7Ge\n好字唯之 | BV1tD4y1D7mS\n假花没有枯萎的权利 | BV1Y7CjYmEnn',
+        desc:'你就像海伊，神秘、多变，有时也可以很调皮。海伊是五维介质企划下的虚拟歌手，声如水，形如海，声线空灵悠远，擅长营造梦幻的氛围。但别被她的外表骗了——熟悉的人都知道她健谈又可爱，冷不丁还会来一句坏坏的吐槽。你也是如此：表面看着安静温柔，其实心里住着一个有趣的灵魂，只有真正潜入你内心的人，才能发现那里藏着无数宝藏。🌊',
+        shortDesc:'你神秘，多变，表面看着安静温柔，内心住着一个有趣的灵魂，只有真正潜入你内心的人才能触及到真实的你，就像她的《STOP》唱到的——“我的诗句，是无法传递的共情～”' },
+      'V flower':{ mbti:'ESTP', ie:50, ns:45, ft:38, pj:56, caption:'叛逆不羁的中性之花', music:'music/vflower.mp3', weight:0, lang:'JP',
+        bgm:'再见宣言 | BV1194y197Re\n猛毒 | BV17s41137mU\nCharles | BV1gs41147c8\n阿吽的节奏 | BV14x411b7SE',
+        desc:'你的性格就像v flower，酷、飒，骨子里流淌着不羁的血液。v flower拥有独特的中性嗓音和强烈的摇滚风格，是V家中最具有攻击性和穿透力的声线之一。她的不同版本声库形象如同绽放的热烈花朵，又是孤傲的高岭之花，又美又刃。你不喜欢被规则束缚，有自己的审美和态度。你可能不是传统意义上的“好脾气”，但你的直率、飒爽和忠于自我的风格，让真正欣赏你的人爱到骨子里。你不讨好世界，世界却忍不住关注你。🌺',
+        shortDesc:'你骨子里流淌着不羁的血液，你不喜欢被规则束缚，有自己的审美和态度。就像她的《再见宣言》唱到的——“不要被无止境的焦虑蒙蔽～”' },
+      'IA':{ mbti:'INFJ', ie:50, ns:52, ft:52, pj:48, caption:'清澈透明的天使歌姬', music:'music/IA.mp3', weight:0, lang:'JP',
+        bgm:'明日的夜空哨戒班 | BV1Rx411N7h7\n如月专注 | BV1Tx411F7e7\n六兆年零一夜物语 | BV1ax411w7gM\n黎明前线 | BV1bs411Y7Ws',
+        desc:'你的性格就像IA，纯净、透明、自带一种远离尘嚣的出尘气质。IA是拥有清澈透明的高音域和白色为主调的角色形象。她的名字意为“在这里”。你给人的第一印象可能是安静、淡然，甚至有些疏离，但了解你的人都知道，你的内心世界丰富而深邃。你不喜欢喧哗，但你的存在本身就是一种治愈——像一束穿过云层的光，不刺眼，但足够温暖。🎐',
+        shortDesc:'你清澈透明，内心世界丰富深邃，你的存在就是穿过云层的光一样特别，就像她的《明日的夜空戒哨班》唱到的——“若一起只能以梦作结，那就让我去改变昨天吧～”' },
+      '结月缘':{ mbti:'ENTP', ie:52, ns:56, ft:30, pj:52, caption:'人间辩论诵读姬', music:'music/yukari.mp3', weight:0, lang:'JP',
+        bgm:'啾噜哩啦·啾噜哩啦·哒哒哒 | BV1bs41197Th\n似乎有着能够变得幸福的隐藏指令 | BV1js411f7tE\n几望之月 | BV1bW411r7WY\n自由的洛丽塔 | BV1Jt411h7Bj',
+        desc:'你的性格就像结月缘，是典型的小紫人辩论家。结月缘最初是作为VOICEROID语音合成软件角色诞生的，说话方式清晰、流畅到可怕，所以常被粉丝调侃为“最会说话的女人”，没有任何人能吵得过她。后来她拥有了VOCALOID声库，不说话的时候是高冷美人，一开口就是三小时逻辑碾压。你喜欢智力上的交锋，但辩论不是为了赢，而是因为追求真理的过程让你兴奋。你的大脑永远在运转，总有新的观点、新的角度、新的论证方式。和你深入交流过的人都会记住你——不是因为你的嗓门大，而是因为你的逻辑无懈可击。💜',
+        shortDesc:'你说话逻辑清晰毫无破绽，喜欢智力上的交锋。追求真理的过程让你感到满足，就像她的《啾噜哩啦·啾噜哩啦·哒哒哒！》唱到的——“最后直到只剩一个人为止，都不会停下～”' },
+      '歌爱雪':{ mbti:'INFP', ie:44, ns:50, ft:56, pj:50, caption:'天真努力小学生', music:'music/yuki.mp3', weight:1, lang:'JP',
+        bgm:'别走 | BV1BW411P7ff\n强风大背头 | BV1yL411X7dM\n延误列车 | BV1fK4y1s7Qf\n明明昨天就应该死去 | BV1YLxszzETc',
+        desc:'你的性格就像歌爱雪，外表看起来是最天真软萌的那一个，内心却住着一个比谁都认真、比谁都努力的灵魂。歌爱雪是一名小学女生，背着大大的书包。因为声线偏幼、调教难度较大，被一些P主称为“最难调的V家之一”，但正因为如此，每一首优秀的雪曲背后，都是P主和她共同的努力。你可能不太自信，总觉得自己还不够好，但事实上，你的认真、执着和日复一日的坚持，早已让你闪闪发光。你会因为一句批评难过一整天，也会因为一句鼓励而开心一个星期。这样的你，值得世界上所有温柔的对待。❄️',
+        shortDesc:'你看起来天真软萌，但是身体里住着一个认真努力的灵魂。你可能还不太自信，但是日复一日的坚持已经让你熠熠闪光了，就像她的《别走》唱到的——“不可以哭，不可以哭～”' },
+    };
+
+    const CHARACTER_IMAGES = {
+      '初音未来':'character/miku.webp','GUMI':'character/gumi.webp','重音Teto':'character/teto.webp','俊达萌':'character/zunmon.webp',
+      '洛天依':'character/luotianyi.webp','可不':'character/kafu.webp','诗岸':'character/shian.webp','海伊':'character/haiyi.webp','歌爱雪':'character/yuki.webp',
+      '乐正绫':'character/yuezhengling.webp','镜音铃':'character/rin.webp','赤羽':'character/chiyu.webp',
+      '言和':'character/yanhe.webp','镜音连':'character/len.webp','墨清弦':'character/moqingxian.webp',
+      '星尘':'character/xingchen.webp','苍穹':'character/cangqiong.webp','IA':'character/IA.webp',
+      '乐正龙牙':'character/yuezhenglongya.webp','永夜':'character/yongye.webp',
+      '巡音流歌':'character/luka.webp','KAITO':'character/kaito.webp','心华':'character/xinhua.webp',
+      'MEIKO':'character/meiko.webp','结月缘':'character/yukari.webp','徵羽摩柯':'character/zhiyumoke.webp',
+      'V flower':'character/vflower.webp','东方栀子':'character/dongfangzhizi.webp'
+    };
+
+    const app = { answers:{}, mbtiScores:{E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0}, mbtiResult:null, finalCharacter:null, secretResolved:false, audioEl:null };
+    const screens = { intro:document.getElementById('intro'), test:document.getElementById('test'), result:document.getElementById('result') };
+    function showScreen(name){ Object.values(screens).forEach(el=>el.classList.remove('active')); screens[name].classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); var btn=document.getElementById('globalBgmBtn'); if(btn) btn.style.display=(name==='result')?'none':'flex'; }
+    let currentQuestionIdx=0, cnScore=0, jpScore=0;
+
+    function renderCurrentQuestion() {
+      const container = document.getElementById('questionContainer');
+      const q = questions[currentQuestionIdx];
+      container.classList.remove('missing-highlight');
+      const savedAnswer = app.answers[q.id];
+      container.innerHTML = `
+        <div class="question-meta"><span class="badge">第 ${currentQuestionIdx+1} 题</span></div>
+        <div class="question-title">${q.text}</div>
+        <div class="options">${q.options.map((opt,i) => {
+          const code = String.fromCharCode(65 + i);
+          const checked = (savedAnswer && savedAnswer.index === i) ? 'checked' : '';
+          return `<label class="option"><input type="radio" name="${q.id}" value="${opt.value}" data-index="${i}" ${checked} /><span class="option-code">${code}</span><span>${opt.label}</span></label>`;
+        }).join('')}</div>`;
+      document.querySelectorAll('.option input').forEach(input => {
+        input.addEventListener('change', (e) => {
+          const idx = parseInt(e.target.dataset.index);
+          app.answers[e.target.name] = { value: e.target.value, index: idx };
+          updateProgress();
+        });
+      });
+      updateNavButtons();
+    }
+
+    function updateNavButtons() {
+      document.getElementById('prevBtn').disabled = (currentQuestionIdx === 0);
+      document.getElementById('nextBtn').disabled = (currentQuestionIdx === questions.length - 1);
+      updateProgress();
+    }
+
+    function goNext() { if(currentQuestionIdx < questions.length-1){ currentQuestionIdx++; renderCurrentQuestion(); } }
+    function goPrev() { if(currentQuestionIdx > 0){ currentQuestionIdx--; renderCurrentQuestion(); } }
+
+    function updateProgress() {
+      const total = questions.length;
+      const done = Object.keys(app.answers).length;
+      document.getElementById('progressBar').style.width = `${(done/total)*100}%`;
+      document.getElementById('progressText').textContent = `${done} / ${total}`;
+      document.getElementById('submitBtn').disabled = false;
+    }
+
+    function findFirstMissing() { for(let i=0;i<questions.length;i++) if(!app.answers[questions[i].id]) return i; return -1; }
+
+    function computeMBTI() {
+      const scores = { E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0 };
+      const doubleWeightIds = ['q1','q5','q8','q10','q11','q14','q20','q21','q29','q33','q36','q39'];
+      cnScore=0; jpScore=0;
+      questions.forEach(q => {
+        const ans = app.answers[q.id]; if(!ans) return;
+        const val = ans.value; let weight=1;
+        if(doubleWeightIds.includes(q.id)) weight=2;
+        if(q.id==='q39'){ const opt=q.options.find(o=>o.value===val); if(opt&&opt.weight) weight=opt.weight; }
+        const chosenOpt = q.options.find(o=>o.value===val);
+        if(chosenOpt){
+          if(chosenOpt.lang==='CN') cnScore+=weight;
+          if(chosenOpt.lang==='JP') jpScore+=weight;
+          if(chosenOpt.isCN) cnScore+=weight;
+          if(chosenOpt.isJP) jpScore+=weight;
+        }
+        if(scores.hasOwnProperty(val)) scores[val]+=weight;
+      });
+      Object.assign(app.mbtiScores, scores);
+      app.mbtiResult = (scores.E>=scores.I?'E':'I')+(scores.S>=scores.N?'S':'N')+(scores.T>=scores.F?'T':'F')+(scores.J>=scores.P?'J':'P');
+    }
+
+    function getCandidates(mbti,preferLang){
+      const all = Object.entries(characters).filter(([_,c])=>c.mbti===mbti).map(([n])=>n);
+      if(!preferLang) return all;
+      const filtered = all.filter(n=>characters[n].lang===preferLang);
+      return filtered.length>0 ? filtered : all;
+    }
+
+    function showSecretQuestion(mbti){
+      if(document.querySelector('.secret-overlay')) return;
+      const q = secretQuestions[mbti]; if(!q) return resolveAndShowResult(null);
+      const overlay = document.createElement('div'); overlay.className='secret-overlay';
+      overlay.innerHTML = `<div class="secret-card"><div class="secret-badge">✨ 你已触发隐藏题！</div><div class="question-title">${q.text}</div><div class="options">${q.options.map((opt,i)=>`<label class="option"><input type="radio" name="secret" value="${opt.target}" /><span class="option-code">${String.fromCharCode(65+i)}</span><span>${opt.label}</span></label>`).join('')}</div><button id="secretSubmitBtn" class="btn-primary" disabled>确定</button></div>`;
+      document.body.appendChild(overlay);
+      overlay.querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',()=>{ overlay.querySelector('#secretSubmitBtn').disabled=false; }));
+      overlay.querySelector('#secretSubmitBtn').addEventListener('click',()=>{
+        const selected = overlay.querySelector('input[name="secret"]:checked');
+        if(selected){ document.body.removeChild(overlay); resolveAndShowResult(selected.value); }
+      });
+    }
+
+    function resolveAndShowResult(secretCharacterName){
+      if(secretCharacterName && characters[secretCharacterName]){ app.finalCharacter=secretCharacterName; app.secretResolved=true; renderResult(); return; }
+      if(app.mbtiResult==='ENTJ'){ showENTJOverlay(); return; }
+      const preferLang = cnScore>jpScore?'CN':(jpScore>cnScore?'JP':null);
+      const candidates = getCandidates(app.mbtiResult, preferLang);
+      if(candidates.length===1){ app.finalCharacter=candidates[0]; app.secretResolved=false; renderResult(); return; }
+      let bestMatch=null, bestScore=Infinity;
+      const userVector = [app.mbtiScores.E-app.mbtiScores.I, app.mbtiScores.N-app.mbtiScores.S, app.mbtiScores.F-app.mbtiScores.T, app.mbtiScores.P-app.mbtiScores.J];
+      candidates.forEach(name=>{
+        const c=characters[name]; const charVector=[c.ie-50,c.ns-50,c.ft-50,c.pj-50]; let dist=0;
+        for(let i=0;i<4;i++) dist+=Math.pow(userVector[i]-charVector[i],2);
+        dist=Math.sqrt(dist); dist-=c.weight*1.5;
+        if(dist<bestScore){ bestScore=dist; bestMatch=name; }
+      });
+      app.finalCharacter=bestMatch||candidates[0]; app.secretResolved=false; renderResult();
+    }
+
+    function showENTJOverlay(){
+      const overlay=document.createElement('div'); overlay.className='secret-overlay';
+      overlay.innerHTML = `<div class="secret-card" style="text-align:center;"><div class="secret-badge">🔓 你解锁了终极隐藏！</div><div style="font-size:16px; line-height:1.8; color:#0d6362; margin-bottom:16px;">你的 MBTI 推测为 <b>ENTJ</b> —— 天生的指挥官、战略家。<br>暂无歌姬与你完全共鸣，但你有一位最接近的灵魂之翼。</div><button id="entjRevealBtn" class="btn-primary" style="width:100%;">👇 查看相近共鸣歌姬</button></div>`;
+      document.body.appendChild(overlay);
+      document.getElementById('entjRevealBtn').addEventListener('click',()=>{
+        document.body.removeChild(overlay); app.finalCharacter=(cnScore>=jpScore)?'乐正龙牙':'MEIKO'; app.secretResolved=true; renderResult();
+      });
+    }
+
+    function stopMusic(){
+      var allAudios=document.querySelectorAll('audio');
+      for(var i=0;i<allAudios.length;i++){ if(allAudios[i].id!=='globalBgm'){ allAudios[i].pause(); allAudios[i].currentTime=0; allAudios[i].remove(); } }
+      app.audioEl=null;
+    }
+
+    function renderResult(){
+      if(window._bgmAudio){ window._bgmAudio.pause(); }
+      var bgmBtn=document.getElementById('globalBgmBtn'); if(bgmBtn) bgmBtn.style.display='none';
+      stopMusic();
+      const char=characters[app.finalCharacter];
+      const inner=document.getElementById('resultCardInner');
+      const songLines=char.bgm?char.bgm.split('\n').filter(line=>line.trim()!==''):[];
+      const songs=songLines.map(line=>{ const parts=line.split('|'); return { name:(parts[0]||'').trim(), bv:(parts[1]||'').trim() }; }).filter(s=>s.name&&s.bv);
+      const isENTJ=app.mbtiResult==='ENTJ';
+      inner.innerHTML = `
+        <div class="result-poster desktop-only" id="resultPoster"><img src="${CHARACTER_IMAGES[app.finalCharacter]}" alt="${app.finalCharacter}" /><div class="caption">「${char.caption}」</div></div>
+        <div class="result-info">
+          <div class="result-header"><div class="kicker">${app.secretResolved?'✨ 你的灵魂歌姬已降临':'你的灵魂歌姬'}</div><div class="name">${app.finalCharacter}</div><div class="match">${isENTJ?'MBTI推测：ENTJ指挥官级共鸣':'歌手MBTI推测：'+char.mbti}</div></div>
+          <div class="result-poster mobile-only" id="resultPosterMobile"><img src="${CHARACTER_IMAGES[app.finalCharacter]}" alt="${app.finalCharacter}" /><div class="caption">「${char.caption}」</div></div>
+          ${isENTJ?'<div style="color: var(--accent-strong); font-size: 13px; margin-bottom: 10px;">🔓 你的灵魂深处是指挥官 ENTJ。暂无完全共鸣的歌姬，但这位已是最懂你锋芒的人。</div>':''}
+          <div class="section-title">灵魂解读</div><div class="result-desc">${char.desc}</div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;"><div class="result-bgm-title" style="margin-bottom:0;">推荐歌单</div><button id="musicToggleBtn" style="border:1px solid #81dfdd; border-radius:50%; width:32px; height:32px; background:#fff; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center;">🔊</button></div>
+          <div class="now-playing" id="nowPlaying" style="display:none;"><span class="note" style="font-size:16px;">🎵</span> 当前播放：<span id="nowPlayingName"></span></div>
+          <div class="result-bgm">${songs.map(function(song){ return '<a class="bgm-tag" href="https://www.bilibili.com/video/'+song.bv+'" target="_blank">'+song.name+'</a>'; }).join('')}</div>
+          <div style="color: var(--muted); font-size: 11px; margin-top: 6px;">（↑点击歌曲前往B站观看）</div>
+        </div>`;
+      if(char.music){
+        stopMusic(); const audio=document.createElement('audio'); audio.src=char.music; audio.loop=true; audio.volume=0.6; audio.id='bgmAudio'; document.body.appendChild(audio); app.audioEl=audio; audio.play().catch(function(){});
+        const nowPlaying=document.getElementById('nowPlaying'), nowPlayingName=document.getElementById('nowPlayingName'); nowPlayingName.textContent=songs.length>0?songs[0].name:''; nowPlaying.style.display='flex';
+        const toggleBtn=document.getElementById('musicToggleBtn'); toggleBtn.addEventListener('click',()=>{ if(audio.paused){ audio.play(); toggleBtn.textContent='🔊'; } else { audio.pause(); toggleBtn.textContent='🔇'; } });
+      }
+      var footer=document.getElementById('resultFooter');
+      footer.innerHTML = `
+        <div class="footer-section" style="text-align:center;"><a href="https://www.bilibili.com/video/BV1of9hBQEsw" target="_blank" class="footer-link">📺 关注作者 / 反馈问题</a></div>
+        <div class="footer-section" style="text-align:center; cursor:pointer;" id="staffTrigger" onmouseenter="this.querySelector('span').style.textDecoration='underline'" onmouseleave="this.querySelector('span').style.textDecoration='none'"><span style="color:var(--accent-strong); font-weight:600; font-size:14px;text-decoration: none;">💖 Staff与测试人员感谢</span></div>
+        <div class="footer-section" style="text-align:center;"><span style="color:var(--accent-strong); font-size:13px; font-weight:600;">加入VBTI交流群：747501305</span></div>
+        <div class="footer-section" style="text-align:center; margin-top:20px;"><div class="footer-big-text">你是谁？请关注更多V家资讯！</div><div class="banner-container"><a href="https://www.bilibili.com/opus/1190997869366083605" target="_blank"><img src="banner/xlpd-banner.webp" alt="2026夏浪派对"></a><a href="https://space.bilibili.com/156489" target="_blank"><img src="banner/zk-banner.webp" alt="中V周刊"></a><a href="https://www.bilibili.com/blackboard/era/YAZ6jyAs8qVslK0r.html" target="_blank"><img src="banner/shulikou.webp" alt="术力口音乐大赛"></a><a href="https://www.bilibili.com/blackboard/era/cb91Hht7tmJzNKqh.html" target="_blank"><img src="banner/Vsinger.webp" alt="Vsinger创作激励"></a></div></div>`;
+      document.getElementById('shareBtn').onclick=function(){
+        var shareText='我的灵魂歌姬是「'+app.finalCharacter+'」！'+characters[app.finalCharacter].mbti+'型人格，来看看你的是谁？'; var shareUrl=window.location.href;
+        if(navigator.share && /Mobi|Android/i.test(navigator.userAgent)){ navigator.share({title:'VBTI · 测测你的灵魂歌姬',text:shareText,url:shareUrl}).catch(function(){ document.getElementById('sharePanel').classList.add('active'); }); }
+        else { document.getElementById('sharePanel').classList.add('active'); }
+      };
+      document.getElementById('cardBtn').onclick=function(){ generateCard(); };
+      document.getElementById('staffTrigger').addEventListener('click',function(){
+        var overlay=document.createElement('div'); overlay.className='staff-overlay';
+        overlay.innerHTML = `<div class="staff-card" style="position:relative;"><button class="staff-close" onclick="this.parentElement.parentElement.remove()">×</button><h3>💖 Staff与测试人员感谢</h3><table><tr><td>策划&开发：</td><td>Crimson茜（墨白茜兔）</td></tr><tr><td>核心内容协力：</td><td>特瑞嗷</td></tr><tr><td></td><td>周刊虚拟歌手中文曲排行榜（失落的分别，物质的量_mol）</td></tr><tr><td></td><td>诺诺小熊猫</td></tr><tr><td>测试感谢：</td><td>花儿不哭</td></tr><tr><td></td><td>-森久保行野-</td></tr><tr><td></td><td>鬼面P</td></tr><tr><td></td><td>CARDINAL星海</td></tr><tr><td></td><td>Semaa小赛</td></tr><tr><td></td><td>半只金蓝</td></tr><tr><td></td><td>鱼丸君</td></tr><tr><td></td><td>侨汣</td></tr><tr><td></td><td>绿洲计划</td></tr><tr><td></td><td>-朝尘-</td></tr></table></div>`;
+        document.body.appendChild(overlay); overlay.addEventListener('click',function(e){ if(e.target===overlay) overlay.remove(); });
+      });
+      showScreen('result');
+    }
+
+    function generateCard(){
+        const char = characters[app.finalCharacter]; if(!char) return;
+        const imgFileName = CHARACTER_IMAGES[app.finalCharacter].split('/').pop();
+        const fullImgPath = 'cardprofile/' + imgFileName;
+        const w = 400, ih = 340;
+        const headerH = 120, mbtiAreaH = 80, qrAreaH = 120, footerH = 20;
+
+        // 计算文字行高
+        const tempCanvas = document.createElement('canvas');
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.font = '12px sans-serif';
+        const maxW = 340;
+        const words = char.shortDesc ? char.shortDesc.split('') : char.desc.split('');
+        const lines = [];
+        let line = '';
+        for (const ch of words) {
+            const test = line + ch;
+            if (tempCtx.measureText(test).width > maxW && line.length > 0) {
+                lines.push(line);
+                line = ch;
+            } else line = test;
+        }
+        if (line) lines.push(line);
+        const shownLines = lines.slice(0, 4);
+        const textH = shownLines.length * 18 + 25;
+
+        const totalH = headerH + ih + mbtiAreaH + textH + qrAreaH + footerH;
+        const canvas = document.createElement('canvas');
+        const scale = 2;
+        canvas.width = w * scale;
+        canvas.height = totalH * scale;
+        const ctx = canvas.getContext('2d');
+        ctx.scale(scale, scale);
+
+        // 白色背景
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, totalH);
+
+        // 顶部文字
+        ctx.fillStyle = '#1cbaa8';
+        ctx.font = 'bold 14px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('✨ 你的灵魂歌姬已降临', w/2, 30);
+        ctx.font = 'bold 32px sans-serif';
+        ctx.fillText(app.finalCharacter, w/2, 70);
+
+        // 立绘 (cover裁剪，顶部对齐)
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.src = fullImgPath;
+        img.onload = function(){
+            const s = Math.max(w / img.width, ih / img.height);
+            const sw = w / s, sh = ih / s;
+            const sx = (img.width - sw) / 2, sy = 0;
+            ctx.drawImage(img, sx, sy, sw, sh, 0, 90, w, ih);
+
+            let y = ih + 110;  // MBTI标签起始Y
+            const mbtiText = '歌手MBTI推测：' + char.mbti;
+            const tw = ctx.measureText(mbtiText).width + 30;
+            ctx.fillStyle = '#e0f5f0';
+            ctx.beginPath();
+            ctx.arc(w/2 - tw/2 + 15, y, 15, Math.PI, -Math.PI/2);
+            ctx.lineTo(w/2 + tw/2 - 15, y - 15);
+            ctx.arc(w/2 + tw/2 - 15, y, 15, -Math.PI/2, 0);
+            ctx.lineTo(w/2 + tw/2, y + 15);
+            ctx.arc(w/2 + tw/2 - 15, y, 15, 0, Math.PI/2);
+            ctx.lineTo(w/2 - tw/2 + 15, y + 15);
+            ctx.closePath();
+            ctx.fill();
+            ctx.fillStyle = '#1cbaa8';
+            ctx.font = 'bold 12px sans-serif';
+            ctx.fillText(mbtiText, w/2, y + 5);
+
+            y += 40;
+            ctx.fillStyle = '#0d6362';
+            ctx.font = 'bold 15px sans-serif';
+            ctx.fillText('灵魂解读', w/2, y);
+            y += 25;
+            ctx.fillStyle = '#4a6b7a';
+            ctx.font = '12px sans-serif';
+            for (const l of shownLines) {
+                ctx.fillText(l, w/2, y);
+                y += 18;
+            }
+
+            y += 20;
+            const qrDiv = document.createElement('div');
+            new QRCode(qrDiv, { text:'https://vbti-test.com/', width:70, height:70 });
+            setTimeout(function(){
+                const qrImg = qrDiv.querySelector('canvas') || qrDiv.querySelector('img');
+                ctx.drawImage(qrImg, w/2 - 40, y, 80, 80);
+                ctx.fillStyle = '#1cbaa8';
+                ctx.font = 'bold 12px sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText('扫码测测', w/2 + 50, y + 30);
+                ctx.fillStyle = '#4a6b7a';
+                ctx.font = '11px sans-serif';
+                ctx.fillText('你的灵魂歌姬是谁？', w/2 + 50, y + 50);
+                ctx.textAlign = 'center';
+                y += 110;  // 二维码本身高度 + 一些呼吸空间
+                ctx.fillStyle = '#aaa';
+                ctx.font = '10px sans-serif';
+                ctx.fillText('VBTI · 测测你的灵魂歌姬 | 分享给更多朋友', w/2, y);
+
+                // 显示卡片和下载按钮
+                const dataURL = canvas.toDataURL();
+                const overlay = document.createElement('div');
+                overlay.style.cssText = 'position:fixed;inset:0;background:rgba(13,99,98,0.85);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3000;';
+                const previewImg = document.createElement('img');
+                previewImg.src = dataURL;
+                previewImg.style.maxWidth = '360px';
+                previewImg.style.borderRadius = '16px';
+                previewImg.style.boxShadow = '0 20px 60px rgba(0,0,0,0.5)';
+                const btnRow = document.createElement('div');
+                btnRow.style.cssText = 'display:flex;gap:16px;margin-top:20px;';
+                const saveBtn = document.createElement('button');
+                saveBtn.textContent = '💾 保存到本地';
+                saveBtn.style.cssText = 'padding:12px 24px;background:#1cbaa8;color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;';
+                saveBtn.onclick = function(){
+                    const link = document.createElement('a');
+                    link.download = 'VBTI_' + app.finalCharacter + '.png';
+                    link.href = dataURL;
+                    link.click();
+                };
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = '✕ 关闭';
+                closeBtn.style.cssText = 'padding:12px 24px;background:#fff;color:#1cbaa8;border:1px solid #1cbaa8;border-radius:12px;font-weight:700;cursor:pointer;';
+                closeBtn.onclick = function(){ document.body.removeChild(overlay); };
+                btnRow.appendChild(saveBtn);
+                btnRow.appendChild(closeBtn);
+                overlay.appendChild(previewImg);
+                overlay.appendChild(btnRow);
+                overlay.addEventListener('click', function(e){ if(e.target===overlay) overlay.remove(); });
+                document.body.appendChild(overlay);
+            }, 500);
+        };
+        img.onerror = function(){ alert('卡片图片加载失败，请检查 cardprofile 文件夹。'); };
+    }
+
+    document.getElementById('startBtn').addEventListener('click',()=>{
+      if(window._bgmAudio&&window._bgmAudio.paused){ window._bgmAudio.play().catch(()=>{}); updateBgmButton(); }
+      app.answers={}; app.mbtiScores={E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0}; app.mbtiResult=null; app.finalCharacter=null; app.secretResolved=false;
+      currentQuestionIdx=0; stopMusic(); renderCurrentQuestion(); showScreen('test');
+    });
+    document.getElementById('backIntroTestBtn').addEventListener('click',()=>{ if(confirm('确定要返回首页吗？你的进度将会丢失。')) showScreen('intro'); });
+    document.getElementById('submitBtn').addEventListener('click',(e)=>{
+      if(e.target.disabled) return; e.target.disabled=true;
+      var missing=findFirstMissing();
+      if(missing!==-1){ currentQuestionIdx=missing; renderCurrentQuestion(); var container=document.getElementById('questionContainer'); container.classList.add('missing-highlight'); window.scrollTo({top:container.offsetTop-100,behavior:'smooth'}); setTimeout(function(){ container.classList.remove('missing-highlight'); },2500); e.target.disabled=false; return; }
+      computeMBTI(); const candidates=getCandidates(app.mbtiResult,null);
+      if(candidates.length>1 && secretQuestions[app.mbtiResult]){ showSecretQuestion(app.mbtiResult); } else { resolveAndShowResult(null); }
+    });
+    document.getElementById('prevBtn').addEventListener('click',goPrev);
+    document.getElementById('nextBtn').addEventListener('click',goNext);
+    document.getElementById('restartBtn').addEventListener('click',()=>{
+      if(!confirm('确定要重新测试吗？当前结果将丢失。')) return;
+      app.answers={}; app.mbtiScores={E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0}; app.mbtiResult=null; app.finalCharacter=null; app.secretResolved=false;
+      currentQuestionIdx=0; stopMusic(); var bgmBtn=document.getElementById('globalBgmBtn'); if(bgmBtn) bgmBtn.style.display='flex';
+      if(window._bgmAudio){ window._bgmAudio.play().catch(function(){}); }
+      renderCurrentQuestion(); showScreen('test');
+    });
+    document.getElementById('toTopBtn').addEventListener('click',()=>{
+      if(!confirm('确定回到首页吗？')) return;
+      stopMusic(); var bgmBtn=document.getElementById('globalBgmBtn'); if(bgmBtn) bgmBtn.style.display='flex';
+      if(window._bgmAudio){ window._bgmAudio.currentTime=0; window._bgmAudio.play().catch(function(){}); }
+      showScreen('intro');
+    });
+    document.getElementById('closeSharePanel').addEventListener('click',()=>{ document.getElementById('sharePanel').classList.remove('active'); });
+    document.querySelectorAll('.share-item').forEach(item=>{
+      item.addEventListener('click',function(){
+        var platform=this.dataset.platform, url=window.location.href;
+        var text='我的灵魂歌姬是「'+app.finalCharacter+'」！'+characters[app.finalCharacter].mbti+'型人格，来看看你的是谁？', fullText=text+' '+url;
+        if(platform==='qq'){ navigator.clipboard.writeText(fullText); alert('文案已复制，打开QQ粘贴分享吧～'); }
+        else if(platform==='wechat'){ navigator.clipboard.writeText(fullText); alert('文案已复制，打开微信粘贴分享吧～'); }
+        else if(platform==='bilibili'){ navigator.clipboard.writeText(fullText); alert('文案已复制，打开B站动态粘贴分享吧～'); }
+        else if(platform==='rednote'){ navigator.clipboard.writeText(fullText); alert('文案已复制，打开小红书粘贴分享吧～'); }
+        else if(platform==='copy'){ navigator.clipboard.writeText(url); alert('链接已复制！'); }
+        document.getElementById('sharePanel').classList.remove('active');
+      });
+    });
+    var bgmBtn = document.createElement('div'); bgmBtn.className='bgm-control'; bgmBtn.id='globalBgmBtn'; bgmBtn.innerHTML='♪';
+    bgmBtn.addEventListener('click', toggleGlobalBgm); document.body.appendChild(bgmBtn); updateBgmButton();
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"bf6f362dba554c08affdb74fb3100791","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
