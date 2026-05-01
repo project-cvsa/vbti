@@ -14,25 +14,40 @@ const seededRandom: () => number = () => {
 	return uniformFloat64(rng);
 };
 
-const distinctValues: Record<string, string[]> = {};
+/**
+ * Build a scoring-identity key for an option.
+ * computeMBTI cares about value (for MBTI scores), lang/isCN/isJP (for cnScore/jpScore),
+ * and weight (for q39 per-option weight). Two options are "equivalent" only if ALL of these match.
+ */
+function optionKey(opt: { value: string; lang?: string; isCN?: boolean; isJP?: boolean; weight?: number }) {
+	return `${opt.value}|${opt.lang ?? ""}|${opt.isCN ? "CN" : ""}|${opt.isJP ? "JP" : ""}|${opt.weight ?? ""}`;
+}
+
+const distinctEntries: Record<string, { value: string; index: number }[]> = {};
 for (const q of questions) {
 	const seen = new Set<string>();
-	for (const opt of q.options) seen.add(opt.value);
-	distinctValues[q.id] = [...seen];
+	const entries: { value: string; index: number }[] = [];
+	for (let i = 0; i < q.options.length; i++) {
+		const key = optionKey(q.options[i]);
+		if (!seen.has(key)) {
+			seen.add(key);
+			entries.push({ value: q.options[i].value, index: i });
+		}
+	}
+	distinctEntries[q.id] = entries;
 }
 
 function randomAnswers(rng: () => number): Record<string, Answer> {
 	const rec: Record<string, Answer> = {};
 	for (const q of questions) {
-		const vals = distinctValues[q.id];
-		const pickedVal = vals[Math.floor(rng() * vals.length)];
-		const idx = q.options.findIndex((o) => o.value === pickedVal);
-		rec[q.id] = { value: pickedVal, index: Math.max(idx, 0) };
+		const entries = distinctEntries[q.id];
+		const picked = entries[Math.floor(rng() * entries.length)];
+		rec[q.id] = { value: picked.value, index: picked.index };
 	}
 	return rec;
 }
 
-const FULL_SETS = 10000;
+const FULL_SETS = 100000;
 
 function generate(count: number, fn: (rng: () => number) => Record<string, Answer>) {
 	const out: Record<string, Answer>[] = [];
@@ -185,18 +200,20 @@ describe("Distribution report", () => {
 		let rank = 0;
 		for (const [name, count] of sorted) {
 			rank++;
-			const pct = ((count / totalN) * 100).toFixed(1);
+			const pct = ((count / totalN) * 100).toFixed(3);
 			const info = characters[name];
-			const label = info ? `${info.mbti}/${info.lang}` : "no data";
-			const displayName = name === "undefined" ? "(undefined)" : name;
+			const label = info ? `${info.mbti}/${info.lang}` : "ENTJ";
+			const displayName = name === "undefined" ? "未测出" : name;
 			console.log(
-				`${String(rank).padStart(2)}. ${displayName} [${label}] — ${count} (${pct}%)`
+				`${String(rank).padStart(2)}. ${displayName} [${label}] — ${pct}%`
 			);
 		}
 	}
 
 	it("Character distribution", () => {
+		const optionLabels = ["A", "B", "C", "D"];
 		const charCounts: Record<string, number> = {};
+		const firstPath: Record<string, Record<string, Answer>> = {};
 
 		for (const answers of fullSets) {
 			const r = computeMBTI(answers);
@@ -204,11 +221,40 @@ describe("Distribution report", () => {
 			const candidates = getCandidates(r.mbti, preferLang as "CN" | "JP" | null);
 			const matched = findMatchCharacter(candidates, r.scores);
 			charCounts[matched] = (charCounts[matched] ?? 0) + 1;
+			if (!(matched in firstPath)) firstPath[matched] = answers;
 		}
 
 		printCharReport("Character Distribution (full answer sets)", charCounts, FULL_SETS);
 
 		const total = Object.values(charCounts).reduce((a, b) => a + b, 0);
 		expect(total).toBe(FULL_SETS);
+
+		console.log("\n=== Answer Paths Per Character ===\n");
+		const charNames = Object.keys(characters);
+		for (const name of charNames) {
+			const char = characters[name];
+			const path = firstPath[name];
+			if (!path) {
+				console.log(`${name.padEnd(8)} [${char.mbti}/${char.lang}] — NOT FOUND IN SAMPLE`);
+				continue;
+			}
+			const r = computeMBTI(path);
+			const seq = questions.map((q) => optionLabels[path[q.id].index]).join("");
+			const chunks: string[] = [];
+			for (let i = 0; i < seq.length; i += 10) chunks.push(seq.slice(i, i + 10));
+			console.log(
+				`${name.padEnd(8)} [${char.mbti}/${char.lang}]  ` +
+				`ie=${String(char.ie).padStart(2)} ns=${String(char.ns).padStart(2)} ft=${String(char.ft).padStart(2)} pj=${String(char.pj).padStart(2)}  ` +
+				`→ ${r.mbti}  cnScore=${r.cnScore} jpScore=${r.jpScore}  ` +
+				`E:${String(r.scores.E).padStart(2)} I:${String(r.scores.I).padStart(2)} ` +
+				`S:${String(r.scores.S).padStart(2)} N:${String(r.scores.N).padStart(2)} ` +
+				`T:${String(r.scores.T).padStart(2)} F:${String(r.scores.F).padStart(2)} ` +
+				`J:${String(r.scores.J).padStart(2)} P:${String(r.scores.P).padStart(2)}`
+			);
+			console.log(`  path: ${chunks.join(" ")}`);
+		}
+
+		const missing = charNames.filter((n) => !(n in firstPath));
+		expect(missing).toEqual([]);
 	});
 });
