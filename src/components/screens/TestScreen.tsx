@@ -156,10 +156,10 @@ export default function TestScreen() {
 	}, [answers, submitting, resolveCharacter, setCurrentIdx]);
 
 	return (
-		<div className="test-wrap card mt-5.5 p-6 bg-white rounded-2xl">
+		<div className="mt-5.5 p-6 max-sm:p-0 max-sm:mt-0 bg-white rounded-2xl max-sm:bg-transparent max-sm:rounded-none">
 			<ProgressBar answered={answered} total={total} />
 
-			<div ref={questionContainerRef} className="rounded-2xl mt-4">
+			<div ref={questionContainerRef} className="rounded-2xl mt-4 max-sm:mt-2 max-sm:rounded-none">
 				<QuestionCard
 					question={currentQuestion}
 					questionIndex={currentIdx}
@@ -179,7 +179,7 @@ export default function TestScreen() {
 						◀ 上一题
 					</Button>
 					<Button
-						className=" text-white font-bold rounded-2xl py-5 min-w-40"
+						className=" text-white font-bold rounded-2xl py-5 px-4"
 						onClick={handleSubmit}
 						disabled={submitting}
 					>

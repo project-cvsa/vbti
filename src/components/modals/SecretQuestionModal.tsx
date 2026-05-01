@@ -47,7 +47,7 @@ export function SecretQuestionModal({ question, onSelect, open }: SecretQuestion
 									"flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition-colors",
 									isChecked
 										? "border-primary bg-primary/5"
-										: "border-border bg-background hover:border-primary/50 hover:bg-primary/5"
+										: "border-border/80 bg-background hover:border-primary/50 hover:bg-primary/5"
 								)}
 							>
 								<RadioGroupItem value={opt.target ?? ""} className="mt-0.5" />

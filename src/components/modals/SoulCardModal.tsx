@@ -197,7 +197,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 						<img
 							src={cardDataURL}
 							alt={`${characterName} 灵魂卡片`}
-							className="max-w-90 max-h-[70vh] rounded-xl shadow-lg"
+							className="max-w-90 max-h-[70vh] rounded-xl"
 						/>
 						<div className="flex gap-3">
 							<Button onClick={handleDownload}>保存到本地</Button>
