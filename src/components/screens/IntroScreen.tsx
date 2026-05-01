@@ -9,7 +9,7 @@ function IntroScreen() {
 
 	return (
 		<div className="h-[70vh] flex flex-col justify-center items-center max-sm:items-start text-center max-sm:text-left mt-5">
-			<Card className="relative overflow-hidden w-full h-full max-sm:bg-transparent max-sm:shadow-none max-sm:ring-0 max-sm:rounded-none max-sm:border-0 max-sm:p-0 max-sm:gap-4">
+			<Card className="relative overflow-hidden w-full h-full bg-white max-sm:bg-transparent max-sm:shadow-none max-sm:ring-0 max-sm:rounded-none max-sm:border-0 max-sm:p-0 max-sm:gap-4">
 				{/* Decorative gradient circle — desktop only */}
 				<div className="absolute -right-17.5 -top-17.5 w-55 h-55 rounded-full pointer-events-none bg-linear-to-b from-primary/20 to-primary/5 max-sm:hidden" />
 
@@ -50,7 +50,7 @@ function IntroScreen() {
 						</span>
 					</div>
 					<p className="mt-2 text-muted-foreground text-[11px]">
-						版本：v1.0.5 &nbsp;&nbsp;| &nbsp;&nbsp;bgm：拼凑的断音 - Toa
+						版本：v1.1.5 &nbsp;&nbsp;| &nbsp;&nbsp;bgm：拼凑的断音 - Toa
 					</p>
 				</div>
 			</Card>

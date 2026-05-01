@@ -48,13 +48,13 @@ export interface MBTIScores {
 export interface Character {
 	/** MBTI type label (e.g., "ENFP") */
 	mbti: string;
-	/** Introversion-Extraversion score (50 = neutral) */
+	/** Introversion-Extraversion score (50 = neutral) >50 = E  */
 	ie: number;
-	/** Intuition-Sensing score (50 = neutral) */
+	/** Intuition-Sensing score (50 = neutral) >50 = N */
 	ns: number;
-	/** Feeling-Thinking score (50 = neutral) */
+	/** Feeling-Thinking score (50 = neutral) >50 = F */
 	ft: number;
-	/** Perceiving-Judging score (50 = neutral) */
+	/** Perceiving-Judging score (50 = neutral) >50 = P */
 	pj: number;
 	/** Short tagline in Chinese */
 	caption: string;
