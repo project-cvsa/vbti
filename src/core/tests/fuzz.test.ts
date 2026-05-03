@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { it, expect } from "vitest";
 import { findMatchCharacterRaw } from "@/core/findChar";
 import { questions } from "@/data/questions";
 import { characters } from "@/data/characters";
@@ -61,105 +61,16 @@ function generate(count: number, fn: (rng: () => number) => Record<string, Answe
 	return out;
 }
 
-const fullSets = generate(FULL_SETS, randomAnswers);
 
-describe("Distribution report", () => {
-
-	function printCharReport(title: string, charCounts: Record<string, number>, totalN: number) {
-		console.log(`\n=== ${title} (n=${totalN}) ===\n`);
-		const sorted = Object.entries(charCounts).sort(([, a], [, b]) => b - a);
-		let rank = 0;
-		for (const [name, count] of sorted) {
-			rank++;
-			const pct = ((count / totalN) * 100).toFixed(3);
-			const info = characters[name];
-			const label = info ? `${info.mbti}/${info.lang}` : "ENTJ";
-			const displayName = name === "undefined" ? "未测出" : name;
-			console.log(`${String(rank).padStart(2)}. ${displayName} [${label}] — ${pct}%`);
-		}
-	}
-
-	it("Character distribution", () => {
-		const optionLabels = ["A", "B", "C", "D"];
-		const charCounts: Record<string, number> = {};
-		const firstPath: Record<string, Record<string, Answer>> = {};
-		const mbtiCounts: Record<string, number> = {};
-		const charProb: Record<string, number> = {};
-
-		for (const answers of fullSets) {
-			const [matched, dist] = findMatchCharacterRaw(answers);
-			const mbti = computeMBTI(answers).mbti;
-			charCounts[matched] = (charCounts[matched] ?? 0) + 1;
-			mbtiCounts[mbti] = (mbtiCounts[mbti] ?? 0) + 1;
-			for (const char in dist) {
-				charProb[char] = (charProb[char] ?? 0) + dist[char];
-			}
-			if (!(matched in firstPath)) firstPath[matched] = answers;
-		}
-
-		printCharReport("Character Distribution (full answer sets)", charCounts, FULL_SETS);
-
-		const total = Object.values(charCounts).reduce((a, b) => a + b, 0);
-		expect(total).toBe(FULL_SETS);
-
-		console.log("\n=== Answer Paths Per Character ===\n");
-		const charNames = Object.keys(characters);
-		for (const name of charNames) {
-			const char = characters[name];
-			const path = firstPath[name];
-			if (!path) {
-				console.log(`${name.padEnd(8)} [${char.mbti}/${char.lang}] — NOT FOUND IN SAMPLE`);
-				continue;
-			}
-			const r = computeMBTI(path);
-			const seq = questions.map((q) => optionLabels[path[q.id].index]).join("");
-			const chunks: string[] = [];
-			for (let i = 0; i < seq.length; i += 10) chunks.push(seq.slice(i, i + 10));
-			console.log(
-				`${name.padEnd(8)} [${char.mbti}/${char.lang}]  ` +
-				`E:${String(r.scores.E).padStart(2)} I:${String(r.scores.I).padStart(2)} ` +
-				`S:${String(r.scores.S).padStart(2)} N:${String(r.scores.N).padStart(2)} ` +
-				`T:${String(r.scores.T).padStart(2)} F:${String(r.scores.F).padStart(2)} ` +
-				`J:${String(r.scores.J).padStart(2)} P:${String(r.scores.P).padStart(2)}`
-			);
-			console.log(`  path: ${chunks.join(" ")}`);
-		}
-
-		console.log("\n=== MBTI Distribution ===\n");
-
-		// 按类型分组统计
-		const mbtiGroups: Record<string, string[]> = {};
-		for (const [mbti, count] of Object.entries(mbtiCounts).sort(([a], [b]) => a.localeCompare(b))) {
-			if (!mbtiGroups[mbti]) mbtiGroups[mbti] = [];
-			mbtiGroups[mbti].push(`${mbti}: ${count}`);
-		}
-
-		// 输出每个 MBTI 类型的数量和百分比
-		for (const [mbti, count] of Object.entries(mbtiCounts).sort(([a], [b]) => a.localeCompare(b))) {
-			const pct = ((count / total) * 100).toFixed(1);
-			const bar = "█".repeat(Math.round(count / total * 50));
-			console.log(`${mbti.padEnd(6)} ${String(count).padStart(4)} (${String(pct).padStart(5)}%) ${bar}`);
-		}
-
-		console.log("\n=== Average Character Probability Distribution ===\n");
-
-		for (const name of charNames) {
-			const avgProb = charProb[name] ? (charProb[name] / total * 100).toFixed(1) : "0.0";
-			console.log(`${name.padEnd(3)} ${String(avgProb).padStart(5)}%`);
-		}
-
-		const missing = charNames.filter((n) => !(n in firstPath));
-		expect(missing).toEqual([]);
-	});
-});
-
-describe("Q0 preference simulations", () => {
-	// q0 的选项，根据你的实际题目定义调整
+it("Q0 preference simulations", () => {
 	const q0Options = [
-		{ index: 0, label: "自推/爱听" },
-		{ index: 1, label: "冷门/小众" },
-		{ index: 2, label: "随机/无所谓" },
+		{ index: 0, label: "MBTI一致" },
+		{ index: 1, label: "自推/爱听" },
+		{ index: 2, label: "冷门/小众" },
+		{ index: 3, label: "随便/无所谓" },
 	];
+	const charNames = Object.keys(characters);
+	const testedChars: string[] = [];
 
 	// 固定指定题目答案的生成器工厂
 	function fixedAnswerGenerator(
@@ -191,45 +102,74 @@ describe("Q0 preference simulations", () => {
 		}
 	}
 
+	function entropy(dist: Record<string, number>): number {
+		let h = 0;
+		for (const p of Object.values(dist)) {
+			if (p > 0) h -= p * Math.log2(p);
+		}
+		return h;
+	}
+
 	// 为每个 q0 选项创建独立测试
 	for (const opt of q0Options) {
-		it(`q0 = ${opt.label} (index ${opt.index})`, () => {
-			const generator = fixedAnswerGenerator(questions[0].id, opt.index);
-			const optionSets = generate(FULL_SETS, generator);
+		const generator = fixedAnswerGenerator(questions[0].id, opt.index);
+		const optionSets = generate(FULL_SETS, generator);
 
-			const charCounts: Record<string, number> = {};
-			const mbtiCounts: Record<string, number> = {};
-			const charProb: Record<string, number> = {};
+		const charCounts: Record<string, number> = {};
+		const mbtiCounts: Record<string, number> = {};
+		const charProb: Record<string, number> = {};
+		const entropies: number[] = [];
 
-			for (const answers of optionSets) {
-				const [matched, dist] = findMatchCharacterRaw(answers);
-				const mbti = computeMBTI(answers).mbti;
-				charCounts[matched] = (charCounts[matched] ?? 0) + 1;
-				mbtiCounts[mbti] = (mbtiCounts[mbti] ?? 0) + 1;
-				for (const char in dist) {
-					charProb[char] = (charProb[char] ?? 0) + dist[char];
-				}
+		for (const answers of optionSets) {
+			const [matched, dist] = findMatchCharacterRaw(answers);
+			const mbti = computeMBTI(answers).mbti;
+			charCounts[matched] = (charCounts[matched] ?? 0) + 1;
+			mbtiCounts[mbti] = (mbtiCounts[mbti] ?? 0) + 1;
+			for (const char in dist) {
+				charProb[char] = (charProb[char] ?? 0) + dist[char];
 			}
+			entropies.push(entropy(dist));
+		}
 
-			const total = Object.values(charCounts).reduce((a, b) => a + b, 0);
-			expect(total).toBe(FULL_SETS);
+		const total = Object.values(charCounts).reduce((a, b) => a + b, 0);
+		expect(total).toBe(FULL_SETS);
 
-			console.log(`\n========== Q0 = ${opt.label} (n=${FULL_SETS}) ==========`);
-			printCharReport("Character Distribution", charCounts, FULL_SETS);
+		const eMean = entropies.reduce((a, b) => a + b, 0) / entropies.length;
+		const eVariance = entropies.reduce((s, e) => s + (e - eMean) ** 2, 0) / entropies.length;
+		const eStd = Math.sqrt(eVariance);
+		const eMin = Math.min(...entropies);
+		const eMax = Math.max(...entropies);
+		const maxPossibleEntropy = Math.log2(Object.keys(characters).length);
 
-			console.log("\n=== MBTI Distribution ===\n");
-			for (const [mbti, count] of Object.entries(mbtiCounts).sort(([a], [b]) => a.localeCompare(b))) {
-				const pct = ((count / total) * 100).toFixed(1);
-				const bar = "█".repeat(Math.round(count / total * 50));
-				console.log(`${mbti.padEnd(6)} ${String(count).padStart(4)} (${String(pct).padStart(5)}%) ${bar}`);
+		console.log(`\n========== Q0 = ${opt.label} (n=${FULL_SETS}) ==========`);
+		console.log(`\n--- Entropy Stats (bits) ---`);
+		console.log(`  mean: ${eMean.toFixed(4)}  std: ${eStd.toFixed(4)}`);
+		console.log(`  min : ${eMin.toFixed(4)}  max: ${eMax.toFixed(4)}`);
+		console.log(`  max possible (uniform): ${maxPossibleEntropy.toFixed(4)}`);
+
+		printCharReport("Character Distribution", charCounts, FULL_SETS);
+		for (const char of Object.keys(charCounts)) {
+			if (!testedChars.includes(char)) {
+				testedChars.push(char)
 			}
+		}
 
-			console.log("\n=== Average Character Probability ===\n");
-			const charNames = Object.keys(characters);
-			for (const name of charNames) {
-				const avgProb = charProb[name] ? (charProb[name] / total * 100).toFixed(1) : "0.0";
-				console.log(`${name.padEnd(8)} ${String(avgProb).padStart(5)}%`);
-			}
-		});
+		console.log("\n=== MBTI Distribution ===\n");
+		for (const [mbti, count] of Object.entries(mbtiCounts).sort(([a], [b]) => a.localeCompare(b))) {
+			const pct = ((count / total) * 100).toFixed(1);
+			const bar = "█".repeat(Math.round(count / total * 50));
+			console.log(`${mbti.padEnd(6)} ${String(count).padStart(4)} (${String(pct).padStart(5)}%) ${bar}`);
+		}
+
+		// 我们已经改成常规的随机采样了，这部分和上面的分布一致
+		// console.log("\n=== Average Character Probability ===\n");
+		// const charNames = Object.keys(characters);
+		// for (const name of charNames) {
+		// 	const avgProb = charProb[name] ? (charProb[name] / total * 100).toFixed(1) : "0.0";
+		// 	console.log(`${name.padEnd(8)} ${String(avgProb).padStart(5)}%`);
+		// }
 	}
-});
+
+	const missing = charNames.filter((n) => !(testedChars.includes(n)));
+	expect(missing).toEqual([]);
+}, 30000);

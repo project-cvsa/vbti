@@ -33,7 +33,7 @@ export function findMatchCharacterRaw(answers: Answers): [string, Dist] {
 	}
 	// 第0题选择“越冷门越特别！我就想看看小众或者之前不认识的！”
 	else if (ans0.index === 2) {
-		dist = adjustCharacterPref(answers, dist, weightChar * -1);
+		dist = adjustCharacterPref(answers, dist, weightChar * 0.3);
 		// 增强冷门角色
 		dist = adjustPopularity(dist, -0.6);
 	}
@@ -45,8 +45,7 @@ export function findMatchCharacterRaw(answers: Answers): [string, Dist] {
 		// 稍微增强热门角色
 		dist = adjustPopularity(dist, 0.3);
 	}
-	const seed = 1099;
-	return [sampleFromDist(dist, mbti, seed), dist];
+	return [sampleFromDist(dist), dist];
 }
 
 export const findMatchCharacter = (answers: Answers): string => {
