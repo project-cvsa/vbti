@@ -2,8 +2,8 @@ import { findMatchCharacterRaw } from "@/core/findChar";
 import { computeMBTI } from "@/core/mbti";
 const ans = {
 	"q0": {
-		"value": "S",
-		"index": 0
+		"value": "F",
+		"index": 1
 	},
 	"q1": {
 		"value": "J",
@@ -14,8 +14,8 @@ const ans = {
 		"index": 0
 	},
 	"q3": {
-		"value": "E",
-		"index": 0
+		"value": "I",
+		"index": 1
 	},
 	"q4": {
 		"value": "N",
@@ -94,8 +94,8 @@ const ans = {
 		"index": 2
 	},
 	"q23": {
-		"value": "P",
-		"index": 0
+		"value": "J",
+		"index": 2
 	},
 	"q24": {
 		"value": "J",
@@ -138,8 +138,8 @@ const ans = {
 		"index": 1
 	},
 	"q34": {
-		"value": "N",
-		"index": 2
+		"value": "CN",
+		"index": 3
 	},
 	"q35": {
 		"value": "S",
@@ -154,12 +154,12 @@ const ans = {
 		"index": 0
 	},
 	"q38": {
-		"value": "S",
-		"index": 1
+		"value": "P",
+		"index": 2
 	},
 	"q39": {
-		"value": "E",
-		"index": 0
+		"value": "P",
+		"index": 2
 	}
 }
 const [char, dist] = findMatchCharacterRaw(ans);
