@@ -98,6 +98,7 @@ export default function ResultScreen() {
 		.filter((s) => s.name && s.bv);
 
 	const kicker = secretResolved ? "你的灵魂歌姬已降临" : "你的灵魂歌姬";
+	const isDev = import.meta.env.DEV || window.location.pathname === "/dev"
 
 	return (
 		<Card className="mt-6 p-6">
@@ -193,7 +194,7 @@ export default function ResultScreen() {
 					</Button>
 				</div>
 				<div className="flex gap-2">
-					{import.meta.env.DEV && <Button variant="outline" onClick={() => setAnswersOpen(true)}>显示我的答案</Button>}
+					{isDev && <Button variant="outline" onClick={() => setAnswersOpen(true)}>显示我的答案</Button>}
 					<Button variant="outline" onClick={() => setShareOpen(true)}>
 						分享结果
 					</Button>

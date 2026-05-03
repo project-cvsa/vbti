@@ -12,6 +12,7 @@ createRoot(document.getElementById("root")!).render(
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />} />
+				<Route path="/dev" element={<App />} />
 				{isDev && <Route path="/result/:character" element={<Result />} />}
 			</Routes>
 		</BrowserRouter>

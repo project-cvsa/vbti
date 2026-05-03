@@ -6,7 +6,7 @@ import { adjustMBTI } from "./specials/mbti";
 import { adjustLangPref } from "./specials/langPref";
 import { determineLang } from "./specials/determineLang";
 import { adjustCharacterPref } from "./specials/charPref";
-import { weightChar } from "./specials/const";
+import { weightChar, weightMbti } from "./specials/const";
 import { adjustPopularity } from "./specials/popularity";
 import { sampleFromDist } from "./sample";
 
@@ -40,7 +40,7 @@ export function findMatchCharacterRaw(answers: Answers): [string, Dist] {
 	}
 	// 随便->这种最难猜了，给一个通用的
 	else {
-		dist = adjustMBTI(mbti, dist);
+		dist = adjustMBTI(mbti, dist, weightMbti * 100);
 		dist = adjustCharacterPref(answers, dist, weightChar / 5);
 		dist = adjustLangPref(answers, dist);
 		dist = determineLang(answers, dist);

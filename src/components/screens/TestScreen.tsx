@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/dialog";
 import ProgressBar from "@/components/test/ProgressBar";
 import QuestionCard from "@/components/test/QuestionCard";
+import ProbDistPanel from "@/components/test/ProbDistPanel";
 import { SecretQuestionModal } from "@/components/modals/SecretQuestionModal";
 import { computeMBTI } from "@/core/mbti";
 
@@ -94,55 +95,61 @@ export default function TestScreen() {
 		resolveCharacter(answers, null);
 	}, [answers, submitting, resolveCharacter]);
 
+	const isDev = import.meta.env.DEV || window.location.pathname === "/dev"
+
 	return (
 		<div className="mt-5.5 p-6 max-sm:p-0 max-sm:mt-0 bg-white rounded-2xl max-sm:bg-transparent max-sm:rounded-none">
 			<ProgressBar answered={answered} total={total} />
 
-			<div
-				ref={questionContainerRef}
-				className="rounded-2xl mt-4 max-sm:mt-2 max-sm:rounded-none"
-			>
-				<QuestionCard
-					question={currentQuestion}
-					questionIndex={currentIdx}
-					savedAnswer={savedAnswer}
-					onAnswer={handleAnswer}
-				/>
-			</div>
+			<div className="flex flex-col md:flex-row gap-5 mt-4 max-sm:mt-2">
+				<div className="flex-1 min-w-0">
+					<div
+						ref={questionContainerRef}
+						className="rounded-2xl max-sm:rounded-none"
+					>
+						<QuestionCard
+							question={currentQuestion}
+							questionIndex={currentIdx}
+							savedAnswer={savedAnswer}
+							onAnswer={handleAnswer}
+						/>
+					</div>
 
-			<div className="flex gap-3 mt-4.5 items-center justify-center flex-wrap">
-				<div className="flex justify-between w-full items-center md:justify-center md:gap-4">
-					<Button
-						variant="outline"
-						className="nav-btn px-5 py-3 rounded-2xl font-semibold"
-						disabled={currentIdx === 0}
-						onClick={() => setCurrentIdx((i) => i - 1)}
-					>
-						◀ 上一题
-					</Button>
-					<Button
-						className=" text-white font-bold rounded-xl py-5 px-10"
-						onClick={handleSubmit}
-						disabled={submitting}
-					>
-						提交
-					</Button>
-					<Button
-						variant="outline"
-						className="nav-btn px-5 py-3 rounded-2xl font-semibold"
-						disabled={currentIdx >= total - 1}
-						onClick={() => setCurrentIdx((i) => i + 1)}
-					>
-						下一题 ▶
-					</Button>
+					<div className="flex gap-3 mt-4.5 items-center justify-center flex-wrap">
+						<div className="flex justify-between w-full items-center md:justify-center md:gap-4">
+							<Button
+								variant="outline"
+								className="nav-btn px-5 py-3 rounded-2xl font-semibold"
+								disabled={currentIdx === 0}
+								onClick={() => setCurrentIdx((i) => i - 1)}
+							>
+								◀ 上一题
+							</Button>
+							<Button
+								className=" text-white font-bold rounded-xl py-5 px-10"
+								onClick={handleSubmit}
+								disabled={submitting}
+							>
+								提交
+							</Button>
+							<Button
+								variant="outline"
+								className="nav-btn px-5 py-3 rounded-2xl font-semibold"
+								disabled={currentIdx >= total - 1}
+								onClick={() => setCurrentIdx((i) => i + 1)}
+							>
+								下一题 ▶
+							</Button>
+						</div>
+						<Button
+							variant="link"
+							className="text-[#4a6b7a] text-sm hover:underline"
+							onClick={() => setShowBackConfirm(true)}
+						>
+							返回首页
+						</Button>
+					</div>
 				</div>
-				<Button
-					variant="link"
-					className="text-[#4a6b7a] text-sm hover:underline"
-					onClick={() => setShowBackConfirm(true)}
-				>
-					返回首页
-				</Button>
 			</div>
 
 			{showSecretQuestion && mbtiResult && secretQuestions[mbtiResult.mbti] && (
@@ -177,6 +184,10 @@ export default function TestScreen() {
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
+
+			{isDev && <div className="w-full shrink-0 md:sticky md:top-4 self-start">
+				<ProbDistPanel />
+			</div>}
 		</div>
 	);
 }

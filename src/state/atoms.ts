@@ -1,5 +1,6 @@
 import { atom } from "jotai";
-import type { Answers, Screen } from "@/core/types";
+import type { Answers, CharacterProbDistribution, Screen } from "@/core/types";
+import { findMatchCharacterRaw } from "@/core/findChar";
 
 export const currentScreenAtom = atom<Screen>("intro");
 
@@ -27,3 +28,9 @@ export const goToIntroAtom = atom(null, (_get, set) => {
 export const resultCharacterAtom = atom<string | null>(null);
 
 export const secretResolvedAtom = atom(false);
+
+export const probDistAtom = atom<CharacterProbDistribution | null>((get) => {
+	const answers = get(answersAtom);
+	if (Object.keys(answers).length === 0) return null;
+	return findMatchCharacterRaw(answers)[1];
+});
