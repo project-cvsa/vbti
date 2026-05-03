@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import type { Question, Answer } from "@/core/types";
+import type { Question } from "@/core/types";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
 
@@ -8,18 +8,18 @@ const OPTION_CODES = ["A", "B", "C", "D"];
 interface QuestionCardProps {
 	question: Question;
 	questionIndex: number;
-	savedAnswer: Answer | undefined;
-	onAnswer: (value: string, index: number) => void;
+	savedAnswer: number | undefined;
+	onAnswer: (index: number) => void;
 }
 
 function QuestionCard({ question, questionIndex, savedAnswer, onAnswer }: QuestionCardProps) {
-	const selectedIndex = savedAnswer?.index;
+	const selectedIndex = savedAnswer;
 
 	const handleValueChange = useCallback(
 		(idxStr: string) => {
 			const idx = Number(idxStr);
 			const opt = question.options[idx];
-			if (opt) onAnswer(opt.value, idx);
+			if (opt) onAnswer(idx);
 		},
 		[question.options, onAnswer]
 	);

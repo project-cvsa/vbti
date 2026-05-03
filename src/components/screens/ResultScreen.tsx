@@ -103,11 +103,11 @@ export default function ResultScreen() {
 		<Card className="mt-6 p-6">
 			<div className="flex flex-col md:grid md:grid-cols-[0.9fr_1.5fr] gap-6 items-start">
 				{/* Desktop poster */}
-				<div className="hidden md:flex flex-col items-center text-center rounded-2xl p-5 border bg-accent/30">
+				<div className="hidden md:flex flex-col items-center text-center">
 					<img
 						src={character.image ?? ""}
 						alt={resultCharacter}
-						className="w-full max-w-65 max-h-80 object-contain rounded-xl bg-white/75"
+						className="w-full max-w-65 max-h-100 object-contain"
 					/>
 					<div className="mt-3 text-muted-foreground text-sm">{character.caption}</div>
 				</div>
@@ -124,11 +124,11 @@ export default function ResultScreen() {
 					</div>
 
 					{/* Mobile poster */}
-					<div className="md:hidden flex flex-col items-center text-center rounded-2xl p-5 border bg-accent/30">
+					<div className="md:hidden flex flex-col items-center text-center">
 						<img
 							src={character.image ?? ""}
 							alt={resultCharacter}
-							className="w-full max-w-100 max-h-100 object-contain rounded-xl bg-white/75"
+							className="w-full max-w-100 max-h-100 object-contain"
 						/>
 						<div className="mt-3 text-muted-foreground text-sm">
 							{character.caption}
@@ -193,7 +193,7 @@ export default function ResultScreen() {
 					</Button>
 				</div>
 				<div className="flex gap-2">
-					<Button variant="outline" onClick={() => setAnswersOpen(true)}>显示我的答案</Button>
+					{import.meta.env.DEV && <Button variant="outline" onClick={() => setAnswersOpen(true)}>显示我的答案</Button>}
 					<Button variant="outline" onClick={() => setShareOpen(true)}>
 						分享结果
 					</Button>

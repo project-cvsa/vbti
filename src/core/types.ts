@@ -17,12 +17,7 @@ export interface Question {
 	options: QuestionOption[];
 }
 
-/** A user's answer to a question */
-export interface Answer {
-	value: string;
-	index: number;
-}
-export type Answers = Record<string, Answer>;
+export type Answers = Record<string, number | undefined>;
 
 /** MBTI sub-scores for each dimension pole */
 export interface MBTIScores {

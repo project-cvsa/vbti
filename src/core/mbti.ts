@@ -47,7 +47,7 @@ export function computeMBTI(answers: Answers): MBTIResult {
 		const ans = answers[q.id];
 		if (!ans) continue;
 
-		const val = ans.value;
+		const val = q.options[ans].value;
 
 		scores[val as keyof MBTIScores] += 1;
 	}

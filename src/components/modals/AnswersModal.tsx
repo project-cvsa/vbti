@@ -1,4 +1,4 @@
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogHeader } from "@/components/ui/dialog";
 import { useAtomValue } from "jotai";
 import { answersAtom } from "@/state/atoms";
 
@@ -17,6 +17,7 @@ export function AnswersModal({ open, onClose }: AnswersModalProps) {
 			}}
 		>
 			<DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
+				<DialogHeader><DialogTitle className="text-xl font-bold">答案数据</DialogTitle></DialogHeader>
 				<pre>
 					<code className="text-wrap">
 						{JSON.stringify(answers)}

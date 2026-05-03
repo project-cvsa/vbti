@@ -20,20 +20,20 @@ export function findMatchCharacterRaw(answers: Answers): [string, Dist] {
 	let dist = initalDistribution;
 	const ans0 = answers[questions[0].id];
 	// 第0题选择“性格越像我越好！最好和我本人的mbti一致”
-	if (ans0.index === 0) {
+	if (ans0 === 0) {
 		dist = adjustMBTI(mbti, dist);
 		dist = adjustLangPref(answers, dist);
 		dist = determineLang(answers, dist);
 	}
 	// 第0题选择“和我爱听的术力口一致，是自推那更好啦~”
-	else if (ans0.index === 1) {
+	else if (ans0 === 1) {
 		dist = adjustCharacterPref(answers, dist, weightChar);
 		dist = adjustLangPref(answers, dist);
 		dist = determineLang(answers, dist);
 		dist = adjustMBTI(mbti, dist, 10); // 略微调整一下MBTI
 	}
 	// 第0题选择“越冷门越特别！我就想看看小众或者之前不认识的！”
-	else if (ans0.index === 2) {
+	else if (ans0 === 2) {
 		dist = adjustCharacterPref(answers, dist, 0.2);
 		// 增强冷门角色
 		dist = adjustPopularity(dist, -1.5);
@@ -41,6 +41,7 @@ export function findMatchCharacterRaw(answers: Answers): [string, Dist] {
 	// 随便->这种最难猜了，给一个通用的
 	else {
 		dist = adjustMBTI(mbti, dist);
+		dist = adjustCharacterPref(answers, dist, weightChar / 5);
 		dist = adjustLangPref(answers, dist);
 		dist = determineLang(answers, dist);
 		// 稍微增强热门角色

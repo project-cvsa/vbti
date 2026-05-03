@@ -46,10 +46,10 @@ export default function TestScreen() {
 	const mbtiResult = computeMBTI(answers);
 
 	const handleAnswer = useCallback(
-		(value: string, index: number) => {
+		(index: number) => {
 			setAnswers((prev) => ({
 				...prev,
-				[currentQuestion.id]: { value, index },
+				[currentQuestion.id]: index,
 			}));
 		},
 		[currentQuestion.id, setAnswers]
@@ -90,32 +90,9 @@ export default function TestScreen() {
 		if (submitting) return;
 		setSubmitting(true);
 
-		let firstMissing = -1;
-		for (let i = 0; i < questions.length; i++) {
-			if (!answers[questions[i].id]) {
-				firstMissing = i;
-				break;
-			}
-		}
-
-		if (firstMissing !== -1) {
-			setCurrentIdx(firstMissing);
-			setSubmitting(false);
-
-			const container = questionContainerRef.current;
-			if (container) {
-				container.classList.add("ring-2", "ring-red-500", "bg-red-50/50");
-				window.scrollTo({ top: container.offsetTop - 100, behavior: "smooth" });
-				setTimeout(() => {
-					container.classList.remove("ring-2", "ring-red-500", "bg-red-50/50");
-				}, 2500);
-			}
-			return;
-		}
-
 		setSubmitting(false);
 		resolveCharacter(answers, null);
-	}, [answers, submitting, resolveCharacter, setCurrentIdx]);
+	}, [answers, submitting, resolveCharacter]);
 
 	return (
 		<div className="mt-5.5 p-6 max-sm:p-0 max-sm:mt-0 bg-white rounded-2xl max-sm:bg-transparent max-sm:rounded-none">
@@ -144,11 +121,11 @@ export default function TestScreen() {
 						◀ 上一题
 					</Button>
 					<Button
-						className=" text-white font-bold rounded-2xl py-5 px-4"
+						className=" text-white font-bold rounded-xl py-5 px-10"
 						onClick={handleSubmit}
 						disabled={submitting}
 					>
-						提交并查看结果
+						提交
 					</Button>
 					<Button
 						variant="outline"
