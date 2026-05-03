@@ -13,6 +13,7 @@ import { StaffModal } from "@/components/modals/StaffModal";
 import { SharePanel } from "@/components/modals/SharePanel";
 import { SoulCardModal } from "@/components/modals/SoulCardModal";
 import { Music, VolumeX, Heart, Tv } from "lucide-react";
+import { AnswersModal } from "../modals/AnswersModal";
 
 interface SongInfo {
 	name: string;
@@ -29,6 +30,7 @@ export default function ResultScreen() {
 	const [shareOpen, setShareOpen] = useState(false);
 	const [cardOpen, setCardOpen] = useState(false);
 	const [musicPlaying, setMusicPlaying] = useState(false);
+	const [answersOpen, setAnswersOpen] = useState(false);
 
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -191,6 +193,7 @@ export default function ResultScreen() {
 					</Button>
 				</div>
 				<div className="flex gap-2">
+					<Button variant="outline" onClick={() => setAnswersOpen(true)}>显示我的答案</Button>
 					<Button variant="outline" onClick={() => setShareOpen(true)}>
 						分享结果
 					</Button>
@@ -293,6 +296,7 @@ export default function ResultScreen() {
 				characterName={resultCharacter}
 				character={character}
 			/>
+			<AnswersModal open={answersOpen} onClose={() => setAnswersOpen(false)}/>
 		</Card>
 	);
 }
