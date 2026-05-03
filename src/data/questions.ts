@@ -10,7 +10,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q5', dim: 'EI', text: '在同好群里或线下活动面基时，你通常是？', options: [
+		id: 'q2', dim: 'EI', text: '在同好群里或线下活动面基时，你通常是？', options: [
 			{ label: '气氛组担当，活跃气氛、带动节奏全靠我！🎉', value: 'E' },
 			{ label: '安安静静在旁边，偶尔发表一下自己的看法。👀', value: 'I' },
 			{ label: '看情况，跟熟的人疯，跟不熟的人冷。🎭', value: 'E' },
@@ -18,7 +18,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q7', dim: 'EI', text: '你更愿意被人评价为——', options: [
+		id: 'q3', dim: 'EI', text: '你更愿意被人评价为——', options: [
 			{ label: '像乐正绫那样，开朗热情、活力满满的人。☀️', value: 'E', lang: 'CN' },
 			{ label: '像GUMI那样，温柔细心、值得信赖的人。🌿', value: 'I', lang: 'JP' },
 			{ label: '像言和那样，帅气利落、独当一面的人。⚔️', value: 'I', lang: 'CN' },
@@ -26,7 +26,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q6', dim: 'SN', text: '用下面选项的一首歌来形容你？', options: [
+		id: 'q4', dim: 'SN', text: '用下面选项的一首歌来形容你？', options: [
 			{ label: '像《千年食谱颂》里的天依：热爱美食，吃饱再说。🍜', value: 'S', lang: 'CN' },
 			{ label: '像《KING》里的GUMI：自信放光芒，生来就是自己世界的主宰。', value: 'N', lang: 'JP' },
 			{ label: '像《伪物》里的可不：连我自己都搞不懂自己。👐', value: 'N', lang: 'JP' },
@@ -34,7 +34,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q2', dim: 'SN', text: '用一首歌来形容你的内心世界，你直觉会选？', options: [
+		id: 'q5', dim: 'SN', text: '用一首歌来形容你的内心世界，你直觉会选？', options: [
 			{ label: '《66CCFF》——想变成天蓝色，不一定最耀眼，但一定是独一无二的自己。💙', value: 'N', lang: 'CN' },
 			{ label: '《世末歌者》——独自在世界的角落弹着吉他，唱给可能永远不会听到的人听。🎸', value: 'N', lang: 'CN' },
 			{ label: '《世界第一的公主殿下》——虽然有时任性，但这就是我，不接受反驳。👑', value: 'S', lang: 'JP' },
@@ -42,7 +42,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q37', dim: 'SN', text: '如果把自己比喻成一种动物，你觉得自己是？', options: [
+		id: 'q6', dim: 'SN', text: '如果把自己比喻成一种动物，你觉得自己是？', options: [
 			{ label: '不知疲倦的小狗，永远在奔跑，在雨中也不曾停不下来。🐕', value: 'S' },
 			{ label: '安静观察的猫，有自己的小世界，偶尔才让人靠近。', value: 'N' },
 			{ label: '下辈子就做在深海独自游弋的鲸，用只有同类能听懂的频率歌唱。🐋', value: 'N' },
@@ -50,7 +50,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q16', dim: 'EI', text: '在同好圈里，你渴望找到那个能和你灵魂共鸣、像失散多年亲人一样默契的同好吗？', options: [
+		id: 'q7', dim: 'EI', text: '在同好圈里，你渴望找到那个能和你灵魂共鸣、像失散多年亲人一样默契的同好吗？', options: [
 			{ label: '非常渴望！灵魂伴侣般的同好谁不想要！💞', value: 'E' },
 			{ label: '还好吧，保持一点距离也挺好，听歌自己听就行。📏', value: 'I' },
 			{ label: '不怎么渴望，我一个人也挺自在。🚶', value: 'I' },
@@ -58,7 +58,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q14', dim: 'EI', text: '你去参加V家only展，你会怎样度过这一天？', options: [
+		id: 'q8', dim: 'EI', text: '你去参加V家only展，你会怎样度过这一天？', options: [
 			{ label: '全场巡回集邮！能逮到的P主和coser全都要合影，能聊两句就更好了！📸', value: 'E' },
 			{ label: '直奔喜欢的P主摊位买周边，买完安静逛两圈就撤。🛍️', value: 'I' },
 			{ label: '提前约好同好一起逛，全程有说有笑，在群里实时直播。📱', value: 'E' },
@@ -66,7 +66,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q17', dim: 'EI', text: '你在圈子里是什么类型的粉丝？', options: [
+		id: 'q9', dim: 'EI', text: '你在圈子里是什么类型的粉丝？', options: [
 			{ label: '传教士——到处安利，恨不得全世界都来听。📣', value: 'E' },
 			{ label: '老宅型——安静听歌，默默收藏，偶尔考古。📼', value: 'I' },
 			{ label: '创作型——自己也想写词/调教/画图。✍️', value: 'I' },
@@ -74,7 +74,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q19', dim: 'EI', text: '以下哪个场景是你可能会干的？', options: [
+		id: 'q10', dim: 'EI', text: '以下哪个场景是你可能会干的？', options: [
 			{ label: '在KTV点了术曲，发现全场只有我一个人嗨。🎤', value: 'E' },
 			{ label: '被问到“你喜欢听哪种歌”，脱口而出“术力口”，对方一脸懵。😶', value: 'I' },
 			{ label: '偷偷循环《脑蚀》两个月了，没和任何人说。💀', value: 'I', lang: 'JP' },
@@ -82,7 +82,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q38', dim: 'EI', text: '当你听到一首超好听的术力口歌曲，你会？', options: [
+		id: 'q11', dim: 'EI', text: '当你听到一首超好听的术力口歌曲，你会？', options: [
 			{ label: '立刻分享给所有亲友和同好群，好歌不能只我一个人听！📢', value: 'E' },
 			{ label: '默默收藏，单曲循环播放。🎧', value: 'I' },
 			{ label: '去找这个P主的其他作品，深入研究。🔬', value: 'I' },
@@ -90,7 +90,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q25', dim: 'EI', text: '你在B站看到一个术力口视频，UP主搬运时没标P主名字也没放原链接，你会？', options: [
+		id: 'q12', dim: 'EI', text: '你在B站看到一个术力口视频，UP主搬运时没标P主名字也没放原链接，你会？', options: [
 			{ label: '在评论区再次提醒并附上原链接，必须尊重创作者。✍️', value: 'J' },
 			{ label: '心里不舒服但不会说什么，默默去原链接那边支持一下。🤫', value: 'P' },
 			{ label: '不标出处是底线问题，直接举办🚨', value: 'J' },
@@ -98,7 +98,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q8', dim: 'TF', text: '你最喜欢的P主突然宣布无限期停更，你会？', options: [
+		id: 'q13', dim: 'TF', text: '你最喜欢的P主突然宣布无限期停更，你会？', options: [
 			{ label: '虽然难过但尊重选择。创作是自由的，累了就该休息。🍃', value: 'F' },
 			{ label: '疯狂刷以前的投稿，一边看一边emo，感觉像失恋。😢', value: 'F' },
 			{ label: '先难过三分钟，然后分析停更原因、找风格代餐。🤔', value: 'T' },
@@ -106,7 +106,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q11', dim: 'TF', text: '你在同好群/评论区里看到两个人突然开始互怼，你通常会？', options: [
+		id: 'q14', dim: 'TF', text: '你在同好群/评论区里看到两个人突然开始互怼，你通常会？', options: [
 			{ label: '前排围观吃瓜，看谁能吵赢。🍿', value: 'T' },
 			{ label: '上去劝架！“大家别吵了，都是热爱术力口的人。”🤝', value: 'F' },
 			{ label: '完全不在乎，划走了。👋', value: 'T' },
@@ -114,7 +114,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q13', dim: 'TF', text: '你喜欢的虚拟歌姬被人在评论区贬低，说她“只是软件而已没有灵魂”，你会？', options: [
+		id: 'q15', dim: 'TF', text: '你喜欢的虚拟歌姬被人在评论区贬低，说她“只是软件而已没有灵魂”，你会？', options: [
 			{ label: '见怪不怪，耐着性子给路人科普虚拟歌手的定义和优秀歌曲。📖', value: 'T' },
 			{ label: '直接开麦回击，引用经典曲目论证什么才是灵魂。🔥', value: 'T' },
 			{ label: '心里很不舒服但不想吵架，默默点了踩然后划走。😔', value: 'F' },
@@ -122,7 +122,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q15', dim: 'TF', text: '圈子里突然流行起一种新的风格，但你听着觉得“这不就是在毁歌吗”，你会？', options: [
+		id: 'q16', dim: 'TF', text: '圈子里突然流行起一种新的风格，但你听着觉得“这不就是在毁歌吗”，你会？', options: [
 			{ label: '在评论区理性留言，分析为什么你觉得这种风格不适合某些曲目。📝', value: 'T' },
 			{ label: '跟同好吐槽，但不会公开说——萝卜青菜各有所爱，尊重吧。🙊', value: 'F' },
 			{ label: '想自己去调一首，用实际作品证明什么叫更好的风格。🎛️', value: 'T' },
@@ -130,7 +130,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q18', dim: 'TF', text: '你在评论区写了一段对这首歌的感受，结果有人回复“你根本没听懂这首歌”，你会？', options: [
+		id: 'q17', dim: 'TF', text: '你在评论区写了一段对这首歌的感受，结果有人回复“你根本没听懂这首歌”，你会？', options: [
 			{ label: '认真回复，解释我为什么这么理解这首歌，欢迎理性讨论。📝', value: 'T' },
 			{ label: '有点不爽，但不想在评论区吵架，删了自己的评论就划走了。😐', value: 'F' },
 			{ label: '不理他。每个人对歌的理解本来就不一样。😎', value: 'T' },
@@ -138,7 +138,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q10', dim: 'TF', text: '有一首术曲火爆了全网，但你get不到它好听在哪，你会？', options: [
+		id: 'q18', dim: 'TF', text: '有一首术曲火爆了全网，但你get不到它好听在哪，你会？', options: [
 			{ label: '既然这么红肯定有它的道理，多听几遍说不定就洗脑中毒了。🎧', value: 'F' },
 			{ label: '默默划走，坚信听歌审美是主观的，没必要勉强自己。😎', value: 'T' },
 			{ label: '去分析这首歌爆火的原因：是PV做得好？旋律洗脑？还是营销到位？🔍', value: 'T' },
@@ -146,7 +146,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q9', dim: 'SN', text: '如果要用一首术力口歌曲来表达你现在的感情观，你会选？', options: [
+		id: 'q19', dim: 'SN', text: '如果要用一首术力口歌曲来表达你现在的感情观，你会选？', options: [
 			{ label: '《勾指起誓》——相信简单纯粹的约定。🤝', value: 'S', lang: 'CN' },
 			{ label: '《心空》——爱的太过，伤得太深。💔', value: 'N', lang: 'CN' },
 			{ label: '《幽灵法则》——无法抽身，依然等你救援。⚔️', value: 'N', lang: 'JP' },
@@ -154,7 +154,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q12', dim: 'TF', text: '你看到一个新人P主的第一首投稿，制作很生涩但某一点意外地戳你，你会？', options: [
+		id: 'q20', dim: 'TF', text: '你看到一个新人P主的第一首投稿，制作很生涩但某一点意外地戳你，你会？', options: [
 			{ label: '果断三连+关注，在评论区留长文鼓励，新人需要爱！💌', value: 'F' },
 			{ label: '先点个赞，等他出下一首看看水平有没有进步再决定要不要关注。🔍', value: 'T' },
 			{ label: '默默下载存进歌单循环，但不在评论区说话。📼', value: 'F' },
@@ -162,7 +162,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q3', dim: 'JP', text: '你打开B站，发现首页同时推了一首殿堂曲和一首冷门良曲，你会先点哪个？', options: [
+		id: 'q21', dim: 'JP', text: '你打开B站，发现首页同时推了一首殿堂曲和一首冷门良曲，你会先点哪个？', options: [
 			{ label: '当然是殿堂曲！能上殿堂肯定有它的道理，先看看大家为什么喜欢。🔥', value: 'J' },
 			{ label: '冷门良曲。比起跟风，我更愿意做那个发现宝藏的人。💎', value: 'P' },
 			{ label: '看封面和标题决定，眼缘最重要。👀', value: 'P' },
@@ -170,7 +170,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q4', dim: 'JP', text: 'B站上有个术力口相关的企划在招募，你很喜欢这个企划的主题，但你需要学一项新技能才能参与，你会？', options: [
+		id: 'q22', dim: 'JP', text: 'B站上有个术力口相关的企划在招募，你很喜欢这个企划的主题，但你需要学一项新技能才能参与，你会？', options: [
 			{ label: '直接报名！不会可以学，机会错过了就没了。⚡', value: 'J' },
 			{ label: '先收藏，等自己技术成熟了再参加下一次。📅', value: 'P' },
 			{ label: '观望一下。看看有没有更简单的分工可以先试着帮忙。👀', value: 'P' },
@@ -178,7 +178,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q20', dim: 'JP', text: '明天就是截止日了，你的同人稿/混音/PV还没完成，你会？', options: [
+		id: 'q23', dim: 'JP', text: '明天就是截止日了，你的同人稿/混音/PV还没完成，你会？', options: [
 			{ label: '开足马力通宵肝完，死线就是第一生产力！🚀', value: 'P' },
 			{ label: '想办法跟策划/主办方求个情，晚几天应该没问题吧……😅', value: 'P' },
 			{ label: '早就做好了。我就是那种提前规划、绝不拖延的人。🗓️', value: 'J' },
@@ -186,7 +186,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q22', dim: 'JP', text: '你正在肝一个企划，突然电脑蓝屏了，之前没保存的进度全没了，你会？', options: [
+		id: 'q24', dim: 'JP', text: '你正在肝一个企划，突然电脑蓝屏了，之前没保存的进度全没了，你会？', options: [
 			{ label: '先骂三分钟，然后打开电脑重来一遍。💢', value: 'J' },
 			{ label: '大脑空白三秒，缓过来后从头理清思路再开始。🧊', value: 'J' },
 			{ label: '今天不干了。老天爷都让我休息。💤', value: 'P' },
@@ -194,7 +194,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q23', dim: 'JP', text: '如果要你完成一个术力口相关的创作项目，你更倾向？', options: [
+		id: 'q25', dim: 'JP', text: '如果要你完成一个术力口相关的创作项目，你更倾向？', options: [
 			{ label: '先干再说，边做边改，灵感在路上。🚲', value: 'P' },
 			{ label: '先构思清楚再动手，磨刀不误砍柴工。🔪', value: 'J' },
 			{ label: '拉齐staff一起做，一个人搞太累了。🌊', value: 'P' },
@@ -202,7 +202,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q27', dim: 'JP', text: '你期待了很久的一首术力口新曲突然提前发布了，但你原计划今晚要早睡，明天有重要的事，你会？', options: [
+		id: 'q26', dim: 'JP', text: '你期待了很久的一首术力口新曲突然提前发布了，但你原计划今晚要早睡，明天有重要的事，你会？', options: [
 			{ label: '先听为快！熬夜就熬了，明天再补觉。🎧', value: 'P' },
 			{ label: '看情况。如果特别期待就听，一般期待就明天再说。🤔', value: 'P' },
 			{ label: '忍痛先睡。明天精神饱满地听，体验更好。😴', value: 'J' },
@@ -210,7 +210,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q21', dim: 'JP', text: '你发现你最喜欢的那首歌本周在周刊上的排名掉了好几名，你会？', options: [
+		id: 'q27', dim: 'JP', text: '你发现你最喜欢的那首歌本周在周刊上的排名掉了好几名，你会？', options: [
 			{ label: '立刻去再循环几遍，用行动把数据刷回来。📈', value: 'J' },
 			{ label: '有点失落但无所谓，这也正常，排名不代表歌的质量。💎', value: 'P' },
 			{ label: '去翻评论区看看最近是不是有什么争议导致热度下降。🔍', value: 'T' },
@@ -218,7 +218,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q24', dim: 'JP', text: '某位歌姬的生日快到了，同好群在商量怎么庆祝，你更倾向于？', options: [
+		id: 'q28', dim: 'JP', text: '某位歌姬的生日快到了，同好群在商量怎么庆祝，你更倾向于？', options: [
 			{ label: '我参与策划！想主题、想文案、分配任务都交给我。🎂', value: 'J' },
 			{ label: '有人带头我就配合。做图/写文案/剪视频，让我干啥就干啥。🙂', value: 'P' },
 			{ label: '我不太参与筹备，但在当天一定会转发生贺图或视频。🎁', value: 'I' },
@@ -226,7 +226,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q26', dim: 'EI', text: '遇到压力或情绪低落时，哪类术曲会符合你的行为？', options: [
+		id: 'q29', dim: 'EI', text: '遇到压力或情绪低落时，哪类术曲会符合你的行为？', options: [
 			{ label: '燃曲拉满！像《万象霜天》把情绪全部吼出去就舒服了。🔥', value: 'E', lang: 'CN' },
 			{ label: '安静治愈系。像《梦与叶樱》慢慢听，慢慢消化。🌙', value: 'I', lang: 'JP' },
 			{ label: '轻松甜曲。像《I LOVE U》那样，用甜蜜可爱的少女转移注意力。🍰', value: 'I', lang: 'CN' },
@@ -234,7 +234,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q28', dim: 'EI', text: '你偶然翻到自己十年前用过的歌单，里面有大量已经被你遗忘的术曲，你会？', options: [
+		id: 'q30', dim: 'EI', text: '你偶然翻到自己十年前用过的歌单，里面有大量已经被你遗忘的术曲，你会？', options: [
 			{ label: '一首一首点开重温，不知不觉听了三小时，眼泪还下来了。😢', value: 'I' },
 			{ label: '分享歌单链接到旧同好群，问一句“还有人记得这些歌吗？”📢', value: 'E' },
 			{ label: '快速扫一眼，挑几首印象深的听一下，剩下的关掉。⏩', value: 'I' },
@@ -242,7 +242,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q29', dim: 'SN', text: '在听V家歌曲时，你更容易被哪种类型的歌吸引？', options: [
+		id: 'q31', dim: 'SN', text: '在听V家歌曲时，你更容易被哪种类型的歌吸引？', options: [
 			{ label: '快节奏、燃向曲——节奏一响就想抖腿。⚡', value: 'S' },
 			{ label: '叙事感强的故事曲——像在读小说。📖', value: 'N' },
 			{ label: '氛围感拉满的电音/实验曲——喜欢那种漂浮感。🌌', value: 'N' },
@@ -250,7 +250,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q30', dim: 'JP', text: '你觉得自己最近的听歌状态是？', options: [
+		id: 'q32', dim: 'JP', text: '你觉得自己最近的听歌状态是？', options: [
 			{ label: '疯狂循环某几首，上头到停不下来。🔄', value: 'J' },
 			{ label: '随机播放，听到哪首是哪首。🎲', value: 'P' },
 			{ label: '在考古，翻老P主的旧作。📼', value: 'P' },
@@ -258,7 +258,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q31', dim: 'SN', text: '如果你只能给朋友安利一首中文V家歌曲，你会选？', options: [
+		id: 'q33', dim: 'SN', text: '如果你只能给朋友安利一首中文V家歌曲，你会选？', options: [
 			{ label: '《达拉崩吧》——洗脑第一名。（原来这是术曲！x）🐉', value: 'S', isCN: true },
 			{ label: '《霜雪千年》——入坑经典，余音绕梁。🐉', value: 'S', isCN: true },
 			{ label: '《告死鸟》——推歌我只推最新的。✍️', value: 'N', isCN: true },
@@ -266,7 +266,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q32', dim: 'SN', text: '如果你只能给朋友安利一首日文V歌曲，你会选？', options: [
+		id: 'q34', dim: 'SN', text: '如果你只能给朋友安利一首日文V歌曲，你会选？', options: [
 			{ label: '《Melt》——奇迹的起源，入坑首选。🎵', value: 'S', isJP: true },
 			{ label: '《千本樱》——就算不听术力口的人也大概率听过。🌸', value: 'S', isJP: true },
 			{ label: '《脑蚀》——只听最新最潮的。🎧', value: 'N', isJP: true },
@@ -274,7 +274,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q33', dim: 'SN', text: '你听V家歌曲会更关注哪个部分？', options: [
+		id: 'q35', dim: 'SN', text: '你听V家歌曲会更关注哪个部分？', options: [
 			{ label: '旋律——好听才是硬道理！🎼', value: 'S' },
 			{ label: '歌词——歌词戳心才会单曲循环。📝', value: 'N' },
 			{ label: '调教——调教好坏决定一首歌的灵魂。🎛️', value: 'N' },
@@ -282,7 +282,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q34', dim: 'SN', text: '如果把V家歌曲比作食物，你的歌单更接近？', options: [
+		id: 'q36', dim: 'SN', text: '如果把V家歌曲比作食物，你的歌单更接近？', options: [
 			{ label: '火锅——万物皆可涮，什么风格都听，越杂越香。', value: 'S' },
 			{ label: '清粥小菜——不需要重口味，清淡温暖就足够治愈。🥣', value: 'N' },
 			{ label: '挚爱甜点——甜就完事了，生活需要糖分和可爱。🍰', value: 'S' },
@@ -290,7 +290,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q35', dim: 'SN', text: '你一般通过什么渠道发现新的术曲？', options: [
+		id: 'q37', dim: 'SN', text: '你一般通过什么渠道发现新的术曲？', options: [
 			{ label: 'B站等平台首页推荐，算法懂我。📱', value: 'S' },
 			{ label: '亲友安利/群聊分享，相信圈子品味。👥', value: 'N' },
 			{ label: '自己扒喜欢的P主列表，一个一个听。🔍', value: 'N' },
@@ -298,7 +298,7 @@ export const questions: Question[] = [
 		]
 	},
 	{
-		id: 'q36', dim: 'JP', text: '如果把你和V家的关系比作一段旋律，你觉得最接近的是？', options: [
+		id: 'q38', dim: 'JP', text: '如果把你和V家的关系比作一段旋律，你觉得最接近的是？', options: [
 			{ label: '一段热血燃烧的副歌——V家就是我青春里的那团火。🔥', value: 'J' },
 			{ label: '一段温柔循环的间奏——不需要高潮，一直陪伴就已足够。🎧', value: 'P' },
 			{ label: '一段还未完成的demo——我和V家的故事才刚开始，未来可期。🌱', value: 'P' },

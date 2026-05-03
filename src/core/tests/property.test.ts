@@ -147,23 +147,23 @@ describe("Edge cases", () => {
 	});
 
 	it("questions with mixed dimension options count correctly", () => {
-		// q4 has options: J, P, P, E → the E option should count toward E
-		const result = computeMBTI({ q4: { value: "E", index: 3 } });
+		// q22 has options: J, P, P, E → the E option should count toward E
+		const result = computeMBTI({ q24: { value: "E", index: 3 } });
 		expect(result.scores.E).toBe(1);
 		expect(result.scores.J).toBe(0);
 		expect(result.scores.P).toBe(0);
 	});
 
-	it("q21 has T option that counts toward T", () => {
-		const result = computeMBTI({ q21: { value: "T", index: 2 } });
+	it("q27 has T option that counts toward T", () => {
+		const result = computeMBTI({ q27: { value: "T", index: 2 } });
 		expect(result.scores.T).toBe(2); // double weight
 		expect(result.scores.J).toBe(0);
 		expect(result.scores.P).toBe(0);
 		expect(result.scores.E).toBe(0);
 	});
 
-	it("q24 has I option that counts toward I", () => {
-		const result = computeMBTI({ q24: { value: "I", index: 2 } });
+	it("q28 has I option that counts toward I", () => {
+		const result = computeMBTI({ q28: { value: "I", index: 2 } });
 		expect(result.scores.I).toBe(1);
 		expect(result.scores.J).toBe(0);
 		expect(result.scores.P).toBe(0);

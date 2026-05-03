@@ -68,7 +68,7 @@ describe("computeMBTI – double weight questions", () => {
 
 describe("computeMBTI – non-double-weight questions get weight=1", () => {
 	// Pick a few non-DW questions
-	const nonDW = ["q2", "q3", "q4", "q7", "q9", "q13"];
+	const nonDW = ["q5", "q3", "q22", "q21", "q19", "q15"];
 	for (const id of nonDW) {
 		it(`${id} applies weight=1`, () => {
 			const q = questions.find((x) => x.id === id);
@@ -120,30 +120,30 @@ describe("computeMBTI – q39 per-option weight", () => {
 });
 
 describe("computeMBTI – cnScore / jpScore from option.lang", () => {
-	it("q7 option 0 has lang=CN → cnScore incremented", () => {
-		// q7 opt 0: value=E, lang=CN
-		const result = computeMBTI({ q7: { value: "E", index: 0 } });
+	it("q3 option 0 has lang=CN → cnScore incremented", () => {
+		// q3 opt 0: value=E, lang=CN
+		const result = computeMBTI({ q3: { value: "E", index: 0 } });
 		expect(result.cnScore).toBeGreaterThan(0);
 		expect(result.jpScore).toBe(0);
 	});
 
-	it("q7 option 1 has lang=JP → jpScore incremented", () => {
-		// q7 opt 1: value=I, lang=JP
-		const result = computeMBTI({ q7: { value: "I", index: 1 } });
+	it("q3 option 1 has lang=JP → jpScore incremented", () => {
+		// q3 opt 1: value=I, lang=JP
+		const result = computeMBTI({ q3: { value: "I", index: 1 } });
 		expect(result.jpScore).toBeGreaterThan(0);
 		expect(result.cnScore).toBe(0);
 	});
 
-	it("q7 option 2 — find(value='I') returns option 1 (lang=JP), so jpScore, not cnScore", () => {
-		// q7 options: 0:E(CN), 1:I(JP), 2:I(CN), 3:I(JP)
+	it("q3 option 2 — find(value='I') returns option 1 (lang=JP), so jpScore, not cnScore", () => {
+		// q3 options: 0:E(CN), 1:I(JP), 2:I(CN), 3:I(JP)
 		// find(value="I") finds option 1 first (lang="JP")
-		const result = computeMBTI({ q7: { value: "I", index: 2 } });
+		const result = computeMBTI({ q3: { value: "I", index: 2 } });
 		expect(result.jpScore).toBeGreaterThan(0);
 		expect(result.cnScore).toBe(0);
 	});
 
-	it("q7 option 3 has lang=JP → jpScore incremented", () => {
-		const result = computeMBTI({ q7: { value: "I", index: 3 } });
+	it("q3 option 3 has lang=JP → jpScore incremented", () => {
+		const result = computeMBTI({ q3: { value: "I", index: 3 } });
 		expect(result.jpScore).toBeGreaterThan(0);
 	});
 
@@ -155,16 +155,16 @@ describe("computeMBTI – cnScore / jpScore from option.lang", () => {
 	});
 });
 
-describe("computeMBTI – cnScore / jpScore from legacy isCN/isJP (q31/q32)", () => {
-	it("q31 option 0 has isCN → cnScore incremented (S, weight=1)", () => {
-		const result = computeMBTI({ q31: { value: "S", index: 0 } });
+describe("computeMBTI – cnScore / jpScore from legacy isCN/isJP (q33/q34)", () => {
+	it("q33 option 0 has isCN → cnScore incremented (S, weight=1)", () => {
+		const result = computeMBTI({ q33: { value: "S", index: 0 } });
 		expect(result.cnScore).toBe(1);
 		expect(result.jpScore).toBe(0);
 	});
 
-	it("q31 option 3 has isJP → jpScore incremented, no score added (value=JP not in MBTIScores)", () => {
+	it("q33 option 3 has isJP → jpScore incremented, no score added (value=JP not in MBTIScores)", () => {
 		// value="JP" is not a dimension key → not added to scores
-		const result = computeMBTI({ q31: { value: "JP", index: 3 } });
+		const result = computeMBTI({ q33: { value: "JP", index: 3 } });
 		expect(result.jpScore).toBe(1);
 		expect(result.cnScore).toBe(0);
 		// "JP" is not an own property of scores → no dimension changed
@@ -173,14 +173,14 @@ describe("computeMBTI – cnScore / jpScore from legacy isCN/isJP (q31/q32)", ()
 		}
 	});
 
-	it("q32 option 0 has isJP → jpScore incremented (S, weight=1)", () => {
-		const result = computeMBTI({ q32: { value: "S", index: 0 } });
+	it("q34 option 0 has isJP → jpScore incremented (S, weight=1)", () => {
+		const result = computeMBTI({ q34: { value: "S", index: 0 } });
 		expect(result.jpScore).toBe(1);
 		expect(result.cnScore).toBe(0);
 	});
 
-	it("q32 option 3 has isCN → cnScore incremented, value=CN not added to scores", () => {
-		const result = computeMBTI({ q32: { value: "CN", index: 3 } });
+	it("q34 option 3 has isCN → cnScore incremented, value=CN not added to scores", () => {
+		const result = computeMBTI({ q34: { value: "CN", index: 3 } });
 		expect(result.cnScore).toBe(1);
 		expect(result.jpScore).toBe(0);
 		for (const k of MBTI_KEYS) {
@@ -190,15 +190,15 @@ describe("computeMBTI – cnScore / jpScore from legacy isCN/isJP (q31/q32)", ()
 });
 
 describe("computeMBTI – values not in MBTI dimension set are NOT added to scores", () => {
-	it("q31 value='JP' → jpScore+=1, but no dimension score changes", () => {
-		const result = computeMBTI({ q31: { value: "JP", index: 3 } });
+	it("q33 value='JP' → jpScore+=1, but no dimension score changes", () => {
+		const result = computeMBTI({ q33: { value: "JP", index: 3 } });
 		expect(result.jpScore).toBe(1);
 		const allZero = MBTI_KEYS.every((k) => result.scores[k] === 0);
 		expect(allZero).toBe(true);
 	});
 
-	it("q32 value='CN' → cnScore+=1, but no dimension score changes", () => {
-		const result = computeMBTI({ q32: { value: "CN", index: 3 } });
+	it("q34 value='CN' → cnScore+=1, but no dimension score changes", () => {
+		const result = computeMBTI({ q34: { value: "CN", index: 3 } });
 		expect(result.cnScore).toBe(1);
 		const allZero = MBTI_KEYS.every((k) => result.scores[k] === 0);
 		expect(allZero).toBe(true);
@@ -207,13 +207,13 @@ describe("computeMBTI – values not in MBTI dimension set are NOT added to scor
 
 describe("computeMBTI – MBTI string tie-breaking (>= favors first pole)", () => {
 	it("E==I tie: 'E' wins", () => {
-		// q7 opt0: E w=1; q17 opt0: E w=1 → E=2
-		// q14 opt1: I w=2 → I=2
+		// q3 opt0: E w=1; q9 opt0: E w=1 → E=2
+		// q8 opt1: I w=2 → I=2
 		// Tie: E>=I → 'E'
 		const result = computeMBTI({
-			q7: { value: "E", index: 0 },
-			q17: { value: "E", index: 0 },
-			q14: { value: "I", index: 1 },
+			q3: { value: "E", index: 0 },
+			q9: { value: "E", index: 0 },
+			q8: { value: "I", index: 1 },
 		});
 		expect(result.scores.E).toBe(2);
 		expect(result.scores.I).toBe(2);
@@ -221,36 +221,36 @@ describe("computeMBTI – MBTI string tie-breaking (>= favors first pole)", () =
 	});
 
 	it("S==N tie: 'S' wins", () => {
-		// q6 opt1: N w=1; q37 opt3: N w=1 → N=2
-		// q29 opt0: S w=2 (double weight) → S=2
+		// q4 opt1: N w=1; q6 opt3: N w=1 → N=2
+		// q31 opt0: S w=2 (double weight) → S=2
 		const result = computeMBTI({
-			q6: { value: "N", index: 1 },
-			q37: { value: "N", index: 3 },
-			q29: { value: "S", index: 0 },
+			q4: { value: "N", index: 1 },
+			q6: { value: "N", index: 3 },
+			q31: { value: "S", index: 0 },
 		});
 		expect(result.scores.S).toBe(result.scores.N);
 		expect(result.mbti[1]).toBe("S");
 	});
 
 	it("T==F tie: 'T' wins", () => {
-		// q13 opt2: F (w=1); q15 opt1: F (w=1) → F=2
-		// q8 opt2: T (w=2, double weight) → T=2
+		// q15 opt2: F (w=1); q16 opt1: F (w=1) → F=2
+		// q13 opt2: T (w=2, double weight) → T=2
 		const result = computeMBTI({
-			q13: { value: "F", index: 2 },
-			q15: { value: "F", index: 1 },
-			q8: { value: "T", index: 2 },
+			q15: { value: "F", index: 2 },
+			q16: { value: "F", index: 1 },
+			q13: { value: "T", index: 2 },
 		});
 		expect(result.scores.T).toBe(result.scores.F);
 		expect(result.mbti[2]).toBe("T");
 	});
 
 	it("J==P tie: 'J' wins", () => {
-		// q3 opt0: J (w=1); q22 opt0: J (w=1) → J=2
-		// q20 opt0: P (w=2, double weight) → P=2
+		// q21 opt0: J (w=1); q24 opt0: J (w=1) → J=2
+		// q23 opt0: P (w=2, double weight) → P=2
 		const result = computeMBTI({
-			q3: { value: "J", index: 0 },
-			q22: { value: "J", index: 0 },
-			q20: { value: "P", index: 0 },
+			q21: { value: "J", index: 0 },
+			q24: { value: "J", index: 0 },
+			q23: { value: "P", index: 0 },
 		});
 		expect(result.scores.J).toBe(result.scores.P);
 		expect(result.mbti[3]).toBe("J");

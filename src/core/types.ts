@@ -5,9 +5,9 @@ export interface QuestionOption {
 	value: string;
 	/** Language preference marker for cnScore/jpScore calculation */
 	lang?: "CN" | "JP";
-	/** Legacy language marker for q31/q32 */
+	/** Legacy language marker for q33/q34 */
 	isCN?: boolean;
-	/** Legacy language marker for q31/q32 */
+	/** Legacy language marker for q33/q34 */
 	isJP?: boolean;
 	/** Optional per-option weight (used in q39) */
 	weight?: number;

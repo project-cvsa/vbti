@@ -7,16 +7,16 @@ export const MBTI_KEYS = ["E", "I", "S", "N", "T", "F", "J", "P"] as const;
 /** doubleWeightIds from scoring.ts */
 export const DOUBLE_WEIGHT_IDS = [
 	"q1",
-	"q5",
+	"q2",
 	"q8",
-	"q10",
-	"q11",
+	"q18",
 	"q14",
-	"q20",
-	"q21",
-	"q29",
-	"q33",
-	"q36",
+	"q13",
+	"q23",
+	"q27",
+	"q31",
+	"q35",
+	"q38",
 	"q39",
 ];
 
