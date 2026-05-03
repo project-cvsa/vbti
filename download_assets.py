@@ -26,7 +26,7 @@ from urllib.parse import urljoin, urlparse
 
 
 BASE_URL   = "https://vbti-test.com"
-HTML_FILE  = "old/v1.1.5.html"
+HTML_FILE  = "old/v1.2.0.html"
 OUTPUT_DIR = "public"
 
 ASSET_EXTS = frozenset({
@@ -95,6 +95,10 @@ DELAY_MAX = 0.8
 
 
 def download(url: str, dest: Path, referer: str = "") -> bool:
+    if dest.exists() and dest.stat().st_size > 0:
+        print(f"  ↻ {url} (already exists, skipping)")
+        return True
+    
     dest.parent.mkdir(parents=True, exist_ok=True)
     print(f"  → {url}")
 

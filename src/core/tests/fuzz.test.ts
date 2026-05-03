@@ -7,7 +7,7 @@ import { MBTI_KEYS } from "./helpers";
 import { xoroshiro128plus } from "pure-rand/generator/xoroshiro128plus";
 import { uniformFloat64 } from "pure-rand/distribution/uniformFloat64";
 
-const seed = 42;
+const seed = 1099;
 const rng = xoroshiro128plus(seed);
 
 const seededRandom: () => number = () => {
