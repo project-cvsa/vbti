@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import type { Character } from "@/core/types";
-import { CHARACTER_IMAGES } from "@/data/images";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import QRCode from "qrcode";
@@ -77,7 +76,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 		ctx.font = "bold 13px sans-serif";
 		ctx.fillText(mbtiText, 200, 110);
 
-		const imgSrc = CHARACTER_IMAGES[characterName];
+		const imgSrc = character.image;
 		if (!imgSrc) {
 			setError("角色图片加载失败");
 			return;

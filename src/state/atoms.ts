@@ -1,9 +1,9 @@
 import { atom } from "jotai";
-import type { Answer, Screen } from "@/core/types";
+import type { Answers, Screen } from "@/core/types";
 
 export const currentScreenAtom = atom<Screen>("intro");
 
-export const answersAtom = atom<Record<string, Answer>>({});
+export const answersAtom = atom<Answers>({});
 
 export const currentQuestionIndexAtom = atom(0);
 

@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import { useAtom, useSetAtom } from "jotai";
-import type { MBTIResult } from "@/core/types";
+import type { Answers } from "@/core/types";
 import {
 	answersAtom,
 	currentQuestionIndexAtom,
@@ -8,7 +8,7 @@ import {
 	resultCharacterAtom,
 	secretResolvedAtom,
 } from "@/state/atoms";
-import { computeMBTI, getCandidates, findMatchCharacter } from "@/core/scoring";
+import { findMatchCharacter } from "@/core/findChar";
 import { questions } from "@/data/questions";
 import { characters } from "@/data/characters";
 import { secretQuestions } from "@/data/secretQuestions";
@@ -24,7 +24,7 @@ import {
 import ProgressBar from "@/components/test/ProgressBar";
 import QuestionCard from "@/components/test/QuestionCard";
 import { SecretQuestionModal } from "@/components/modals/SecretQuestionModal";
-import { ENTJRevealModal } from "@/components/modals/ENTJRevealModal";
+import { computeMBTI } from "@/core/mbti";
 
 export default function TestScreen() {
 	const [answers, setAnswers] = useAtom(answersAtom);
@@ -34,8 +34,6 @@ export default function TestScreen() {
 	const setSecretResolved = useSetAtom(secretResolvedAtom);
 
 	const [showSecretQuestion, setShowSecretQuestion] = useState(false);
-	const [entjPending, setEntjPending] = useState(false);
-	const [mbtiResult, setMbtiResult] = useState<MBTIResult | null>(null);
 	const [submitting, setSubmitting] = useState(false);
 	const [showBackConfirm, setShowBackConfirm] = useState(false);
 
@@ -44,6 +42,8 @@ export default function TestScreen() {
 	const answered = Object.keys(answers).length;
 	const currentQuestion = questions[currentIdx];
 	const savedAnswer = answers[currentQuestion.id];
+
+	const mbtiResult = computeMBTI(answers);
 
 	const handleAnswer = useCallback(
 		(value: string, index: number) => {
@@ -56,7 +56,7 @@ export default function TestScreen() {
 	);
 
 	const resolveCharacter = useCallback(
-		(mbti: MBTIResult, secretCharacterName: string | null) => {
+		(answers: Answers, secretCharacterName: string | null) => {
 			if (secretCharacterName && characters[secretCharacterName]) {
 				setResultCharacter(secretCharacterName);
 				setSecretResolved(true);
@@ -64,40 +64,13 @@ export default function TestScreen() {
 				return;
 			}
 
-			if (mbti.mbti === "ENTJ") {
-				setMbtiResult(mbti);
-				setEntjPending(true);
-				return;
-			}
-
-			const preferLang =
-				mbti.cnScore > mbti.jpScore ? "CN" : mbti.jpScore > mbti.cnScore ? "JP" : null;
-
-			const candidates = getCandidates(mbti.mbti, preferLang);
-
-			if (candidates.length === 1) {
-				setResultCharacter(candidates[0]);
-				setSecretResolved(false);
-				setScreen("result");
-				return;
-			}
-
-			const match = findMatchCharacter(candidates, mbti.scores);
-			setResultCharacter(match);
+			const char = findMatchCharacter(answers);
+			setResultCharacter(char);
 			setSecretResolved(false);
 			setScreen("result");
 		},
 		[setResultCharacter, setSecretResolved, setScreen]
 	);
-
-	const handleEntjConfirm = useCallback(() => {
-		setEntjPending(false);
-		if (!mbtiResult) return;
-		const char = mbtiResult.cnScore >= mbtiResult.jpScore ? "乐正龙牙" : "MEIKO";
-		setResultCharacter(char);
-		setSecretResolved(true);
-		setScreen("result");
-	}, [mbtiResult, setResultCharacter, setSecretResolved, setScreen]);
 
 	const handleSecretSelect = useCallback(
 		(targetCharacter: string) => {
@@ -106,11 +79,11 @@ export default function TestScreen() {
 				setResultCharacter(targetCharacter);
 				setSecretResolved(true);
 				setScreen("result");
-			} else if (mbtiResult) {
-				resolveCharacter(mbtiResult, null);
+			} else {
+				resolveCharacter(answers, null);
 			}
 		},
-		[mbtiResult, resolveCharacter, setResultCharacter, setSecretResolved, setScreen]
+		[answers, resolveCharacter, setResultCharacter, setSecretResolved, setScreen]
 	);
 
 	const handleSubmit = useCallback(() => {
@@ -140,26 +113,18 @@ export default function TestScreen() {
 			return;
 		}
 
-		const result = computeMBTI(answers);
-		setMbtiResult(result);
-
-		const candidatesAfterMBTI = getCandidates(result.mbti, null);
-
-		if (candidatesAfterMBTI.length > 1 && secretQuestions[result.mbti]) {
-			setShowSecretQuestion(true);
-			setSubmitting(false);
-			return;
-		}
-
 		setSubmitting(false);
-		resolveCharacter(result, null);
+		resolveCharacter(answers, null);
 	}, [answers, submitting, resolveCharacter, setCurrentIdx]);
 
 	return (
 		<div className="mt-5.5 p-6 max-sm:p-0 max-sm:mt-0 bg-white rounded-2xl max-sm:bg-transparent max-sm:rounded-none">
 			<ProgressBar answered={answered} total={total} />
 
-			<div ref={questionContainerRef} className="rounded-2xl mt-4 max-sm:mt-2 max-sm:rounded-none">
+			<div
+				ref={questionContainerRef}
+				className="rounded-2xl mt-4 max-sm:mt-2 max-sm:rounded-none"
+			>
 				<QuestionCard
 					question={currentQuestion}
 					questionIndex={currentIdx}
@@ -208,11 +173,9 @@ export default function TestScreen() {
 					open={showSecretQuestion}
 					question={secretQuestions[mbtiResult.mbti]}
 					onSelect={handleSecretSelect}
-					onClose={() => {}}
+					onClose={() => { }}
 				/>
 			)}
-
-			<ENTJRevealModal open={entjPending} onConfirm={handleEntjConfirm} />
 
 			<Dialog open={showBackConfirm} onOpenChange={setShowBackConfirm}>
 				<DialogContent className="max-w-sm">

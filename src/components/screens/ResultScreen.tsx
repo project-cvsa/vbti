@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import {
-	answersAtom,
 	resultCharacterAtom,
 	secretResolvedAtom,
 	goToIntroAtom,
 	restartTestAtom,
 } from "@/state/atoms";
-import { computeMBTI } from "@/core/scoring";
 import { characters } from "@/data/characters";
-import { CHARACTER_IMAGES } from "@/data/images";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { StaffModal } from "@/components/modals/StaffModal";
@@ -23,7 +20,6 @@ interface SongInfo {
 }
 
 export default function ResultScreen() {
-	const answers = useAtomValue(answersAtom);
 	const resultCharacter = useAtomValue(resultCharacterAtom);
 	const secretResolved = useAtomValue(secretResolvedAtom);
 	const goToIntro = useSetAtom(goToIntroAtom);
@@ -36,9 +32,7 @@ export default function ResultScreen() {
 
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 
-	const mbtiResult = computeMBTI(answers);
 	const character = resultCharacter ? characters[resultCharacter] : null;
-	const isENTJ = mbtiResult.mbti === "ENTJ";
 
 	useEffect(() => {
 		if (window._bgmAudio) {
@@ -52,7 +46,10 @@ export default function ResultScreen() {
 		const audio = new Audio(character.music);
 		audio.loop = true;
 		audio.volume = 0.6;
-		audio.play().catch(() => {});
+		audio.play().catch((e) => {
+			setMusicPlaying(false);
+			console.error(e);
+		});
 		setMusicPlaying(true);
 		audioRef.current = audio;
 
@@ -66,7 +63,10 @@ export default function ResultScreen() {
 		const audio = audioRef.current;
 		if (!audio) return;
 		if (audio.paused) {
-			audio.play().catch(() => {});
+			audio.play().catch((e) => {
+				setMusicPlaying(false);
+				console.error(e);
+			});
 			setMusicPlaying(true);
 		} else {
 			audio.pause();
@@ -103,7 +103,7 @@ export default function ResultScreen() {
 				{/* Desktop poster */}
 				<div className="hidden md:flex flex-col items-center text-center rounded-2xl p-5 border bg-accent/30">
 					<img
-						src={CHARACTER_IMAGES[resultCharacter] ?? ""}
+						src={character.image ?? ""}
 						alt={resultCharacter}
 						className="w-full max-w-65 max-h-80 object-contain rounded-xl bg-white/75"
 					/>
@@ -117,16 +117,14 @@ export default function ResultScreen() {
 							{resultCharacter}
 						</h2>
 						<span className="inline-flex items-center gap-2 rounded-full px-3.5 py-2 bg-primary/20 border border-primary/30 text-primary font-bold text-xs mt-2.5">
-							{isENTJ
-								? "MBTI推测：ENTJ指挥官级共鸣"
-								: `歌手MBTI推测：${character.mbti}`}
+							{`歌手MBTI推测：${character.mbti}`}
 						</span>
 					</div>
 
 					{/* Mobile poster */}
 					<div className="md:hidden flex flex-col items-center text-center rounded-2xl p-5 border bg-accent/30">
 						<img
-							src={CHARACTER_IMAGES[resultCharacter] ?? ""}
+							src={character.image ?? ""}
 							alt={resultCharacter}
 							className="w-full max-w-100 max-h-100 object-contain rounded-xl bg-white/75"
 						/>
@@ -134,13 +132,6 @@ export default function ResultScreen() {
 							{character.caption}
 						</div>
 					</div>
-
-					{isENTJ && (
-						<div className="text-primary text-sm">
-							你的灵魂深处是指挥官
-							ENTJ。暂无完全共鸣的歌姬，但这位已是最懂你锋芒的人。
-						</div>
-					)}
 
 					<div>
 						<div className="text-sm font-bold mb-1">灵魂解读</div>
@@ -244,7 +235,7 @@ export default function ResultScreen() {
 							className="block rounded-xl overflow-hidden border"
 						>
 							<img
-								src="banner/xlpd-banner.webp"
+								src="/banner/xlpd-banner.webp"
 								alt="2026夏浪派对"
 								className="w-full block"
 							/>
@@ -256,7 +247,7 @@ export default function ResultScreen() {
 							className="block rounded-xl overflow-hidden border"
 						>
 							<img
-								src="banner/zk-banner.webp"
+								src="/banner/zk-banner.webp"
 								alt="中V周刊"
 								className="w-full block"
 							/>
@@ -268,7 +259,7 @@ export default function ResultScreen() {
 							className="block rounded-xl overflow-hidden border"
 						>
 							<img
-								src="banner/shulikou.webp"
+								src="/banner/shulikou.webp"
 								alt="术力口音乐大赛"
 								className="w-full block"
 							/>
@@ -280,7 +271,7 @@ export default function ResultScreen() {
 							className="block rounded-xl overflow-hidden border"
 						>
 							<img
-								src="banner/Vsinger.webp"
+								src="/banner/Vsinger.webp"
 								alt="Vsinger创作激励"
 								className="w-full block"
 							/>

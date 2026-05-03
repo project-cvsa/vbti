@@ -1,18 +1,11 @@
 /** A single option within a question */
 export interface QuestionOption {
+	/** Option Description Text */
 	label: string;
-	/** MBTI dimension value: E/I/S/N/T/F/J/P, or CN/JP for language markers */
+	/** MBTI dimension value: E/I/S/N/T/F/J/P, or empty string for special questions(e.g. q0)  */
 	value: string;
 	/** Language preference marker for cnScore/jpScore calculation */
 	lang?: "CN" | "JP";
-	/** Legacy language marker for q33/q34 */
-	isCN?: boolean;
-	/** Legacy language marker for q33/q34 */
-	isJP?: boolean;
-	/** Optional per-option weight (used in q39) */
-	weight?: number;
-	/** Optional vibe tag (used in q39) */
-	vibe?: string;
 	/** Target character name (used in secret questions) */
 	target?: string;
 }
@@ -20,8 +13,6 @@ export interface QuestionOption {
 /** A question in the VBTI test */
 export interface Question {
 	id: string;
-	/** MBTI dimension this question tests */
-	dim: string;
 	text: string;
 	options: QuestionOption[];
 }
@@ -31,6 +22,7 @@ export interface Answer {
 	value: string;
 	index: number;
 }
+export type Answers = Record<string, Answer>;
 
 /** MBTI sub-scores for each dimension pole */
 export interface MBTIScores {
@@ -44,41 +36,46 @@ export interface MBTIScores {
 	P: number;
 }
 
+export type CharLang = "CN" | "JP";
+
 /** Character data used for matching */
 export interface Character {
 	/** MBTI type label (e.g., "ENFP") */
 	mbti: string;
-	/** Introversion-Extraversion score (50 = neutral) >50 = E  */
-	ie: number;
-	/** Intuition-Sensing score (50 = neutral) >50 = N */
-	ns: number;
-	/** Feeling-Thinking score (50 = neutral) >50 = F */
-	ft: number;
-	/** Perceiving-Judging score (50 = neutral) >50 = P */
-	pj: number;
 	/** Short tagline in Chinese */
 	caption: string;
+	image: string;
 	/** Path to character's theme music file */
 	music: string;
-	/** Matching weight bias (subtracted from distance) */
-	weight: number;
 	/** Language group: CN (Chinese) or JP (Japanese) */
-	lang: "CN" | "JP";
+	lang: CharLang;
 	/** BGM recommendation text with song names and BV numbers */
 	bgm: string;
 	/** Full character description in Chinese */
 	desc: string;
 	/** Short description for soul card generation */
 	shortDesc: string;
+	popularity?: number;
+	color?: string;
+	tags?: string;
 }
+
+/**
+ * A vector representing personality
+ * Dimensions are: E, S, T, J
+ * i.e. all positive value represent ESTJ
+ */
+export type MBTIVector = [number, number, number, number];
 
 /** Result of computeMBTI() */
 export interface MBTIResult {
 	scores: MBTIScores;
+	vector: MBTIVector;
 	mbti: string;
-	cnScore: number;
-	jpScore: number;
 }
+
+export type CharacterProbDistribution = Record<string, number>;
+export type Dist = CharacterProbDistribution;
 
 /** Result of resolveCharacter() */
 export interface CharacterResult {

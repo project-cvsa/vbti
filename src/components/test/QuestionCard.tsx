@@ -27,7 +27,7 @@ function QuestionCard({ question, questionIndex, savedAnswer, onAnswer }: Questi
 	return (
 		<div className="flex flex-col gap-3">
 			<span className="self-start inline-flex items-center px-3 py-1.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs">
-				第 {questionIndex + 1} 题
+				第 {questionIndex} 题
 			</span>
 
 			<p className="text-lg leading-relaxed text-foreground font-medium whitespace-pre-wrap">
@@ -56,9 +56,7 @@ function QuestionCard({ question, questionIndex, savedAnswer, onAnswer }: Questi
 						>
 							<RadioGroupItem value={String(i)} className="mt-0.5" />
 							<span className="flex items-start gap-2 min-w-0">
-								<span className="font-extrabold text-primary shrink-0">
-									{code}
-								</span>
+								<span className="font-extrabold text-primary shrink-0">{code}</span>
 								<span className="text-sm leading-relaxed">{opt.label}</span>
 							</span>
 						</label>
