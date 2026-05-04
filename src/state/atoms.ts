@@ -20,12 +20,11 @@ export const unansweredAtom = atom((get) => {
 	for (let i = 0; i < questions.length; i += 1) {
 		const q = questions[i];
 		if (answers[q.id] === undefined) {
-			unanswered.push(i)
+			unanswered.push(i);
 		}
 	}
 	return unanswered;
 });
-
 
 export const restartTestAtom = atom(null, (_get, set) => {
 	set(answersAtom, {});

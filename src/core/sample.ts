@@ -3,7 +3,9 @@ import { uniformFloat64 } from "pure-rand/distribution/uniformFloat64";
 import type { Answers, Dist } from "./types";
 
 function hashAnswers(answers: Answers): number {
-	const ordered = Object.keys(answers).sort().map((k) => [k, answers[k]]);
+	const ordered = Object.keys(answers)
+		.sort()
+		.map((k) => [k, answers[k]]);
 	const s = JSON.stringify(ordered);
 	let hash = 0;
 	for (let i = 0; i < s.length; i++) {

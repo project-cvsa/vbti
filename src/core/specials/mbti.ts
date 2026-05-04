@@ -16,15 +16,18 @@ function countUniqueCommonChars(str1: string, str2: string) {
 	return count;
 }
 
-export const adjustMBTI = (mbti: MBTIResult, _dist: Dist, weightMbti: number = _weightMbti): Dist => {
+export const adjustMBTI = (
+	mbti: MBTIResult,
+	_dist: Dist,
+	weightMbti: number = _weightMbti
+): Dist => {
 	let dist = { ..._dist };
 	for (const char in characters) {
 		const charMbti = characters[char].mbti;
 		const userMbti = mbti.mbti;
 		if (charMbti === userMbti) {
 			dist[char] *= weightMbti;
-		}
-		else {
+		} else {
 			const c = countUniqueCommonChars(charMbti, userMbti);
 			if (c !== 0) {
 				dist[char] *= weightMbti / 4;

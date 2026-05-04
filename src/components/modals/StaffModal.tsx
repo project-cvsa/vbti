@@ -51,17 +51,18 @@ export function StaffModal({ open, onClose }: StaffModalProps) {
 					{staffData.map((section) => {
 						return (
 							<div key="">
-								<span className="font-bold text-primary">
-									{section.role}
-								</span>
-								<br/>
-								{
-									section.names.map((name) => (
-										<span key={name} className="py-1.5 px-2 align-top text-sm leading-relaxed">
-											{name}<br/>
-										</span>
-									))
-								}<br/>
+								<span className="font-bold text-primary">{section.role}</span>
+								<br />
+								{section.names.map((name) => (
+									<span
+										key={name}
+										className="py-1.5 px-2 align-top text-sm leading-relaxed"
+									>
+										{name}
+										<br />
+									</span>
+								))}
+								<br />
 							</div>
 						);
 					})}

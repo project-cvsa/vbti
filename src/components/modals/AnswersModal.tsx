@@ -21,9 +21,7 @@ export function AnswersModal({ open, onClose }: AnswersModalProps) {
 					<DialogTitle className="text-xl font-bold">答案数据</DialogTitle>
 				</DialogHeader>
 				<pre>
-					<code className="text-wrap break-all">
-						{JSON.stringify(answers)}
-					</code>
+					<code className="text-wrap break-all">{JSON.stringify(answers)}</code>
 				</pre>
 			</DialogContent>
 		</Dialog>

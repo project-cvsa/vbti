@@ -8,9 +8,9 @@ import { characters } from "@/data/characters";
  * @param weight 权重，正值为增强热门角色，负值为增强冷门角色
  * @returns 调整后的概率分布
  */
- export const adjustPopularity = (_dist: Dist, weight: number): Dist => {
+export const adjustPopularity = (_dist: Dist, weight: number): Dist => {
 	let dist = { ..._dist };
- 
+
 	for (const char in characters) {
 		const character = characters[char];
 		const p = character.popularity;
@@ -23,10 +23,10 @@ import { characters } from "@/data/characters";
 		} else {
 			normalizedPopularity = (p - 60) / 40;
 		}
- 
+
 		const factor = 1 + weight * normalizedPopularity;
 		dist[char] = (dist[char] ?? 0) * Math.max(factor, 0.1);
 	}
- 
+
 	return normalized(dist);
- };
+};

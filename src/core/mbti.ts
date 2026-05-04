@@ -1,11 +1,5 @@
 import { questions } from "@/data/questions";
-import type {
-	MBTIScores,
-	MBTIResult,
-	Answers,
-	MBTIVector,
-} from "@/core/types";
-
+import type { MBTIScores, MBTIResult, Answers, MBTIVector } from "@/core/types";
 
 const emptyScores = (): MBTIScores => ({
 	E: 0,
@@ -17,7 +11,6 @@ const emptyScores = (): MBTIScores => ({
 	J: 0,
 	P: 0,
 });
-
 
 const getPropertyOccurrence = (prop: string) => {
 	let result = 0;

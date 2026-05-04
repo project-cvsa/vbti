@@ -1,8 +1,5 @@
 import { characters } from "@/data/characters";
-import type {
-	CharacterProbDistribution,
-	CharLang,
-} from "@/core/types";
+import type { CharacterProbDistribution, CharLang } from "@/core/types";
 
 type Dist = CharacterProbDistribution;
 
@@ -18,7 +15,7 @@ export const isAllZeroDist = (dist: Dist): boolean => {
 	let result = true;
 	for (const key in dist) {
 		if (dist[key] !== 0) {
-			result = false
+			result = false;
 		}
 	}
 	return result;
@@ -62,8 +59,7 @@ export const increaseChar = (_dist: Dist, char: string, weight: number): Dist =>
 	const dist = { ..._dist };
 	dist[char] *= weight;
 	return normalized(dist);
-}
-
+};
 
 export const increaseChars = (_dist: Dist, chars: string[], weight: number): Dist => {
 	let dist = { ..._dist };
@@ -71,4 +67,4 @@ export const increaseChars = (_dist: Dist, chars: string[], weight: number): Dis
 		dist = increaseChar(dist, char, weight);
 	}
 	return normalized(dist);
-}
+};

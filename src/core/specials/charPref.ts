@@ -3,7 +3,11 @@ import type { Dist, Answers } from "@/core/types";
 import { increaseChar, increaseChars, normalized } from "../adjusters";
 import { weightChar as _weightChar } from "./const";
 
-export const adjustCharacterPref = (answers: Answers, _dist: Dist, weightChar: number = _weightChar): Dist => {
+export const adjustCharacterPref = (
+	answers: Answers,
+	_dist: Dist,
+	weightChar: number = _weightChar
+): Dist => {
 	let dist = { ..._dist };
 
 	// Q3: 角色偏好

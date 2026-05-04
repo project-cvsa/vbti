@@ -5,7 +5,7 @@ import { characters } from "@/data/characters";
 import { xoroshiro128plus } from "pure-rand/generator/xoroshiro128plus";
 import { uniformFloat64 } from "pure-rand/distribution/uniformFloat64";
 import { computeMBTI } from "../mbti";
-import type { Answers } from "@/core/types"
+import type { Answers } from "@/core/types";
 
 const seed = 1099;
 const rng = xoroshiro128plus(seed);
@@ -49,7 +49,7 @@ function randomAnswers(rng: () => number): Answers {
 	for (const q of questions) {
 		const entries = distinctEntries[q.id];
 		const picked = entries[Math.floor(rng() * entries.length)];
-		rec[q.id] = picked
+		rec[q.id] = picked;
 	}
 	return rec;
 }
@@ -75,11 +75,11 @@ it("Q0 preference simulations", () => {
 	// 固定指定题目答案的生成器工厂
 	function fixedAnswerGenerator(
 		qId: string,
-		optionIndex: number,
+		optionIndex: number
 	): (rng: () => number) => Answers {
 		return (rng) => {
 			const answers = randomAnswers(rng);
-			answers[qId] = optionIndex
+			answers[qId] = optionIndex;
 			return answers;
 		};
 	}
@@ -146,18 +146,22 @@ it("Q0 preference simulations", () => {
 		printCharReport("Character Distribution", charCounts, FULL_SETS);
 		for (const char of Object.keys(charCounts)) {
 			if (!testedChars.includes(char)) {
-				testedChars.push(char)
+				testedChars.push(char);
 			}
 		}
 
 		console.log("\n=== MBTI Distribution ===\n");
-		for (const [mbti, count] of Object.entries(mbtiCounts).sort(([a], [b]) => a.localeCompare(b))) {
+		for (const [mbti, count] of Object.entries(mbtiCounts).sort(([a], [b]) =>
+			a.localeCompare(b)
+		)) {
 			const pct = ((count! / total!) * 100).toFixed(1);
-			const bar = "█".repeat(Math.round(count! / total! * 50));
-			console.log(`${mbti.padEnd(6)} ${String(count).padStart(4)} (${String(pct).padStart(5)}%) ${bar}`);
+			const bar = "█".repeat(Math.round((count! / total!) * 50));
+			console.log(
+				`${mbti.padEnd(6)} ${String(count).padStart(4)} (${String(pct).padStart(5)}%) ${bar}`
+			);
 		}
 	}
 
-	const missing = charNames.filter((n) => !(testedChars.includes(n)));
+	const missing = charNames.filter((n) => !testedChars.includes(n));
 	expect(missing).toEqual([]);
 }, 30000);

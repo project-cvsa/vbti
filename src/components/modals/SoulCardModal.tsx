@@ -30,11 +30,11 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 
 	const palette = useMemo(
 		() => (character.color ? generateCardPalette(character.color) : DEFAULT_PALETTE),
-		[character.color],
+		[character.color]
 	);
 
 	const generateCard = useCallback(() => {
-		const imgSrc = character.image.replace("/character","/cardprofile");
+		const imgSrc = character.image.replace("/character", "/cardprofile");
 		if (!imgSrc) {
 			setError("角色图片加载失败");
 			return;
@@ -126,7 +126,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 				ctx.textAlign = "left";
 				let lineY = descY + 20;
 				for (let j = 0; j < Math.min(lines.length, 4); j++) {
-					console.log(lines[j])
+					console.log(lines[j]);
 					ctx.fillText(lines[j], 30, lineY);
 					lineY += 18;
 				}

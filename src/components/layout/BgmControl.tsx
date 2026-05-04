@@ -35,7 +35,7 @@ function BgmControl({ visible = true }: BgmControlProps) {
 		const audio = audioRef.current;
 		if (!audio) return;
 		if (audio.paused) {
-			audio.play().catch(() => { });
+			audio.play().catch(() => {});
 		} else {
 			audio.pause();
 		}

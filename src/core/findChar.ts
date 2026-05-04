@@ -54,4 +54,4 @@ export function findMatchCharacterRaw(answers: Answers): [string, Dist] {
 
 export const findMatchCharacter = (answers: Answers): string => {
 	return findMatchCharacterRaw(answers)[0];
-}
+};

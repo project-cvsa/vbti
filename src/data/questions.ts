@@ -18,7 +18,10 @@ export const questions: Question[] = [
 			{ label: "有！我想用创作、安利或应援，让更多人听到我喜欢的声音。🎤", value: "EFJ" },
 			{ label: "有，但不太确定自己能做到什么程度，偶尔自我怀疑。🌙", value: "IFP" },
 			{ label: "没什么特别想追求的，听歌开心、圈子和平就好。🍌", value: "FP" },
-			{ label: "曾经有过，但现在觉得顺其自然就好。能一直听下去，已经是最幸福的事了。🍃", value: "IP" },
+			{
+				label: "曾经有过，但现在觉得顺其自然就好。能一直听下去，已经是最幸福的事了。🍃",
+				value: "IP",
+			},
 		],
 	},
 	{
@@ -46,19 +49,43 @@ export const questions: Question[] = [
 		text: "用下面选项的一首歌来形容你？",
 		options: [
 			{ label: "像《千年食谱颂》里的天依：热爱美食，吃饱再说。🍜", value: "SP", lang: "CN" },
-			{ label: "像《KING》里的GUMI：自信放光芒，生来就是自己世界的主宰。", value: "EJ", lang: "JP" },
+			{
+				label: "像《KING》里的GUMI：自信放光芒，生来就是自己世界的主宰。",
+				value: "EJ",
+				lang: "JP",
+			},
 			{ label: "像《伪物》里的可不：连我自己都搞不懂自己。👐", value: "IP", lang: "JP" },
-			{ label: "像《九九八十一》里的乐正绫，关关难、关关过，永远迎难而上。", value: "TJ", lang: "CN" },
+			{
+				label: "像《九九八十一》里的乐正绫，关关难、关关过，永远迎难而上。👑",
+				value: "TJ",
+				lang: "CN",
+			},
 		],
 	},
 	{
 		id: "q5",
 		text: "用一首歌来形容你的内心世界，你直觉会选？",
 		options: [
-			{ label: "《66CCFF》——想变成天蓝色，不一定最耀眼，但一定是独一无二的自己。💙", value: "N", lang: "CN" },
-			{ label: "《世末歌者》——独自在世界的角落弹着吉他，唱给可能永远不会听到的人听。🎸", value: "IN", lang: "CN" },
-			{ label: "《世界第一的公主殿下》——虽然有时任性，但这就是我，不接受反驳。👑", value: "EF", lang: "JP" },
-			{ label: "《天ノ弱》——内心柔软敏感，总在深夜反复思考自己是不是哪里不够好。", value: "IF", lang: "JP" },
+			{
+				label: "《66CCFF》——想变成天蓝色，不一定最耀眼，但一定是独一无二的自己。💙",
+				value: "N",
+				lang: "CN",
+			},
+			{
+				label: "《世末歌者》——独自在世界的角落弹着吉他，唱给可能永远不会听到的人听。🎸",
+				value: "IN",
+				lang: "CN",
+			},
+			{
+				label: "《世界第一的公主殿下》——虽然有时任性，但这就是我，不接受反驳。👑",
+				value: "EF",
+				lang: "JP",
+			},
+			{
+				label: "《天ノ弱》——内心柔软敏感，总在深夜反复思考自己是不是哪里不够好。",
+				value: "IF",
+				lang: "JP",
+			},
 		],
 	},
 	{
@@ -78,17 +105,26 @@ export const questions: Question[] = [
 			{ label: "非常渴望！灵魂伴侣般的同好谁不想要！💞", value: "EF" },
 			{ label: "还好吧，保持一点距离也挺好，听歌自己听就行。📏", value: "ITP" },
 			{ label: "不怎么渴望，我一个人也挺自在。🚶", value: "IT" },
-			{ label: "已经有了。圈子里那几个一起听歌、一起吐槽的朋友，就是我的快乐老家。🌍", value: "IFJ" },
+			{
+				label: "已经有了。圈子里那几个一起听歌、一起吐槽的朋友，就是我的快乐老家。🌍",
+				value: "IFJ",
+			},
 		],
 	},
 	{
 		id: "q8",
 		text: "你去参加V家only展，你会怎样度过这一天？",
 		options: [
-			{ label: "全场巡回集邮！能逮到的P主和coser全都要合影，能聊两句就更好了！📸", value: "EP" },
+			{
+				label: "全场巡回集邮！能逮到的P主和coser全都要合影，能聊两句就更好了！📸",
+				value: "EP",
+			},
 			{ label: "直奔喜欢的P主摊位买周边，买完安静逛两圈就撤。🛍️", value: "ITJ" },
 			{ label: "提前约好同好一起逛，全程有说有笑，在群里实时直播。📱", value: "EFJ" },
-			{ label: "一个人仔细逛每一个摊位，拍照记录有意思的作品发在同好群里，但不一定说话。📷", value: "ISJ" },
+			{
+				label: "一个人仔细逛每一个摊位，拍照记录有意思的作品发在同好群里，但不一定说话。📷",
+				value: "ISJ",
+			},
 		],
 	},
 	{
@@ -118,7 +154,10 @@ export const questions: Question[] = [
 			{ label: "立刻分享给所有亲友和同好群，好歌不能只我一个人听！📢", value: "EFP" },
 			{ label: "默默收藏，单曲循环播放。🎧", value: "ISP" },
 			{ label: "去找这个P主的其他作品，深入研究。🔬", value: "ISTJ" },
-			{ label: "打开评论区认真写一段自己的感受，哪怕没什么人看也想把话说出来。📝", value: "IFJ" },
+			{
+				label: "打开评论区认真写一段自己的感受，哪怕没什么人看也想把话说出来。📝",
+				value: "IFJ",
+			},
 		],
 	},
 	{
@@ -128,7 +167,10 @@ export const questions: Question[] = [
 			{ label: "在评论区再次提醒并附上原链接，必须尊重创作者。✍️", value: "EFJ" },
 			{ label: "心里不舒服但不会说什么，默默去原链接那边支持一下。🤫", value: "IFP" },
 			{ label: "不标出处是底线问题，直接举办🚨", value: "ETJ" },
-			{ label: "看看UP主平时是不是都这样，如果是惯犯就举报，偶尔一次就提醒。🔍", value: "ITP" },
+			{
+				label: "看看UP主平时是不是都这样，如果是惯犯就举报，偶尔一次就提醒。🔍",
+				value: "ITP",
+			},
 		],
 	},
 	{
@@ -178,7 +220,10 @@ export const questions: Question[] = [
 			{ label: "认真回复，解释我为什么这么理解这首歌，欢迎理性讨论。📝", value: "ETJ" },
 			{ label: "有点不爽，但不想在评论区吵架，删了自己的评论就划走了。😐", value: "IFP" },
 			{ label: "不理他。每个人对歌的理解本来就不一样。😎", value: "ITP" },
-			{ label: "家访他的主页，点进看看他平时都转发什么、听什么，尝试理解他为什么这么说。🔍", value: "INTP" },
+			{
+				label: "家访他的主页，点进看看他平时都转发什么、听什么，尝试理解他为什么这么说。🔍",
+				value: "INTP",
+			},
 		],
 	},
 	{
@@ -187,7 +232,10 @@ export const questions: Question[] = [
 		options: [
 			{ label: "既然这么红肯定有它的道理，多听几遍说不定就洗脑中毒了。🎧", value: "SP" },
 			{ label: "默默划走，坚信听歌审美是主观的，没必要勉强自己。😎", value: "INP" },
-			{ label: "去分析这首歌爆火的原因：是PV做得好？旋律洗脑？还是营销到位？🔍", value: "NTJ" },
+			{
+				label: "去分析这首歌爆火的原因：是PV做得好？旋律洗脑？还是营销到位？🔍",
+				value: "NTJ",
+			},
 			{ label: "上去和吹捧这首歌的人对线，坚决维护心中更值得被关注的术曲。🔥", value: "EFJ" },
 		],
 	},
@@ -213,9 +261,12 @@ export const questions: Question[] = [
 	},
 	{
 		id: "q21",
-		text: "你打开B站，发现首页同时推了一首殿堂曲和一首冷门良曲，你会先点哪个？",
+		text: "你打开B站，发现首页同时推了一首殿堂曲和一首播放不高但看着不错的冷门歌曲，你会先点哪个？",
 		options: [
-			{ label: "当然是殿堂曲！能上殿堂肯定有它的道理，先看看大家为什么喜欢。🔥", value: "ESJ" },
+			{
+				label: "当然是殿堂曲！能上殿堂肯定有它的道理，先看看大家为什么喜欢。🔥",
+				value: "ESJ",
+			},
 			{ label: "冷门良曲。比起跟风，我更愿意做那个发现宝藏的人。💎", value: "INP" },
 			{ label: "看封面和标题决定，眼缘最重要。👀", value: "SP" },
 			{ label: "先加进收藏夹或“稍后再看”，等有时间了再一起慢慢品。📑", value: "ITJ" },
@@ -268,7 +319,10 @@ export const questions: Question[] = [
 			{ label: "先听为快！熬夜就熬了，明天再补觉。🎧", value: "EP" },
 			{ label: "看情况。如果特别期待就听，一般期待就明天再说。🤔", value: "SP" },
 			{ label: "忍痛先睡。明天精神饱满地听，体验更好。😴", value: "IJ" },
-			{ label: "先看评论区，如果大家都说“神曲”就熬夜听，评价一般就明早再听。📊", value: "ETP" },
+			{
+				label: "先看评论区，如果大家都说“神曲”就熬夜听，评价一般就明早再听。📊",
+				value: "ETP",
+			},
 		],
 	},
 	{
@@ -295,10 +349,22 @@ export const questions: Question[] = [
 		id: "q29",
 		text: "遇到压力或情绪低落时，哪类术曲会符合你的行为？",
 		options: [
-			{ label: "燃曲拉满！像《万象霜天》把情绪全部吼出去就舒服了。🔥", value: "EP", lang: "CN" },
+			{
+				label: "燃曲拉满！像《万象霜天》把情绪全部吼出去就舒服了。🔥",
+				value: "EP",
+				lang: "CN",
+			},
 			{ label: "安静治愈系。像《梦与叶樱》慢慢听，慢慢消化。🌙", value: "IJ", lang: "JP" },
-			{ label: "轻松甜曲。像《I LOVE U》那样，用甜蜜可爱的少女转移注意力。🍰", value: "ES", lang: "CN" },
-			{ label: "听点比我还emo的歌，比如《心做し》《少女A》，以毒攻毒。", value: "IP", lang: "JP" },
+			{
+				label: "轻松甜曲。像《I LOVE U》那样，用甜蜜可爱的少女转移注意力。🍰",
+				value: "ES",
+				lang: "CN",
+			},
+			{
+				label: "听点比我还emo的歌，比如《心做し》《少女A》，以毒攻毒。",
+				value: "IP",
+				lang: "JP",
+			},
 		],
 	},
 	{
@@ -308,7 +374,10 @@ export const questions: Question[] = [
 			{ label: "一首一首点开重温，不知不觉听了三小时，眼泪还下来了。😢", value: "IFP" },
 			{ label: "分享歌单链接到旧同好群，问一句“还有人记得这些歌吗？”📢", value: "EFP" },
 			{ label: "快速扫一眼，挑几首印象深的听一下，剩下的关掉。⏩", value: "ITP" },
-			{ label: "立刻开始考古这个P主的近况，发现ta也已经停更很久了，又emo了。🔍", value: "INFJ" },
+			{
+				label: "立刻开始考古这个P主的近况，发现ta也已经停更很久了，又emo了。🔍",
+				value: "INFJ",
+			},
 		],
 	},
 	{
@@ -318,7 +387,10 @@ export const questions: Question[] = [
 			{ label: "快节奏、燃向曲——节奏一响就想抖腿。⚡", value: "EP" },
 			{ label: "叙事感强的故事曲——像在读小说。📖", value: "IN" },
 			{ label: "氛围感拉满的电音/实验曲——喜欢那种漂浮感。🌌", value: "INP" },
-			{ label: "旋律简单但歌词精准扎心的曲子——一句歌词能让你想起十年前的自己。🎯", value: "IF" },
+			{
+				label: "旋律简单但歌词精准扎心的曲子——一句歌词能让你想起十年前的自己。🎯",
+				value: "IF",
+			},
 		],
 	},
 	{

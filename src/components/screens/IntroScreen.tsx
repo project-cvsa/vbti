@@ -26,12 +26,16 @@ function IntroScreen() {
 				</div>
 
 				<div className="relative z-10 mb-1">
-					<Button onClick={() => {
-						restart();
-						if (window._bgmAudio) {
-							window._bgmAudio.play();
-						}
-					}} size="lg" className="px-10 py-6 text-lg font-bold">
+					<Button
+						onClick={() => {
+							restart();
+							if (window._bgmAudio) {
+								window._bgmAudio.play();
+							}
+						}}
+						size="lg"
+						className="px-10 py-6 text-lg font-bold"
+					>
 						开始测试
 					</Button>
 				</div>

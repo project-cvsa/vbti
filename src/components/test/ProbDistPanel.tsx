@@ -56,8 +56,8 @@ export default function ProbDistPanel() {
 			{expanded && (
 				<div className="px-5 pb-4 space-y-2">
 					<p className="text-sm font-medium text-muted-foreground mt-4">
-						当前MBTI推测: {mbti.mbti},
-						向量: [{mbti.vector.map((v) => v.toFixed(3)).join(", ")}]
+						当前MBTI推测: {mbti.mbti}, 向量: [
+						{mbti.vector.map((v) => v.toFixed(3)).join(", ")}]
 					</p>
 					{sorted.map(([charName, prob]) => {
 						const char = characters[charName];
@@ -67,9 +67,7 @@ export default function ProbDistPanel() {
 						return (
 							<div key={charName} className="group">
 								<div className="flex items-center justify-between mb-0.5">
-									<span className="text-xs font-medium truncate">
-										{charName}
-									</span>
+									<span className="text-xs font-medium truncate">{charName}</span>
 									<span className="text-xs text-muted-foreground tabular-nums ml-2 shrink-0">
 										{pct}%
 									</span>

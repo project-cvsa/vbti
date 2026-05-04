@@ -1,17 +1,11 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import {
-	resultCharacterAtom,
-	secretResolvedAtom,
-	goToIntroAtom,
-	restartTestAtom,
-	answersAtom,
-} from "@/state/atoms";
+import { resultCharacterAtom, goToIntroAtom, restartTestAtom, answersAtom } from "@/state/atoms";
 import { characters } from "@/data/characters";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { StaffModal } from "@/components/modals/StaffModal";
-import { SharePanel } from "@/components/modals/SharePanel";
+import { ShareBtn } from "@/components/ShareBtn";
 import { SoulCardModal } from "@/components/modals/SoulCardModal";
 import { Music, VolumeX, Heart, Tv } from "lucide-react";
 import { AnswersModal } from "../modals/AnswersModal";
@@ -28,12 +22,10 @@ interface SongInfo {
 export default function ResultScreen() {
 	const answers = useAtomValue(answersAtom);
 	const resultCharacter = useAtomValue(resultCharacterAtom);
-	const secretResolved = useAtomValue(secretResolvedAtom);
 	const goToIntro = useSetAtom(goToIntroAtom);
 	const restartTest = useSetAtom(restartTestAtom);
 
 	const [staffOpen, setStaffOpen] = useState(false);
-	const [shareOpen, setShareOpen] = useState(false);
 	const [cardOpen, setCardOpen] = useState(false);
 	const [musicPlaying, setMusicPlaying] = useState(false);
 	const [answersOpen, setAnswersOpen] = useState(false);
@@ -50,13 +42,13 @@ export default function ResultScreen() {
 	}, []);
 
 	useEffect(() => {
-		const tm = new Thumbmark;
+		const tm = new Thumbmark();
 		tm.get()
 			.then((result) => {
 				setThumbmark(result.thumbmark);
 			})
 			.catch((error) => {
-				console.error('Error getting fingerprint:', error);
+				console.error("Error getting fingerprint:", error);
 				setThumbmark(null);
 			});
 	}, []);
@@ -72,15 +64,15 @@ export default function ResultScreen() {
 			dataVer: DATA_VERSION,
 			appVer: pkg.version,
 			fingerprint: thumbmark,
-			mode: import.meta.env.MODE
+			mode: import.meta.env.MODE,
 		};
 		const url = new URL(import.meta.env.VITE_BACKEND_URL);
-		url.pathname = "/stat"
+		url.pathname = "/stat";
 		fetch(url, {
 			method: "POST",
 			body: JSON.stringify(data),
 			headers: {
-				'Content-Type': 'application/json'
+				"Content-Type": "application/json",
 			},
 		});
 	}, [resultCharacter, answers, thumbmark]);
@@ -96,12 +88,12 @@ export default function ResultScreen() {
 		});
 		audioRef.current = audio;
 
-		audio.addEventListener('playing', () => {
+		audio.addEventListener("playing", () => {
 			setMusicPlaying(true);
-		})
-		audio.addEventListener('pause', () => {
+		});
+		audio.addEventListener("pause", () => {
 			setMusicPlaying(false);
-		})
+		});
 
 		return () => {
 			audio.pause();
@@ -112,12 +104,12 @@ export default function ResultScreen() {
 	const toggleMusic = useCallback(() => {
 		const audio = audioRef.current;
 		if (!audio) return;
-		audio.addEventListener('playing', () => {
+		audio.addEventListener("playing", () => {
 			setMusicPlaying(true);
-		})
-		audio.addEventListener('pause', () => {
+		});
+		audio.addEventListener("pause", () => {
 			setMusicPlaying(false);
-		})
+		});
 		if (audio.paused) {
 			audio.play().catch((e) => {
 				console.error(e);
@@ -150,8 +142,7 @@ export default function ResultScreen() {
 		})
 		.filter((s) => s.name && s.bv);
 
-	const kicker = secretResolved ? "你的灵魂歌姬已降临" : "你的灵魂歌姬";
-	const isDev = import.meta.env.DEV || window.location.pathname === "/dev"
+	const isDev = import.meta.env.DEV || window.location.pathname === "/dev";
 
 	return (
 		<Card className="mt-6 sm:p-6 ring-none ring-transparent shadow-none sm:bg-white/60">
@@ -163,12 +154,16 @@ export default function ResultScreen() {
 						alt={resultCharacter}
 						className="w-full max-w-65 max-h-100 object-contain"
 					/>
-					<div className="mt-3 text-muted-foreground text-sm">「{character.caption}」</div>
+					<div className="mt-3 text-muted-foreground text-sm">
+						「{character.caption}」
+					</div>
 				</div>
 
-				<div className="flex flex-col gap-4">
+				<div className="flex flex-col gap-4 text-accent-foreground">
 					<div>
-						<div className="text-sm text-primary tracking-wider mb-1">{kicker}</div>
+						<div className="text-sm text-primary tracking-wider mb-1">
+							✨ 你的灵魂歌姬已降临{" "}
+						</div>
 						<h2 className="text-[clamp(32px,5vw,48px)] leading-tight tracking-tight font-bold">
 							{resultCharacter}
 						</h2>
@@ -226,7 +221,8 @@ export default function ResultScreen() {
 									href={`https://www.bilibili.com/video/${song.bv}`}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="inline-flex items-center px-3.5 py-1.5 rounded-full border bg-accent text-xs font-semibold no-underline transition-colors hover:bg-accent/70"
+									className="inline-flex items-center px-3.5 py-1.5 rounded-full border bg-accent 
+									text-xs font-semibold no-underline transition-colors hover:bg-accent/70 border-accent-foreground/10"
 								>
 									{song.name}
 								</a>
@@ -247,10 +243,12 @@ export default function ResultScreen() {
 					</Button>
 				</div>
 				<div className="flex gap-2">
-					{isDev && <Button variant="outline" onClick={() => setAnswersOpen(true)}>显示我的答案</Button>}
-					{/* <Button variant="outline" onClick={() => setShareOpen(true)}>
-						分享结果
-					</Button> */}
+					{isDev && (
+						<Button variant="outline" onClick={() => setAnswersOpen(true)}>
+							显示我的答案
+						</Button>
+					)}
+					<ShareBtn characterName={resultCharacter} mbti={character.mbti} />
 					<Button onClick={() => setCardOpen(true)}>生成灵魂卡片</Button>
 				</div>
 			</div>
@@ -338,12 +336,7 @@ export default function ResultScreen() {
 			</div>
 
 			<StaffModal open={staffOpen} onClose={() => setStaffOpen(false)} />
-			<SharePanel
-				open={shareOpen}
-				onClose={() => setShareOpen(false)}
-				characterName={resultCharacter}
-				mbti={character.mbti}
-			/>
+
 			<SoulCardModal
 				open={cardOpen}
 				onClose={() => setCardOpen(false)}

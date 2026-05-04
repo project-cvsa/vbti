@@ -104,7 +104,7 @@ export default function TestScreen() {
 		resolveCharacter(answers, null);
 	}, [answers, submitting, resolveCharacter, answeredCount]);
 
-	const isDev = import.meta.env.DEV || window.location.pathname === "/dev"
+	const isDev = import.meta.env.DEV || window.location.pathname === "/dev";
 
 	return (
 		<div className="mt-5.5 p-6 max-sm:p-0 max-sm:mt-0 bg-white rounded-2xl max-sm:bg-transparent max-sm:rounded-none">
@@ -112,10 +112,7 @@ export default function TestScreen() {
 
 			<div className="flex flex-col md:flex-row gap-5 mt-4 max-sm:mt-2">
 				<div className="flex-1 min-w-0">
-					<div
-						ref={questionContainerRef}
-						className="rounded-2xl max-sm:rounded-none"
-					>
+					<div ref={questionContainerRef} className="rounded-2xl max-sm:rounded-none">
 						<QuestionCard
 							question={currentQuestion}
 							questionIndex={currentIdx}
@@ -166,7 +163,7 @@ export default function TestScreen() {
 					open={showSecretQuestion}
 					question={secretQuestions[mbtiResult.mbti]}
 					onSelect={handleSecretSelect}
-					onClose={() => { }}
+					onClose={() => {}}
 				/>
 			)}
 
@@ -201,19 +198,31 @@ export default function TestScreen() {
 					</DialogHeader>
 					<ScrollArea className="max-h-100">
 						<DialogDescription>
-							目前还有未回答的问题，确定要提交并查看结果吗？<br />
-							并非所有题目都必须回答，你可以跳过难以回答的问题。<br /><br />
-							当前未回答的问题：<br />
+							目前还有未回答的问题，确定要提交并查看结果吗？
+							<br />
+							并非所有题目都必须回答，你可以跳过难以回答的问题。
+							<br />
+							<br />
+							当前未回答的问题：
+							<br />
 							{unanswered.map((v) => {
-								return <>第{v}题: {questions[v].text}<br /></>
+								return (
+									<>
+										第{v}题: {questions[v].text}
+										<br />
+									</>
+								);
 							})}
 						</DialogDescription>
 					</ScrollArea>
 					<DialogFooter>
-						<Button variant="outline" onClick={() => {
-							setSubmitting(false);
-							setShowSubmitConfirm(false);
-						}}>
+						<Button
+							variant="outline"
+							onClick={() => {
+								setSubmitting(false);
+								setShowSubmitConfirm(false);
+							}}
+						>
 							取消
 						</Button>
 						<Button
@@ -228,9 +237,11 @@ export default function TestScreen() {
 				</DialogContent>
 			</Dialog>
 
-			{isDev && <div className="w-full shrink-0 md:sticky md:top-4 self-start">
-				<ProbDistPanel />
-			</div>}
+			{isDev && (
+				<div className="w-full shrink-0 md:sticky md:top-4 self-start">
+					<ProbDistPanel />
+				</div>
+			)}
 		</div>
 	);
 }
