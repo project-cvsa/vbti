@@ -19,7 +19,7 @@ export function AnswersModal({ open, onClose }: AnswersModalProps) {
 			<DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
 				<DialogHeader><DialogTitle className="text-xl font-bold">答案数据</DialogTitle></DialogHeader>
 				<pre>
-					<code className="text-wrap">
+					<code className="text-wrap break-all">
 						{JSON.stringify(answers)}
 					</code>
 				</pre>

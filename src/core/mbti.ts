@@ -23,7 +23,7 @@ const getPropertyOccurrence = (prop: string) => {
 	let result = 0;
 	for (const question of questions) {
 		for (const option of question.options) {
-			if (option.value === prop) {
+			if (option.value.includes(prop)) {
 				result += 1;
 				break;
 			}
@@ -45,11 +45,12 @@ export function computeMBTI(answers: Answers): MBTIResult {
 
 	for (const q of questions) {
 		const ans = answers[q.id];
-		if (!ans) continue;
+		if (ans === undefined) continue;
 
 		const val = q.options[ans].value;
-
-		scores[val as keyof MBTIScores] += 1;
+		for (const v of val.split("")) {
+			scores[v as keyof MBTIScores] += 1;
+		}
 	}
 
 	const mbti =

@@ -18,8 +18,10 @@ function analyzeQuestionBalance(questions: Question[]): void {
 	for (const q of questions) {
 		const seen = new Set<string>();
 		for (const opt of q.options) {
-			const v = opt.value.toUpperCase();
-			if (v in stats) seen.add(v);
+			const values = opt.value.toUpperCase();
+			for (const v of values.split("")) {
+				if (v in stats) seen.add(v);
+			}
 		}
 		for (const v of seen) {
 			stats[v]++;
