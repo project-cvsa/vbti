@@ -145,10 +145,10 @@ export default function ResultScreen() {
 	const isDev = import.meta.env.DEV || window.location.pathname === "/dev";
 
 	return (
-		<Card className="mt-6 sm:p-6 ring-none ring-transparent shadow-none sm:bg-white/60">
+		<Card className="mt-6 sm:p-6 ring-none ring-transparent shadow-none sm:bg-white">
 			<div className="flex flex-col md:grid md:grid-cols-[0.9fr_1.5fr] gap-6 items-start">
 				{/* Desktop poster */}
-				<div className="hidden md:flex flex-col items-center text-center rounded-2xl p-5 bg-white/80">
+				<div className="hidden md:flex flex-col items-center text-center rounded-2xl p-5 bg-accent/20">
 					<img
 						src={character.image ?? ""}
 						alt={resultCharacter}
@@ -173,7 +173,7 @@ export default function ResultScreen() {
 					</div>
 
 					{/* Mobile poster */}
-					<div className="md:hidden flex flex-col items-center text-center sm:bg-white/80">
+					<div className="md:hidden flex flex-col items-center text-center py-5 rounded-lg bg-white/70">
 						<img
 							src={character.image ?? ""}
 							alt={resultCharacter}

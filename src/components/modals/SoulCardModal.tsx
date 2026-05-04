@@ -66,7 +66,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 				const ratio = Math.min(imgMaxW / img.width, imgMaxH / img.height);
 				const imgW = img.width * ratio;
 				const imgH = img.height * ratio;
-				ctx.drawImage(img, (cardWidth - imgW) / 2, 0, imgW, imgH);
+				ctx.drawImage(img, (cardWidth - imgW) / 2, 15, imgW, imgH);
 
 				ctx.fillStyle = palette.accent;
 				ctx.font = "bold 16px sans-serif";

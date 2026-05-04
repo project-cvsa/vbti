@@ -1,10 +1,9 @@
-import { Heart } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea } from "../ui/scroll-area";
 
 const staffData = [
-	{ role: "策划", names: ["Crimson茜（墨白茜兔）"] },
-	{ role: "开发", names: ["Crimson茜", "星寒"] },
+	{ role: "策划&开发", names: ["Crimson茜（墨白茜兔）"] },
+	{ role: "新架构支持", names: ["星寒"] },
 	{ role: "技术支持", names: ["中V档案馆"] },
 	{
 		role: "核心内容协力",
@@ -44,7 +43,7 @@ export function StaffModal({ open, onClose }: StaffModalProps) {
 			<DialogContent className="max-w-md">
 				<DialogHeader>
 					<DialogTitle className="inline-flex items-center gap-2 text-lg font-bold">
-						<Heart className="size-4 text-primary" />
+						♥️
 						Staff与测试人员感谢
 					</DialogTitle>
 				</DialogHeader>
