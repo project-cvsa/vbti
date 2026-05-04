@@ -29,6 +29,7 @@ import ProbDistPanel from "@/components/test/ProbDistPanel";
 import { SecretQuestionModal } from "@/components/modals/SecretQuestionModal";
 import { computeMBTI } from "@/core/mbti";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { report } from "@/lib/telemetry";
 
 export default function TestScreen() {
 	const [answers, setAnswers] = useAtom(answersAtom);
@@ -58,6 +59,7 @@ export default function TestScreen() {
 				...prev,
 				[currentQuestion.id]: index,
 			}));
+			report("answer", { questionId: currentQuestion.id, optionIndex: index });
 		},
 		[currentQuestion.id, setAnswers]
 	);
@@ -82,6 +84,7 @@ export default function TestScreen() {
 	const handleSecretSelect = useCallback(
 		(targetCharacter: string) => {
 			setShowSecretQuestion(false);
+			report("secret_answer", { target: targetCharacter });
 			if (characters[targetCharacter]) {
 				setResultCharacter(targetCharacter);
 				setSecretResolved(true);
@@ -94,6 +97,7 @@ export default function TestScreen() {
 	);
 
 	const handleSubmit = useCallback(() => {
+		report("submit", { answeredCount });
 		if (submitting) return;
 		setSubmitting(true);
 		if (answeredCount < questions.length) {
@@ -128,7 +132,10 @@ export default function TestScreen() {
 								variant="outline"
 								className="nav-btn px-5 py-3 rounded-2xl font-semibold"
 								disabled={currentIdx === 0}
-								onClick={() => setCurrentIdx((i) => i - 1)}
+								onClick={() => {
+									report("nav_prev", { from: currentIdx, to: currentIdx - 1 });
+									setCurrentIdx((i) => i - 1);
+								}}
 							>
 								◀ 上一题
 							</Button>
@@ -143,7 +150,10 @@ export default function TestScreen() {
 								variant="outline"
 								className="nav-btn px-5 py-3 rounded-2xl font-semibold"
 								disabled={currentIdx >= total - 1}
-								onClick={() => setCurrentIdx((i) => i + 1)}
+								onClick={() => {
+									report("nav_next", { from: currentIdx, to: currentIdx + 1 });
+									setCurrentIdx((i) => i + 1);
+								}}
 							>
 								下一题 ▶
 							</Button>
@@ -180,6 +190,7 @@ export default function TestScreen() {
 						</Button>
 						<Button
 							onClick={() => {
+								report("abandon_test", { answeredCount });
 								setShowBackConfirm(false);
 								setAnswers({});
 								setCurrentIdx(0);

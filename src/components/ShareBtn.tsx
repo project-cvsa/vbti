@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { report } from "@/lib/telemetry";
 
 interface ShareBtnProps {
     characterName: string;
@@ -21,13 +22,16 @@ export function ShareBtn({ characterName, mbti }: ShareBtnProps) {
                     text: shareText,
                     url: SHARE_URL,
                 });
+                report("share", { method: "native" });
             } catch {
                 await navigator.clipboard.writeText(fullText);
                 toast("文案已复制，快去和好友分享吧～", { position: "top-center" });
+                report("share", { method: "clipboard" });
             }
         } else {
             await navigator.clipboard.writeText(fullText);
             toast("文案已复制，快去和好友分享吧～", { position: "top-center" });
+            report("share", { method: "clipboard" });
         }
     };
 

@@ -12,6 +12,7 @@ import { AnswersModal } from "../modals/AnswersModal";
 import { computeMBTI } from "@/core/mbti";
 import { DATA_VERSION } from "@/data/ver";
 import * as pkg from "../../../package.json";
+import { report, submitStat } from "@/lib/telemetry";
 
 interface SongInfo {
 	name: string;
@@ -44,24 +45,7 @@ export default function ResultScreen() {
 		if (!resultCharacter) return;
 		if (thumbmark === undefined) return;
 		const mbti = computeMBTI(answers);
-		const data = {
-			answers,
-			resultCharacter,
-			mbti,
-			dataVer: DATA_VERSION,
-			appVer: pkg.version,
-			fingerprint: thumbmark,
-			mode: import.meta.env.MODE,
-		};
-		const url = new URL(import.meta.env.VITE_BACKEND_URL);
-		url.pathname = "/stat";
-		fetch(url, {
-			method: "POST",
-			body: JSON.stringify(data),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
+		submitStat({ answers, resultCharacter, mbti, dataVer: DATA_VERSION, appVer: pkg.version });
 	}, [resultCharacter, answers, thumbmark]);
 
 	useEffect(() => {
@@ -89,6 +73,7 @@ export default function ResultScreen() {
 	}, [character]);
 
 	const toggleMusic = useCallback(() => {
+		report("result_bgm_toggle");
 		const audio = audioRef.current;
 		if (!audio) return;
 		audio.addEventListener("playing", () => {
@@ -224,19 +209,19 @@ export default function ResultScreen() {
 
 			<div className="flex justify-between gap-2.5 flex-wrap mt-5 items-center">
 				<div className="flex gap-2">
-					<Button onClick={() => goToIntro()}>回到首页</Button>
-					<Button variant="outline" onClick={() => restartTest()}>
+					<Button onClick={() => { report("go_home"); goToIntro(); }}>回到首页</Button>
+					<Button variant="outline" onClick={() => { report("restart_test"); restartTest(); }}>
 						重新测试
 					</Button>
 				</div>
 				<div className="flex gap-2">
 					{isDev && (
-						<Button variant="outline" onClick={() => setAnswersOpen(true)}>
+						<Button variant="outline" onClick={() => { report("view_answers"); setAnswersOpen(true); }}>
 							显示我的答案
 						</Button>
 					)}
 					<ShareBtn characterName={resultCharacter} mbti={character.mbti} />
-					<Button onClick={() => setCardOpen(true)}>生成灵魂卡片</Button>
+					<Button onClick={() => { report("card_open"); setCardOpen(true); }}>生成灵魂卡片</Button>
 				</div>
 			</div>
 
@@ -256,7 +241,7 @@ export default function ResultScreen() {
 					<Button
 						variant="link"
 						className="inline-flex items-center gap-1"
-						onClick={() => setStaffOpen(true)}
+						onClick={() => { report("staff_view"); setStaffOpen(true); }}
 					>
 						<Heart className="size-4" />
 						Staff与测试人员感谢

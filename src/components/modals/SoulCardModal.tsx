@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import QRCode from "qrcode";
 import { generateCardPalette } from "@/core/color";
+import { report } from "@/lib/telemetry";
 
 const CARD_URL = "https://vbti-test.com";
 
@@ -179,6 +180,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 
 	const handleDownload = () => {
 		if (!cardDataURL) return;
+		report("download_card", { characterName });
 		const link = document.createElement("a");
 		link.download = `VBTI_灵魂卡片_${characterName}.png`;
 		link.href = cardDataURL;

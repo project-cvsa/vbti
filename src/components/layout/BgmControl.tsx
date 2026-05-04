@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Music, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { report } from "@/lib/telemetry";
 
 declare global {
 	interface Window {
@@ -40,6 +41,7 @@ function BgmControl({ visible = true }: BgmControlProps) {
 		} else {
 			audio.pause();
 		}
+		report("bgm_toggle");
 	}, []);
 
 	if (!visible) return null;

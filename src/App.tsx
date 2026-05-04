@@ -7,6 +7,7 @@ import TestScreen from "@/components/screens/TestScreen";
 import ResultScreen from "@/components/screens/ResultScreen";
 import { useEffect } from "react";
 import { Thumbmark } from "@thumbmarkjs/thumbmarkjs";
+import { report } from "@/lib/telemetry";
 
 function App() {
 	const currentScreen = useAtomValue(currentScreenAtom);
@@ -26,21 +27,7 @@ function App() {
 
 	useEffect(() => {
 		if (thumbmark === undefined) return;
-		const data = {
-			actionType: "onboard",
-			actionData: null,
-			fingerprint: thumbmark,
-			mode: import.meta.env.MODE
-		};
-		const url = new URL(import.meta.env.VITE_BACKEND_URL);
-		url.pathname = "/access";
-		fetch(url, {
-			method: "POST",
-			body: JSON.stringify(data),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
+		report("onboard");
 	}, [thumbmark]);
 
 	return (

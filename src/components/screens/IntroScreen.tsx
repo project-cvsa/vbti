@@ -1,5 +1,6 @@
 import { useSetAtom } from "jotai";
 import { restartTestAtom } from "@/state/atoms";
+import { report } from "@/lib/telemetry";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tv } from "lucide-react";
@@ -28,6 +29,7 @@ function IntroScreen() {
 				<div className="relative z-10 mb-1">
 					<Button
 						onClick={() => {
+							report("start_test");
 							restart();
 							if (window._bgmAudio) {
 								window._bgmAudio.play();
