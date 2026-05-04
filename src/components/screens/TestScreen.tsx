@@ -98,6 +98,7 @@ export default function TestScreen() {
 		setSubmitting(true);
 		if (answeredCount < questions.length) {
 			setShowSubmitConfirm(true);
+			setSubmitting(false);
 			return;
 		}
 		setSubmitting(false);
