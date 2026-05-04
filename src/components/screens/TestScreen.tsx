@@ -77,6 +77,7 @@ export default function TestScreen() {
 			setResultCharacter(char);
 			setSecretResolved(false);
 			setScreen("result");
+			report("resolve", { char, answers });
 		},
 		[setResultCharacter, setSecretResolved, setScreen]
 	);
