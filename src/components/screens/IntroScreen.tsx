@@ -10,7 +10,7 @@ function IntroScreen() {
 
 	return (
 		<div className="h-[70vh] flex flex-col justify-center items-center text-center mt-5">
-			<Card className="relative overflow-hidden w-full h-full bg-white">
+			<Card className="relative overflow-hidden w-full h-full bg-white max-sm:px-4">
 				{/* Decorative gradient circle — desktop only */}
 				<div className="absolute -right-17.5 -top-17.5 w-55 h-55 rounded-full pointer-events-none bg-linear-to-b from-primary/20 to-primary/5" />
 
