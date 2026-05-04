@@ -5,11 +5,13 @@ import { characters } from "@/data/characters";
 import { cn } from "@/lib/utils";
 import { ChevronDown, ChevronUp, BarChart3 } from "lucide-react";
 import { computeMBTI } from "@/core/mbti";
+import { findMatchCharacter } from "@/core/findChar";
 
 export default function ProbDistPanel() {
 	const answers = useAtomValue(answersAtom);
 	const mbti = computeMBTI(answers);
 	const dist = useAtomValue(probDistAtom);
+	const char = findMatchCharacter(answers);
 	const [expanded, setExpanded] = useState(true);
 
 	const sorted = useMemo(() => {
@@ -58,6 +60,8 @@ export default function ProbDistPanel() {
 					<p className="text-sm font-medium text-muted-foreground mt-4">
 						当前MBTI推测: {mbti.mbti}, 向量: [
 						{mbti.vector.map((v) => v.toFixed(3)).join(", ")}]
+						<br />
+						测试结果: {char}
 					</p>
 					{sorted.map(([charName, prob]) => {
 						const char = characters[charName];

@@ -53,6 +53,7 @@ export interface Character {
 	popularity?: number;
 	color?: string;
 	tags?: string;
+	url?: string;
 }
 
 /**
