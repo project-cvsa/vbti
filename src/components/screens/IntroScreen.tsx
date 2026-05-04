@@ -9,12 +9,12 @@ function IntroScreen() {
 	const restart = useSetAtom(restartTestAtom);
 
 	return (
-		<div className="h-[70vh] flex flex-col justify-center items-center text-center mt-5">
-			<Card className="relative overflow-hidden w-full h-full bg-white max-sm:px-4">
+		<div className="flex flex-col justify-center items-center text-center mt-5">
+			<Card className="relative overflow-hidden w-full h-full bg-white max-sm:px-4 py-10 md:py-20">
 				{/* Decorative gradient circle — desktop only */}
 				<div className="absolute -right-17.5 -top-17.5 w-55 h-55 rounded-full pointer-events-none bg-linear-to-b from-primary/20 to-primary/5" />
 
-				<div className="flex-1 flex flex-col justify-end items-center pb-5 z-10">
+				<div className="flex-1 flex flex-col justify-end items-center pb-5 z-10 mt-5">
 					<h1 className="text-[clamp(34px,6vw,48px)] leading-[1.12] tracking-[-0.03em] text-primary max-w-2xl mb-3.5 font-bold">
 						VBTI · 测测你的灵魂歌姬
 					</h1>
