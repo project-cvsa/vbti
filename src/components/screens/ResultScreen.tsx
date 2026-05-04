@@ -154,16 +154,16 @@ export default function ResultScreen() {
 	const isDev = import.meta.env.DEV || window.location.pathname === "/dev"
 
 	return (
-		<Card className="mt-6 sm:p-6 max-sm:ring-none max-sm:ring-transparent shadow-none">
+		<Card className="mt-6 sm:p-6 ring-none ring-transparent shadow-none sm:bg-white/60">
 			<div className="flex flex-col md:grid md:grid-cols-[0.9fr_1.5fr] gap-6 items-start">
 				{/* Desktop poster */}
-				<div className="hidden md:flex flex-col items-center text-center">
+				<div className="hidden md:flex flex-col items-center text-center rounded-2xl p-5 bg-white/80">
 					<img
 						src={character.image ?? ""}
 						alt={resultCharacter}
 						className="w-full max-w-65 max-h-100 object-contain"
 					/>
-					<div className="mt-3 text-muted-foreground text-sm">{character.caption}</div>
+					<div className="mt-3 text-muted-foreground text-sm">「{character.caption}」</div>
 				</div>
 
 				<div className="flex flex-col gap-4">
@@ -178,14 +178,14 @@ export default function ResultScreen() {
 					</div>
 
 					{/* Mobile poster */}
-					<div className="md:hidden flex flex-col items-center text-center">
+					<div className="md:hidden flex flex-col items-center text-center sm:bg-white/80">
 						<img
 							src={character.image ?? ""}
 							alt={resultCharacter}
 							className="w-full max-w-100 max-h-100 object-contain"
 						/>
 						<div className="mt-3 text-muted-foreground text-sm">
-							{character.caption}
+							「{character.caption}」
 						</div>
 					</div>
 
@@ -248,14 +248,14 @@ export default function ResultScreen() {
 				</div>
 				<div className="flex gap-2">
 					{isDev && <Button variant="outline" onClick={() => setAnswersOpen(true)}>显示我的答案</Button>}
-					<Button variant="outline" onClick={() => setShareOpen(true)}>
+					{/* <Button variant="outline" onClick={() => setShareOpen(true)}>
 						分享结果
-					</Button>
+					</Button> */}
 					<Button onClick={() => setCardOpen(true)}>生成灵魂卡片</Button>
 				</div>
 			</div>
 
-			<div className="mt-5 pt-5 border-t">
+			<div className="mt-5 pt-5 border-t border-accent-foreground/10">
 				<div className="text-center mb-4">
 					<a
 						href="https://www.bilibili.com/video/BV1of9hBQEsw"
