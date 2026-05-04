@@ -17,8 +17,8 @@ function BgmControl({ visible = true }: BgmControlProps) {
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 
 	useEffect(() => {
-		const audio =
-			window._bgmAudio ?? (document.getElementById("globalBgm") as HTMLAudioElement | null);
+		window._bgmAudio = document.getElementById("globalBgm") as HTMLAudioElement;
+		const audio = window._bgmAudio;
 		audioRef.current = audio;
 		if (audio) setPlaying(!audio.paused);
 	}, []);
@@ -35,7 +35,7 @@ function BgmControl({ visible = true }: BgmControlProps) {
 		const audio = audioRef.current;
 		if (!audio) return;
 		if (audio.paused) {
-			audio.play().catch(() => {});
+			audio.play().catch(() => { });
 		} else {
 			audio.pause();
 		}

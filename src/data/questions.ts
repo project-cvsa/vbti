@@ -65,8 +65,8 @@ export const questions: Question[] = [
 		id: "q6",
 		text: "如果把自己比喻成一种动物，你觉得自己是？",
 		options: [
-			{ label: "不知疲倦的小狗，永远在奔跑，在雨中也不曾停不下来。🐕", value: "EP" },
-			{ label: "安静观察的猫，有自己的小世界，偶尔才让人靠近。", value: "ITP" },
+			{ label: "不知疲倦的小狗，永远在奔跑，在雨中也不曾停不下来。🐶", value: "EP" },
+			{ label: "安静观察的猫，有自己的小世界，偶尔才让人靠近。🐱", value: "ITP" },
 			{ label: "下辈子就做在深海独自游弋的鲸，用只有同类能听懂的频率歌唱。🐋", value: "INF" },
 			{ label: "飞入熔炉的飞蛾，明知危险仍向前。🕊️", value: "NFJ" },
 		],
@@ -98,7 +98,7 @@ export const questions: Question[] = [
 			{ label: "传教士——到处安利，恨不得全世界都来听。📣", value: "EFJ" },
 			{ label: "老宅型——安静听歌，默默收藏，偶尔考古。📼", value: "ISP" },
 			{ label: "创作型——自己也想写词/调教/画图。✍️", value: "NFP" },
-			{ label: "考据党——从P主十年前的作品开始翻起、整理时间线。", value: "ISTJ" },
+			{ label: "考据党——从P主十年前的作品开始翻起、整理时间线。📜", value: "ISTJ" },
 		],
 	},
 	{
@@ -147,7 +147,7 @@ export const questions: Question[] = [
 		options: [
 			{ label: "前排围观吃瓜，看谁能吵赢。🍿", value: "EP" },
 			{ label: "上去劝架！“大家别吵了，都是热爱术力口的人。”🤝", value: "EFJ" },
-			{ label: "默默截图发到自己个人群：“快来看好戏。”📸", value: "ITP" },
+			{ label: "完全不在乎，划走了。👋", value: "IP" },
 			{ label: "分析双方论点，在心里默默判断哪边更有道理，但不发言。🤔", value: "ITJ" },
 		],
 	},
@@ -158,7 +158,7 @@ export const questions: Question[] = [
 			{ label: "见怪不怪，耐着性子给路人科普虚拟歌手的定义和优秀歌曲。📖", value: "ITJ" },
 			{ label: "直接开麦回击，引用经典曲目论证什么才是灵魂。🔥", value: "ETJ" },
 			{ label: "心里很不舒服但不想吵架，默默点了踩然后划走。😔", value: "IFP" },
-			{ label: "一笑而过。工具论也是一种观点，表示尊重理解，有这时间还是自己去听首新歌吧。", value: "INTP" },
+			{ label: "一笑而过。表示尊重理解，有这时间还是自己去听首新歌吧。🎧", value: "INTP" },
 		],
 	},
 	{

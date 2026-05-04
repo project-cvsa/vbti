@@ -3,6 +3,7 @@ import { restartTestAtom } from "@/state/atoms";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tv } from "lucide-react";
+import * as pkg from "../../../package.json";
 
 function IntroScreen() {
 	const restart = useSetAtom(restartTestAtom);
@@ -25,7 +26,12 @@ function IntroScreen() {
 				</div>
 
 				<div className="relative z-10 mb-1">
-					<Button onClick={restart} size="lg" className="px-10 py-6 text-lg font-bold">
+					<Button onClick={() => {
+						restart();
+						if (window._bgmAudio) {
+							window._bgmAudio.play();
+						}
+					}} size="lg" className="px-10 py-6 text-lg font-bold">
 						开始测试
 					</Button>
 				</div>
@@ -50,7 +56,7 @@ function IntroScreen() {
 						</span>
 					</div>
 					<p className="mt-2 text-muted-foreground text-[11px]">
-						版本：v2.0.0 alpha &nbsp;&nbsp;| &nbsp;&nbsp;bgm：拼凑的断音 - Toa
+						版本：v{pkg.version} &nbsp;&nbsp;| &nbsp;&nbsp;bgm：拼凑的断音 - Toa
 					</p>
 				</div>
 			</Card>

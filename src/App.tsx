@@ -17,7 +17,7 @@ function App() {
 				{currentScreen === "result" && <ResultScreen />}
 			</AppShell>
 			<BgmControl visible={currentScreen !== "result"} />
-			<audio id="globalBgm" src="bgm/bgm.mp3" loop hidden />
+			<audio id="globalBgm" src="bgm/bgm.mp3" autoPlay={true} loop hidden />
 		</>
 	);
 }

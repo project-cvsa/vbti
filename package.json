@@ -1,7 +1,7 @@
 {
 	"name": "vbti",
 	"private": true,
-	"version": "0.0.0",
+	"version": "2.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "bunx --bun vite",
@@ -14,6 +14,7 @@
 	"dependencies": {
 		"@fontsource-variable/inter": "^5.2.8",
 		"@tailwindcss/vite": "^4.2.4",
+		"@thumbmarkjs/thumbmarkjs": "^1.8.1",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"jotai": "^2.19.1",
@@ -41,6 +42,7 @@
 		"babel-plugin-react-compiler": "^1.0.0",
 		"globals": "^17.5.0",
 		"pure-rand": "^8.4.0",
+		"terser": "^5.46.2",
 		"typescript": "~6.0.2",
 		"vite": "^8.0.10",
 		"vitest": "^4.1.5"

@@ -93,7 +93,6 @@ export default function TestScreen() {
 	const handleSubmit = useCallback(() => {
 		if (submitting) return;
 		setSubmitting(true);
-		console.log(answeredCount, questions.length)
 		if (answeredCount < questions.length) {
 			setShowSubmitConfirm(true);
 			return;

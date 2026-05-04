@@ -5,6 +5,7 @@ import {
 	secretResolvedAtom,
 	goToIntroAtom,
 	restartTestAtom,
+	answersAtom,
 } from "@/state/atoms";
 import { characters } from "@/data/characters";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,10 @@ import { SharePanel } from "@/components/modals/SharePanel";
 import { SoulCardModal } from "@/components/modals/SoulCardModal";
 import { Music, VolumeX, Heart, Tv } from "lucide-react";
 import { AnswersModal } from "../modals/AnswersModal";
+import { computeMBTI } from "@/core/mbti";
+import { DATA_VERSION } from "@/data/ver";
+import * as pkg from "../../../package.json";
+import { Thumbmark } from "@thumbmarkjs/thumbmarkjs";
 
 interface SongInfo {
 	name: string;
@@ -21,6 +26,7 @@ interface SongInfo {
 }
 
 export default function ResultScreen() {
+	const answers = useAtomValue(answersAtom);
 	const resultCharacter = useAtomValue(resultCharacterAtom);
 	const secretResolved = useAtomValue(secretResolvedAtom);
 	const goToIntro = useSetAtom(goToIntroAtom);
@@ -31,6 +37,7 @@ export default function ResultScreen() {
 	const [cardOpen, setCardOpen] = useState(false);
 	const [musicPlaying, setMusicPlaying] = useState(false);
 	const [answersOpen, setAnswersOpen] = useState(false);
+	const [thumbmark, setThumbmark] = useState<string | null | undefined>(undefined);
 
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -43,17 +50,58 @@ export default function ResultScreen() {
 	}, []);
 
 	useEffect(() => {
+		const tm = new Thumbmark;
+		tm.get()
+			.then((result) => {
+				setThumbmark(result.thumbmark);
+			})
+			.catch((error) => {
+				console.error('Error getting fingerprint:', error);
+				setThumbmark(null);
+			});
+	}, []);
+
+	useEffect(() => {
+		if (!resultCharacter) return;
+		if (thumbmark === undefined) return;
+		const mbti = computeMBTI(answers);
+		const data = {
+			answers,
+			resultCharacter,
+			mbti,
+			dataVer: DATA_VERSION,
+			appVer: pkg.version,
+			fingerprint: thumbmark,
+			mode: import.meta.env.MODE
+		};
+		const url = new URL(import.meta.env.VITE_BACKEND_URL);
+		url.pathname = "/stat"
+		fetch(url, {
+			method: "POST",
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		});
+	}, [resultCharacter, answers, thumbmark]);
+
+	useEffect(() => {
 		if (!character) return;
 
 		const audio = new Audio(character.music);
 		audio.loop = true;
 		audio.volume = 0.6;
 		audio.play().catch((e) => {
-			setMusicPlaying(false);
 			console.error(e);
 		});
-		setMusicPlaying(true);
 		audioRef.current = audio;
+
+		audio.addEventListener('playing', () => {
+			setMusicPlaying(true);
+		})
+		audio.addEventListener('pause', () => {
+			setMusicPlaying(false);
+		})
 
 		return () => {
 			audio.pause();
@@ -64,9 +112,14 @@ export default function ResultScreen() {
 	const toggleMusic = useCallback(() => {
 		const audio = audioRef.current;
 		if (!audio) return;
+		audio.addEventListener('playing', () => {
+			setMusicPlaying(true);
+		})
+		audio.addEventListener('pause', () => {
+			setMusicPlaying(false);
+		})
 		if (audio.paused) {
 			audio.play().catch((e) => {
-				setMusicPlaying(false);
 				console.error(e);
 			});
 			setMusicPlaying(true);
@@ -297,7 +350,7 @@ export default function ResultScreen() {
 				characterName={resultCharacter}
 				character={character}
 			/>
-			<AnswersModal open={answersOpen} onClose={() => setAnswersOpen(false)}/>
+			<AnswersModal open={answersOpen} onClose={() => setAnswersOpen(false)} />
 		</Card>
 	);
 }

@@ -1,10 +1,20 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import type { Character } from "@/core/types";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import QRCode from "qrcode";
+import { generateCardPalette } from "@/core/color";
 
 const CARD_URL = "https://vbti-test.com";
+
+const DEFAULT_PALETTE = {
+	bg: "#f6fbfa",
+	accent: "#1cbaa8",
+	text: "#0d6362",
+	muted: "#4a6b7a",
+	pill: "#b0e8e7",
+	line: "#bee7e5",
+};
 
 interface SoulCardModalProps {
 	open: boolean;
@@ -13,36 +23,18 @@ interface SoulCardModalProps {
 	character: Character;
 }
 
-const CARD_BG = "#f6fbfa";
-const CARD_ACCENT = "#1cbaa8";
-const CARD_TEXT = "#0d6362";
-const CARD_MUTED = "#4a6b7a";
-const CARD_PILL = "#b0e8e7";
-const CARD_LINE = "#bee7e5";
-
 export function SoulCardModal({ open, onClose, characterName, character }: SoulCardModalProps) {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const [cardDataURL, setCardDataURL] = useState<string | null>(null);
 	const [error, setError] = useState<string | null>(null);
 
+	const palette = useMemo(
+		() => (character.color ? generateCardPalette(character.color) : DEFAULT_PALETTE),
+		[character.color],
+	);
+
 	const generateCard = useCallback(() => {
-		const canvas = canvasRef.current;
-		if (!canvas) return;
-
-		const scale = 3;
-		const cardWidth = 400;
-		const cardHeight = 650;
-		canvas.width = cardWidth * scale;
-		canvas.height = cardHeight * scale;
-
-		const ctx = canvas.getContext("2d");
-		if (!ctx) return;
-
-		ctx.scale(scale, scale);
-		ctx.fillStyle = CARD_BG;
-		ctx.fillRect(0, 0, cardWidth, cardHeight);
-
-		const imgSrc = character.image;
+		const imgSrc = character.image.replace("/character","/cardprofile");
 		if (!imgSrc) {
 			setError("角色图片加载失败");
 			return;
@@ -54,32 +46,47 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 
 		img.onload = async () => {
 			try {
-				const imgMaxW = 220;
-				const imgMaxH = 260;
+				const canvas = canvasRef.current;
+				if (!canvas) return;
+
+				const scale = 3;
+				const cardWidth = 400;
+				const cardHeight = 700;
+				canvas.width = cardWidth * scale;
+				canvas.height = cardHeight * scale;
+
+				const ctx = canvas.getContext("2d");
+				if (!ctx) return;
+
+				ctx.scale(scale, scale);
+				ctx.fillStyle = palette.bg;
+				ctx.fillRect(0, 0, cardWidth, cardHeight);
+				const imgMaxW = 350;
+				const imgMaxH = 1000;
 				const ratio = Math.min(imgMaxW / img.width, imgMaxH / img.height);
 				const imgW = img.width * ratio;
 				const imgH = img.height * ratio;
-				ctx.drawImage(img, (cardWidth - imgW) / 2, 20, imgW, imgH);
+				ctx.drawImage(img, (cardWidth - imgW) / 2, 0, imgW, imgH);
 
-				ctx.fillStyle = CARD_ACCENT;
+				ctx.fillStyle = palette.accent;
 				ctx.font = "bold 16px sans-serif";
 				ctx.textAlign = "center";
-				ctx.fillText("你的灵魂歌姬已降临", 200, imgH + 60);
+				ctx.fillText("你的灵魂歌姬已降临", 200, imgH + 45);
 
-				const descY = imgH + 180;
-				ctx.fillStyle = CARD_TEXT;
+				const descY = imgH + 160;
+				ctx.fillStyle = palette.text;
 				ctx.font = "bold 15px sans-serif";
 				ctx.fillText("灵魂解读", 200, descY);
 
-				ctx.fillStyle = CARD_TEXT;
+				ctx.fillStyle = palette.text;
 				ctx.font = "bold 36px sans-serif";
-				ctx.fillText(characterName, 200, imgH + 105);
+				ctx.fillText(characterName, 200, imgH + 85);
 
 				const mbtiText = `歌手MBTI推测：${character.mbti}`;
 				const mbtiWidth = 200;
-				ctx.fillStyle = CARD_PILL;
+				ctx.fillStyle = palette.pill;
 				const rx = 200 - mbtiWidth / 2;
-				const ry = imgH + 122;
+				const ry = imgH + 102;
 				const rw = mbtiWidth;
 				const rh = 26;
 				const radius = 13;
@@ -96,11 +103,11 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 				ctx.closePath();
 				ctx.fill();
 
-				ctx.fillStyle = CARD_TEXT;
+				ctx.fillStyle = palette.text;
 				ctx.font = "bold 13px sans-serif";
-				ctx.fillText(mbtiText, 200, imgH + 122 + 18);
+				ctx.fillText(mbtiText, 200, imgH + 102 + 18);
 
-				ctx.fillStyle = CARD_TEXT;
+				ctx.fillStyle = palette.text;
 				ctx.font = "11px sans-serif";
 				const maxWidth = 340;
 				const words = character.shortDesc.split("");
@@ -116,23 +123,24 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 					}
 				}
 				if (currentLine) lines.push(currentLine);
-
+				ctx.textAlign = "left";
 				let lineY = descY + 20;
 				for (let j = 0; j < Math.min(lines.length, 4); j++) {
-					ctx.fillText(lines[j], 200, lineY);
+					console.log(lines[j])
+					ctx.fillText(lines[j], 30, lineY);
 					lineY += 18;
 				}
 
 				const qrY = cardHeight - 70;
 				ctx.font = "10px sans-serif";
-				ctx.fillStyle = CARD_MUTED;
+				ctx.fillStyle = palette.muted;
 				ctx.textAlign = "left";
 				ctx.font = "bold 15px sans-serif";
 				ctx.fillText("扫码测测", 190, qrY + 23);
 				ctx.font = "13px sans-serif";
 				ctx.fillText("你的灵魂歌姬是谁？", 190, qrY + 45);
 
-				ctx.strokeStyle = CARD_LINE;
+				ctx.strokeStyle = palette.line;
 				ctx.lineWidth = 1;
 				ctx.beginPath();
 				ctx.moveTo(30, qrY - 13);
@@ -145,7 +153,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 				await QRCode.toCanvas(qrCanvas, CARD_URL, {
 					width: qrSize,
 					margin: 1,
-					color: { dark: CARD_TEXT, light: "#ffffff00" },
+					color: { dark: palette.text, light: "#ffffff00" },
 				});
 				ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
 
@@ -159,7 +167,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 		img.onerror = () => {
 			setError("角色图片加载失败，请检查网络后重试。");
 		};
-	}, [characterName, character]);
+	}, [characterName, character, palette]);
 
 	useEffect(() => {
 		if (open) {
