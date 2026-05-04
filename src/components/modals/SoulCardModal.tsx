@@ -35,6 +35,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 	);
 
 	const generateCard = useCallback(() => {
+		report("generate_card")
 		const imgSrc = character.image.replace("/character", "/cardprofile");
 		if (!imgSrc) {
 			setError("角色图片加载失败");
