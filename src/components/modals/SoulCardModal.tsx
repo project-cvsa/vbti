@@ -13,12 +13,12 @@ interface SoulCardModalProps {
 	character: Character;
 }
 
-const CARD_BG = "#e0f0f5";
+const CARD_BG = "#f6fbfa";
 const CARD_ACCENT = "#1cbaa8";
 const CARD_TEXT = "#0d6362";
 const CARD_MUTED = "#4a6b7a";
 const CARD_PILL = "#b0e8e7";
-const CARD_LINE = "#81dfdd";
+const CARD_LINE = "#bee7e5";
 
 export function SoulCardModal({ open, onClose, characterName, character }: SoulCardModalProps) {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -29,9 +29,9 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 		const canvas = canvasRef.current;
 		if (!canvas) return;
 
-		const scale = 2;
+		const scale = 3;
 		const cardWidth = 400;
-		const cardHeight = 580;
+		const cardHeight = 650;
 		canvas.width = cardWidth * scale;
 		canvas.height = cardHeight * scale;
 
@@ -41,40 +41,6 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 		ctx.scale(scale, scale);
 		ctx.fillStyle = CARD_BG;
 		ctx.fillRect(0, 0, cardWidth, cardHeight);
-
-		ctx.fillStyle = CARD_ACCENT;
-		ctx.font = "bold 16px sans-serif";
-		ctx.textAlign = "center";
-		ctx.fillText("你的灵魂歌姬已降临", 200, 35);
-
-		ctx.fillStyle = CARD_TEXT;
-		ctx.font = "bold 36px sans-serif";
-		ctx.fillText(characterName, 200, 80);
-
-		const mbtiText = `歌手MBTI推测：${character.mbti}`;
-		const mbtiWidth = ctx.measureText(mbtiText).width + 24;
-		ctx.fillStyle = CARD_PILL;
-		const rx = 200 - mbtiWidth / 2;
-		const ry = 92;
-		const rw = mbtiWidth;
-		const rh = 26;
-		const radius = 13;
-		ctx.beginPath();
-		ctx.moveTo(rx + radius, ry);
-		ctx.lineTo(rx + rw - radius, ry);
-		ctx.arcTo(rx + rw, ry, rx + rw, ry + radius, radius);
-		ctx.lineTo(rx + rw, ry + rh - radius);
-		ctx.arcTo(rx + rw, ry + rh, rx + rw - radius, ry + rh, radius);
-		ctx.lineTo(rx + radius, ry + rh);
-		ctx.arcTo(rx, ry + rh, rx, ry + rh - radius, radius);
-		ctx.lineTo(rx, ry + radius);
-		ctx.arcTo(rx, ry, rx + radius, ry, radius);
-		ctx.closePath();
-		ctx.fill();
-
-		ctx.fillStyle = CARD_TEXT;
-		ctx.font = "bold 13px sans-serif";
-		ctx.fillText(mbtiText, 200, 110);
 
 		const imgSrc = character.image;
 		if (!imgSrc) {
@@ -93,12 +59,46 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 				const ratio = Math.min(imgMaxW / img.width, imgMaxH / img.height);
 				const imgW = img.width * ratio;
 				const imgH = img.height * ratio;
-				ctx.drawImage(img, (cardWidth - imgW) / 2, 130, imgW, imgH);
+				ctx.drawImage(img, (cardWidth - imgW) / 2, 20, imgW, imgH);
 
-				const descY = 400;
+				ctx.fillStyle = CARD_ACCENT;
+				ctx.font = "bold 16px sans-serif";
+				ctx.textAlign = "center";
+				ctx.fillText("你的灵魂歌姬已降临", 200, imgH + 60);
+
+				const descY = imgH + 180;
 				ctx.fillStyle = CARD_TEXT;
 				ctx.font = "bold 15px sans-serif";
 				ctx.fillText("灵魂解读", 200, descY);
+
+				ctx.fillStyle = CARD_TEXT;
+				ctx.font = "bold 36px sans-serif";
+				ctx.fillText(characterName, 200, imgH + 105);
+
+				const mbtiText = `歌手MBTI推测：${character.mbti}`;
+				const mbtiWidth = 200;
+				ctx.fillStyle = CARD_PILL;
+				const rx = 200 - mbtiWidth / 2;
+				const ry = imgH + 122;
+				const rw = mbtiWidth;
+				const rh = 26;
+				const radius = 13;
+				ctx.beginPath();
+				ctx.moveTo(rx + radius, ry);
+				ctx.lineTo(rx + rw - radius, ry);
+				ctx.arcTo(rx + rw, ry, rx + rw, ry + radius, radius);
+				ctx.lineTo(rx + rw, ry + rh - radius);
+				ctx.arcTo(rx + rw, ry + rh, rx + rw - radius, ry + rh, radius);
+				ctx.lineTo(rx + radius, ry + rh);
+				ctx.arcTo(rx, ry + rh, rx, ry + rh - radius, radius);
+				ctx.lineTo(rx, ry + radius);
+				ctx.arcTo(rx, ry, rx + radius, ry, radius);
+				ctx.closePath();
+				ctx.fill();
+
+				ctx.fillStyle = CARD_TEXT;
+				ctx.font = "bold 13px sans-serif";
+				ctx.fillText(mbtiText, 200, imgH + 122 + 18);
 
 				ctx.fillStyle = CARD_TEXT;
 				ctx.font = "11px sans-serif";
@@ -123,27 +123,29 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 					lineY += 18;
 				}
 
-				const qrY = Math.min(lineY + 16, 496);
+				const qrY = cardHeight - 70;
 				ctx.font = "10px sans-serif";
 				ctx.fillStyle = CARD_MUTED;
 				ctx.textAlign = "left";
-				ctx.fillText("分享给更多朋友", 110, qrY + 30);
-				ctx.fillText("测出你的灵魂虚拟歌姬", 110, qrY + 48);
+				ctx.font = "bold 15px sans-serif";
+				ctx.fillText("扫码测测", 190, qrY + 23);
+				ctx.font = "13px sans-serif";
+				ctx.fillText("你的灵魂歌姬是谁？", 190, qrY + 45);
 
 				ctx.strokeStyle = CARD_LINE;
 				ctx.lineWidth = 1;
 				ctx.beginPath();
-				ctx.moveTo(30, qrY - 10);
-				ctx.lineTo(370, qrY - 10);
+				ctx.moveTo(30, qrY - 13);
+				ctx.lineTo(370, qrY - 13);
 				ctx.stroke();
 
-				const qrSize = 70;
-				const qrX = 30;
+				const qrSize = 55;
+				const qrX = 125;
 				const qrCanvas = document.createElement("canvas");
 				await QRCode.toCanvas(qrCanvas, CARD_URL, {
 					width: qrSize,
 					margin: 1,
-					color: { dark: "#000", light: "#fff" },
+					color: { dark: CARD_TEXT, light: "#ffffff00" },
 				});
 				ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
 

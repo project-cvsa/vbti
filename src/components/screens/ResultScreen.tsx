@@ -101,7 +101,7 @@ export default function ResultScreen() {
 	const isDev = import.meta.env.DEV || window.location.pathname === "/dev"
 
 	return (
-		<Card className="mt-6 p-6">
+		<Card className="mt-6 sm:p-6 max-sm:ring-none max-sm:ring-transparent shadow-none">
 			<div className="flex flex-col md:grid md:grid-cols-[0.9fr_1.5fr] gap-6 items-start">
 				{/* Desktop poster */}
 				<div className="hidden md:flex flex-col items-center text-center">

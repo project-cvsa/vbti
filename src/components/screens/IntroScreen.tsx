@@ -50,7 +50,7 @@ function IntroScreen() {
 						</span>
 					</div>
 					<p className="mt-2 text-muted-foreground text-[11px]">
-						版本：v1.4.0 alpha &nbsp;&nbsp;| &nbsp;&nbsp;bgm：拼凑的断音 - Toa
+						版本：v2.0.0 alpha &nbsp;&nbsp;| &nbsp;&nbsp;bgm：拼凑的断音 - Toa
 					</p>
 				</div>
 			</Card>

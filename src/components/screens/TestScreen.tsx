@@ -1,7 +1,8 @@
 import { useState, useCallback, useRef } from "react";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import type { Answers } from "@/core/types";
 import {
+	answeredCountAtom,
 	answersAtom,
 	currentQuestionIndexAtom,
 	currentScreenAtom,
@@ -29,6 +30,7 @@ import { computeMBTI } from "@/core/mbti";
 
 export default function TestScreen() {
 	const [answers, setAnswers] = useAtom(answersAtom);
+	const answeredCount = useAtomValue(answeredCountAtom);
 	const [currentIdx, setCurrentIdx] = useAtom(currentQuestionIndexAtom);
 	const setScreen = useSetAtom(currentScreenAtom);
 	const setResultCharacter = useSetAtom(resultCharacterAtom);
@@ -37,6 +39,7 @@ export default function TestScreen() {
 	const [showSecretQuestion, setShowSecretQuestion] = useState(false);
 	const [submitting, setSubmitting] = useState(false);
 	const [showBackConfirm, setShowBackConfirm] = useState(false);
+	const [showSubmitConfirm, setShowSubmitConfirm] = useState(false);
 
 	const questionContainerRef = useRef<HTMLDivElement>(null);
 	const total = questions.length;
@@ -90,10 +93,14 @@ export default function TestScreen() {
 	const handleSubmit = useCallback(() => {
 		if (submitting) return;
 		setSubmitting(true);
-
+		console.log(answeredCount, questions.length)
+		if (answeredCount < questions.length) {
+			setShowSubmitConfirm(true);
+			return;
+		}
 		setSubmitting(false);
 		resolveCharacter(answers, null);
-	}, [answers, submitting, resolveCharacter]);
+	}, [answers, submitting, resolveCharacter, answeredCount]);
 
 	const isDev = import.meta.env.DEV || window.location.pathname === "/dev"
 
@@ -177,6 +184,34 @@ export default function TestScreen() {
 								setAnswers({});
 								setCurrentIdx(0);
 								setScreen("intro");
+							}}
+						>
+							确定
+						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+
+			<Dialog open={showSubmitConfirm} onOpenChange={setShowSubmitConfirm}>
+				<DialogContent className="max-w-sm">
+					<DialogHeader>
+						<DialogTitle className="text-lg font-bold">确认提交</DialogTitle>
+						<DialogDescription>
+							目前还有未回答的问题，确定要提交并查看结果吗？<br />
+							你可以跳过难以回答的问题。
+						</DialogDescription>
+					</DialogHeader>
+					<DialogFooter>
+						<Button variant="outline" onClick={() => {
+							setSubmitting(false);
+							setShowSubmitConfirm(false);
+						}}>
+							取消
+						</Button>
+						<Button
+							onClick={() => {
+								setSubmitting(false);
+								resolveCharacter(answers, null);
 							}}
 						>
 							确定

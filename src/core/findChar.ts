@@ -14,7 +14,6 @@ const initalDistribution: Dist = Object.fromEntries(
 	Object.keys(characters).map((char) => [char, 1 / Object.keys(characters).length])
 );
 
-
 export function findMatchCharacterRaw(answers: Answers): [string, Dist] {
 	const mbti = computeMBTI(answers);
 	let dist = initalDistribution;
@@ -37,11 +36,14 @@ export function findMatchCharacterRaw(answers: Answers): [string, Dist] {
 		dist = adjustCharacterPref(answers, dist, 0.2);
 		// 增强冷门角色
 		dist = adjustPopularity(dist, -1.5);
+		dist = adjustLangPref(answers, dist);
+		dist = determineLang(answers, dist);
+		dist = adjustMBTI(mbti, dist, 5); // 略微调整一下MBTI
 	}
 	// 随便->这种最难猜了，给一个通用的
 	else {
 		dist = adjustMBTI(mbti, dist, weightMbti * 100);
-		dist = adjustCharacterPref(answers, dist, weightChar / 5);
+		dist = adjustCharacterPref(answers, dist, weightChar / 15);
 		dist = adjustLangPref(answers, dist);
 		dist = determineLang(answers, dist);
 		// 稍微增强热门角色

@@ -1,8 +1,11 @@
 import { Heart } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ScrollArea } from "../ui/scroll-area";
 
 const staffData = [
-	{ role: "策划&开发", names: ["Crimson茜（墨白茜兔）"] },
+	{ role: "策划", names: ["Crimson茜（墨白茜兔）"] },
+	{ role: "开发", names: ["星寒", "Crimson茜"] },
+	{ role: "技术支持", names: ["中V档案馆"] },
 	{
 		role: "核心内容协力",
 		names: ["特瑞嗷", "周刊虚拟歌手中文曲排行榜", "诺诺小熊猫"],
@@ -37,34 +40,32 @@ export function StaffModal({ open, onClose }: StaffModalProps) {
 				if (!o) onClose();
 			}}
 		>
-			<DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
+			<DialogContent className="max-w-md">
 				<DialogHeader>
-					<DialogTitle className="inline-flex items-center gap-2">
+					<DialogTitle className="inline-flex items-center gap-2 text-lg font-bold">
 						<Heart className="size-4 text-primary" />
 						Staff与测试人员感谢
 					</DialogTitle>
 				</DialogHeader>
-
-				<table className="w-full border-collapse">
-					<tbody>
-						{staffData.map((section) =>
-							section.names.map((name, i) => (
-								<tr key={`${section.role}-${name}`}>
-									<td className="py-1.5 px-2 align-top text-sm leading-relaxed whitespace-nowrap">
-										{i === 0 ? (
-											<span className="font-bold text-primary">
-												{section.role}：
-											</span>
-										) : null}
-									</td>
-									<td className="py-1.5 px-2 align-top text-sm leading-relaxed">
-										{name}
-									</td>
-								</tr>
-							))
-						)}
-					</tbody>
-				</table>
+				<ScrollArea className="max-h-[80vh]">
+					{staffData.map((section) => {
+						return (
+							<div key="">
+								<span className="font-bold text-primary">
+									{section.role}
+								</span>
+								<br/>
+								{
+									section.names.map((name) => (
+										<span key={name} className="py-1.5 px-2 align-top text-sm leading-relaxed">
+											{name}<br/>
+										</span>
+									))
+								}<br/>
+							</div>
+						);
+					})}
+				</ScrollArea>
 			</DialogContent>
 		</Dialog>
 	);

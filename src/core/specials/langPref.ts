@@ -11,7 +11,7 @@ export const adjustLangPref = (answers: Answers, _dist: Dist): Dist => {
 		if (q.id === "q33" || q.id === "q34") {
 			continue;
 		}
-		if (!ans) continue;
+		if (ans === undefined) continue;
 		if (q.options[ans].lang === 'CN') {
 			dist = increaseCN(dist, weightLang);
 		}
