@@ -76,8 +76,8 @@ function flush() {
 					buffer.splice(0, count);
 				}
 			})
-			.catch(() => {});
-	} catch {}
+			.catch(() => { });
+	} catch { }
 
 	if (buffer.length > MAX_BUFFER) {
 		buffer.splice(0, buffer.length - MAX_BUFFER);
@@ -90,7 +90,7 @@ function flushForUnload() {
 	try {
 		const { url, blob } = sendBatch(batch);
 		navigator.sendBeacon(url, blob);
-	} catch {}
+	} catch { }
 }
 
 export function report(
@@ -122,6 +122,10 @@ export function submitStat(data: Record<string, unknown>) {
 			method: "POST",
 			body: JSON.stringify({ ...basePayload(), ...data }),
 			headers: { "Content-Type": "application/json" },
-		}).catch(() => {});
-	} catch {}
+		}).catch(() => {
+			submitStat(data)
+		});
+	} catch {
+		submitStat(data)
+	}
 }
