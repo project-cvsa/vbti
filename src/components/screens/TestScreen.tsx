@@ -113,12 +113,12 @@ export default function TestScreen() {
 	const isDev = import.meta.env.DEV || window.location.pathname === "/dev";
 
 	return (
-		<div className="mt-5.5 p-6 max-sm:p-0 max-sm:mt-0 bg-white rounded-2xl max-sm:bg-transparent max-sm:rounded-none">
+		<div className="mt-6 p-6 max-md:p-0 max-md:mt-0 bg-white rounded-2xl max-md:bg-transparent max-md:rounded-none">
 			<ProgressBar answered={answered} total={total} />
 
-			<div className="flex flex-col md:flex-row gap-5 mt-4 max-sm:mt-2">
+			<div className="flex flex-col md:flex-row gap-5 mt-4 max-md:mt-2">
 				<div className="flex-1 min-w-0">
-					<div ref={questionContainerRef} className="rounded-2xl max-sm:rounded-none">
+					<div ref={questionContainerRef} className="rounded-2xl max-md:rounded-none">
 						<QuestionCard
 							question={currentQuestion}
 							questionIndex={currentIdx}
@@ -127,7 +127,7 @@ export default function TestScreen() {
 						/>
 					</div>
 
-					<div className="flex gap-3 mt-4.5 items-center justify-center flex-wrap">
+					<div className="flex gap-3 mt-5 items-center justify-center flex-wrap">
 						<div className="flex justify-between w-full items-center md:justify-center md:gap-4">
 							<Button
 								variant="outline"
@@ -209,7 +209,7 @@ export default function TestScreen() {
 					<DialogHeader>
 						<DialogTitle className="text-lg font-bold">确认提交</DialogTitle>
 					</DialogHeader>
-					<ScrollArea className="max-h-100">
+					<ScrollArea className="max-h-[25rem]">
 						<DialogDescription>
 							目前还有未回答的问题，确定要提交并查看结果吗？
 							<br />

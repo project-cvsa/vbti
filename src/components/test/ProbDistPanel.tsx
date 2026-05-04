@@ -21,7 +21,7 @@ export default function ProbDistPanel() {
 
 	if (!dist) {
 		return (
-			<div className="rounded-2xl border border-border/60 bg-card/50 p-5">
+			<div className="rounded-2xl border border-border bg-card p-5">
 				<div className="flex items-center gap-2 text-muted-foreground">
 					<BarChart3 className="h-4 w-4" />
 					<span className="text-sm font-medium">概率分布</span>
@@ -36,10 +36,10 @@ export default function ProbDistPanel() {
 	const maxProb = sorted[0]?.[1] ?? 0;
 
 	return (
-		<div className="rounded-2xl border border-border/60 bg-card/50 overflow-hidden">
+		<div className="rounded-2xl border border-border bg-card overflow-hidden">
 			<button
 				type="button"
-				className="flex items-center justify-between w-full p-5 hover:bg-accent/50 transition-colors cursor-pointer"
+				className="flex items-center justify-between w-full p-5 hover:bg-accent-50 transition-colors cursor-pointer"
 				onClick={() => setExpanded((v) => !v)}
 			>
 				<div className="flex items-center gap-2 text-muted-foreground">
@@ -66,17 +66,17 @@ export default function ProbDistPanel() {
 
 						return (
 							<div key={charName} className="group">
-								<div className="flex items-center justify-between mb-0.5">
+								<div className="flex items-center justify-between mb-1">
 									<span className="text-xs font-medium truncate">{charName}</span>
 									<span className="text-xs text-muted-foreground tabular-nums ml-2 shrink-0">
 										{pct}%
 									</span>
 								</div>
-								<div className="h-2 rounded-full bg-muted/80 overflow-hidden">
+								<div className="h-2 rounded-full bg-muted-80 overflow-hidden">
 									<div
 										className={cn(
 											"h-full rounded-full transition-all duration-500 ease-out",
-											widthPct > 0 && "min-w-0.5"
+											widthPct > 0 && "min-w-1"
 										)}
 										style={{
 											width: `${widthPct}%`,

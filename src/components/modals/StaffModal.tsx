@@ -56,7 +56,7 @@ export function StaffModal({ open, onClose }: StaffModalProps) {
 								{section.names.map((name) => (
 									<span
 										key={name}
-										className="py-1.5 px-2 align-top text-sm leading-relaxed"
+										className="py-2 px-2 align-top text-sm leading-relaxed"
 									>
 										{name}
 										<br />

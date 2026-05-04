@@ -113,7 +113,9 @@ export function report(
 	}
 }
 
-export function submitStat(data: Record<string, unknown>) {
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+export async function submitStat(data: Record<string, unknown>) {
 	flush();
 	try {
 		const url = new URL(import.meta.env.VITE_BACKEND_URL);
@@ -122,10 +124,12 @@ export function submitStat(data: Record<string, unknown>) {
 			method: "POST",
 			body: JSON.stringify({ ...basePayload(), ...data }),
 			headers: { "Content-Type": "application/json" },
-		}).catch(() => {
+		}).catch(async () => {
+			await sleep(2000)
 			submitStat(data)
 		});
 	} catch {
+		await sleep(2000)
 		submitStat(data)
 	}
 }

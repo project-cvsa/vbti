@@ -51,7 +51,7 @@ function BgmControl({ visible = true }: BgmControlProps) {
 			variant="outline"
 			size="icon-lg"
 			onClick={toggle}
-			className="fixed bottom-6 left-6 z-50 size-13 rounded-full border-2 border-primary text-primary"
+			className="fixed bottom-6 left-6 z-50 size-12 rounded-full border-2 border-primary text-primary"
 			aria-label={playing ? "暂停背景音乐" : "播放背景音乐"}
 		>
 			{playing ? <Pause className="size-5" /> : <Music className="size-5" />}

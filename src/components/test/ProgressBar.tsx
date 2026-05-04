@@ -8,9 +8,9 @@ function ProgressBar({ answered, total }: ProgressBarProps) {
 
 	return (
 		<div className="top-0 z-40 py-3 flex items-center gap-4 flex-wrap">
-			<div className="flex-1 min-w-55 h-2.5 rounded-full bg-primary/20 overflow-hidden">
+			<div className="flex-1 min-w-55 h-[0.625rem] rounded-full bg-white md:bg-border overflow-hidden">
 				<div
-					className="h-full rounded-full bg-linear-to-r from-primary to-primary/70 transition-[width] duration-300 ease-out"
+					className="h-full rounded-full bg-primary transition-[width] duration-300 ease-out"
 					style={{ width: `${pct}%` }}
 				/>
 			</div>

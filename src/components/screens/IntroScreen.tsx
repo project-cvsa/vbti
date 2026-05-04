@@ -11,12 +11,13 @@ function IntroScreen() {
 
 	return (
 		<div className="flex flex-col justify-center items-center text-center mt-5">
-			<Card className="relative overflow-hidden w-full h-full bg-white max-sm:px-4 py-10 md:py-20">
+			<Card className="relative overflow-hidden w-full h-full bg-white max-md:px-4 py-10 md:py-20">
 				{/* Decorative gradient circle — desktop only */}
-				<div className="absolute -right-17.5 -top-17.5 w-55 h-55 rounded-full pointer-events-none bg-linear-to-b from-primary/20 to-primary/5" />
+				<div className="absolute right-[-5rem] top-[-5rem] w-48 h-48 rounded-full 
+				pointer-events-none bg-[linear-gradient(to_bottom,#00a79533,#00a79510)]" />
 
 				<div className="flex-1 flex flex-col justify-end items-center pb-5 z-10 mt-5">
-					<h1 className="text-[clamp(34px,6vw,48px)] leading-[1.12] tracking-[-0.03em] text-primary max-w-2xl mb-3.5 font-bold">
+					<h1 className="text-[clamp(34px,6vw,48px)] leading-[1.12] tracking-[-0.03em] text-primary max-w-2xl mb-4 font-bold">
 						VBTI · 测测你的灵魂歌姬
 					</h1>
 					<p className="text-muted-foreground text-base leading-relaxed max-w-150">
@@ -42,7 +43,7 @@ function IntroScreen() {
 					</Button>
 				</div>
 
-				<p className="text-muted-foreground text-xs mt-1 mb-4 z-10 px-6 max-sm:px-0">
+				<p className="text-muted-foreground text-xs mt-1 mb-4 z-10 px-6 max-md:px-0">
 					测试结果仅供参考。愿你无论测出哪位歌姬，都能在自己的世界闪闪发光
 				</p>
 
@@ -54,7 +55,7 @@ function IntroScreen() {
 							rel="noopener noreferrer"
 							className="text-primary text-xs font-semibold hover:underline inline-flex items-center gap-1"
 						>
-							<Tv className="size-3.5" />
+							<Tv className="size-4" />
 							关注作者 / 反馈问题
 						</a>
 						<span className="text-primary text-xs font-semibold">

@@ -34,7 +34,7 @@ export function SecretQuestionModal({ question, onSelect, open }: SecretQuestion
 				<RadioGroup
 					value={selectedTarget ?? ""}
 					onValueChange={setSelectedTarget}
-					className="gap-2.5"
+					className="gap-3"
 				>
 					{question.options.map((opt, i) => {
 						const code = String.fromCharCode(65 + i);
@@ -44,13 +44,13 @@ export function SecretQuestionModal({ question, onSelect, open }: SecretQuestion
 							<label
 								key={opt.target ?? `secret-${i}`}
 								className={cn(
-									"flex items-start gap-3 p-3.5 rounded-2xl border cursor-pointer transition-colors",
+									"flex items-start gap-3 p-4 rounded-2xl border cursor-pointer transition-colors",
 									isChecked
 										? "border-primary bg-primary/5"
-										: "border-border/80 bg-background hover:border-primary/50 hover:bg-primary/5"
+										: "border-border/80 bg-background hover:border-primary-50 hover:bg-primary/5"
 								)}
 							>
-								<RadioGroupItem value={opt.target ?? ""} className="mt-0.5" />
+								<RadioGroupItem value={opt.target ?? ""} className="mt-1" />
 								<span className="flex items-start gap-2">
 									<span className="font-extrabold text-primary shrink-0">
 										{code}
