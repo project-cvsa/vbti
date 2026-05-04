@@ -164,7 +164,7 @@ export default function ResultScreen() {
 						<div className="text-sm text-primary tracking-wider mb-1">
 							✨ 你的灵魂歌姬已降临{" "}
 						</div>
-						<h2 className="text-[clamp(32px,5vw,48px)] leading-tight tracking-tight font-bold">
+						<h2 className="text-[clamp(32px,5vw,48px)] leading-tight tracking-tight">
 							{resultCharacter}
 						</h2>
 						<span className="inline-flex items-center gap-2 rounded-full px-3.5 py-2 bg-primary/20 border border-primary/30 text-primary font-bold text-xs mt-2.5">
