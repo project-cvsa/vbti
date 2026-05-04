@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import { resultCharacterAtom, goToIntroAtom, restartTestAtom, answersAtom } from "@/state/atoms";
+import { resultCharacterAtom, goToIntroAtom, restartTestAtom, answersAtom, fingerprintAtom } from "@/state/atoms";
 import { characters } from "@/data/characters";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -12,7 +12,6 @@ import { AnswersModal } from "../modals/AnswersModal";
 import { computeMBTI } from "@/core/mbti";
 import { DATA_VERSION } from "@/data/ver";
 import * as pkg from "../../../package.json";
-import { Thumbmark } from "@thumbmarkjs/thumbmarkjs";
 
 interface SongInfo {
 	name: string;
@@ -21,6 +20,7 @@ interface SongInfo {
 
 export default function ResultScreen() {
 	const answers = useAtomValue(answersAtom);
+	const thumbmark = useAtomValue(fingerprintAtom);
 	const resultCharacter = useAtomValue(resultCharacterAtom);
 	const goToIntro = useSetAtom(goToIntroAtom);
 	const restartTest = useSetAtom(restartTestAtom);
@@ -29,7 +29,6 @@ export default function ResultScreen() {
 	const [cardOpen, setCardOpen] = useState(false);
 	const [musicPlaying, setMusicPlaying] = useState(false);
 	const [answersOpen, setAnswersOpen] = useState(false);
-	const [thumbmark, setThumbmark] = useState<string | null | undefined>(undefined);
 
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -39,18 +38,6 @@ export default function ResultScreen() {
 		if (window._bgmAudio) {
 			window._bgmAudio.pause();
 		}
-	}, []);
-
-	useEffect(() => {
-		const tm = new Thumbmark();
-		tm.get()
-			.then((result) => {
-				setThumbmark(result.thumbmark);
-			})
-			.catch((error) => {
-				console.error("Error getting fingerprint:", error);
-				setThumbmark(null);
-			});
 	}, []);
 
 	useEffect(() => {

@@ -47,3 +47,6 @@ export const probDistAtom = atom<CharacterProbDistribution | null>((get) => {
 	if (Object.keys(answers).length === 0) return null;
 	return findMatchCharacterRaw(answers)[1];
 });
+
+// null 代表无法生成指纹，undefined代表未设置
+export const fingerprintAtom = atom<string | null | undefined>(undefined);
