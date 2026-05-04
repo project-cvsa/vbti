@@ -9,12 +9,12 @@ function IntroScreen() {
 	const restart = useSetAtom(restartTestAtom);
 
 	return (
-		<div className="h-[70vh] flex flex-col justify-center items-center max-sm:items-start text-center max-sm:text-left mt-5">
-			<Card className="relative overflow-hidden w-full h-full bg-white max-sm:bg-transparent max-sm:shadow-none max-sm:ring-0 max-sm:rounded-none max-sm:border-0 max-sm:p-0 max-sm:gap-4">
+		<div className="h-[70vh] flex flex-col justify-center items-center text-center mt-5">
+			<Card className="relative overflow-hidden w-full h-full bg-white">
 				{/* Decorative gradient circle — desktop only */}
-				<div className="absolute -right-17.5 -top-17.5 w-55 h-55 rounded-full pointer-events-none bg-linear-to-b from-primary/20 to-primary/5 max-sm:hidden" />
+				<div className="absolute -right-17.5 -top-17.5 w-55 h-55 rounded-full pointer-events-none bg-linear-to-b from-primary/20 to-primary/5" />
 
-				<div className="flex-1 flex flex-col justify-end items-center max-sm:items-start pb-5 z-10">
+				<div className="flex-1 flex flex-col justify-end items-center pb-5 z-10">
 					<h1 className="text-[clamp(34px,6vw,48px)] leading-[1.12] tracking-[-0.03em] text-primary max-w-2xl mb-3.5 font-bold">
 						VBTI · 测测你的灵魂歌姬
 					</h1>
@@ -40,8 +40,8 @@ function IntroScreen() {
 					测试结果仅供参考。愿你无论测出哪位歌姬，都能在自己的世界闪闪发光
 				</p>
 
-				<div className="flex-1 flex flex-col justify-end items-center max-sm:items-start pt-5 pb-3 z-10">
-					<div className="flex flex-col items-center max-sm:items-start gap-2">
+				<div className="flex-1 flex flex-col items-center pt-5 pb-3 z-10">
+					<div className="flex flex-col items-center gap-2">
 						<a
 							href="https://www.bilibili.com/video/BV1of9hBQEsw"
 							target="_blank"
