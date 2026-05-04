@@ -8,6 +8,7 @@ import {
 	currentScreenAtom,
 	resultCharacterAtom,
 	secretResolvedAtom,
+	unansweredAtom,
 } from "@/state/atoms";
 import { findMatchCharacter } from "@/core/findChar";
 import { questions } from "@/data/questions";
@@ -27,9 +28,11 @@ import QuestionCard from "@/components/test/QuestionCard";
 import ProbDistPanel from "@/components/test/ProbDistPanel";
 import { SecretQuestionModal } from "@/components/modals/SecretQuestionModal";
 import { computeMBTI } from "@/core/mbti";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function TestScreen() {
 	const [answers, setAnswers] = useAtom(answersAtom);
+	const unanswered = useAtomValue(unansweredAtom);
 	const answeredCount = useAtomValue(answeredCountAtom);
 	const [currentIdx, setCurrentIdx] = useAtom(currentQuestionIndexAtom);
 	const setScreen = useSetAtom(currentScreenAtom);
@@ -195,11 +198,17 @@ export default function TestScreen() {
 				<DialogContent className="max-w-sm">
 					<DialogHeader>
 						<DialogTitle className="text-lg font-bold">确认提交</DialogTitle>
+					</DialogHeader>
+					<ScrollArea className="max-h-100">
 						<DialogDescription>
 							目前还有未回答的问题，确定要提交并查看结果吗？<br />
-							你可以跳过难以回答的问题。
+							并非所有题目都必须回答，你可以跳过难以回答的问题。<br /><br />
+							当前未回答的问题：<br />
+							{unanswered.map((v) => {
+								return <>第{v}题: {questions[v].text}<br /></>
+							})}
 						</DialogDescription>
-					</DialogHeader>
+					</ScrollArea>
 					<DialogFooter>
 						<Button variant="outline" onClick={() => {
 							setSubmitting(false);
