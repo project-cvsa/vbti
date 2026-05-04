@@ -19,6 +19,7 @@ function BgmControl({ visible = true }: BgmControlProps) {
 	useEffect(() => {
 		window._bgmAudio = document.getElementById("globalBgm") as HTMLAudioElement;
 		const audio = window._bgmAudio;
+		audio.volume = 0.6;
 		audioRef.current = audio;
 		if (audio) setPlaying(!audio.paused);
 	}, []);

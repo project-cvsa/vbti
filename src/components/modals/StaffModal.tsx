@@ -4,11 +4,11 @@ import { ScrollArea } from "../ui/scroll-area";
 
 const staffData = [
 	{ role: "策划", names: ["Crimson茜（墨白茜兔）"] },
-	{ role: "开发", names: ["星寒", "Crimson茜"] },
+	{ role: "开发", names: ["Crimson茜", "星寒"] },
 	{ role: "技术支持", names: ["中V档案馆"] },
 	{
 		role: "核心内容协力",
-		names: ["特瑞嗷", "周刊虚拟歌手中文曲排行榜", "诺诺小熊猫"],
+		names: ["特瑞嗷", "周刊虚拟歌手中文曲排行榜（失落的分别，物质的量_mol）", "诺诺小熊猫"],
 	},
 	{
 		role: "测试感谢",
@@ -23,6 +23,7 @@ const staffData = [
 			"侨汣",
 			"绿洲计划",
 			"-朝尘-",
+			"诐狐"
 		],
 	},
 ];
