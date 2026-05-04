@@ -1,10 +1,6 @@
 import { getDefaultStore } from "jotai";
 import { fingerprintAtom } from "@/state/atoms";
 
-/**
- * 生成跨页面导航保持不变的会话 ID（基于 sessionStorage）。
- * 浏览器关闭后自动清除。
- */
 function getSessionId(): string {
 	const key = "vbti_sid";
 	let sid = sessionStorage.getItem(key);
@@ -19,7 +15,6 @@ function getSessionId(): string {
 	return sid;
 }
 
-/** 上报事件的公共基础字段 */
 function basePayload() {
 	const fingerprint = (() => {
 		try {
@@ -28,7 +23,6 @@ function basePayload() {
 			return undefined;
 		}
 	})();
-
 	return {
 		fingerprint,
 		timestamp: new Date().toISOString(),
@@ -37,48 +31,97 @@ function basePayload() {
 	};
 }
 
-function post(pathname: string, data: Record<string, unknown>) {
+const BATCH_SIZE = 10;
+const FLUSH_MS = 5000;
+const MAX_BUFFER = 1000;
+
+const buffer: Record<string, unknown>[] = [];
+let timer: ReturnType<typeof setInterval> | null = null;
+let listenersReady = false;
+
+function ensureListeners() {
+	if (listenersReady) return;
+	listenersReady = true;
+	window.addEventListener("beforeunload", flushForUnload);
+	window.addEventListener("pagehide", flushForUnload);
+}
+
+function startTimer() {
+	if (timer !== null) return;
+	timer = setInterval(flush, FLUSH_MS);
+}
+
+function sendBatch(batch: Record<string, unknown>[]) {
+	const url = new URL(import.meta.env.VITE_BACKEND_URL);
+	url.pathname = "/access";
+	const body = JSON.stringify(batch);
+	const blob = new Blob([body], { type: "application/json" });
+	return { url, body, blob };
+}
+
+function flush() {
+	if (buffer.length === 0) return;
+	const count = buffer.length;
+	const batch = buffer.slice(0, count);
+
 	try {
-		const url = new URL(import.meta.env.VITE_BACKEND_URL);
-		url.pathname = pathname;
+		const { url, body } = sendBatch(batch);
 		fetch(url, {
 			method: "POST",
-			body: JSON.stringify(data),
+			body,
 			headers: { "Content-Type": "application/json" },
-		}).catch(() => {
-			// 遥测上报失败不应中断应用
-		});
-	} catch {
-		// 构造 URL 失败时静默忽略
+		})
+			.then((res) => {
+				if (res.ok) {
+					buffer.splice(0, count);
+				}
+			})
+			.catch(() => {});
+	} catch {}
+
+	if (buffer.length > MAX_BUFFER) {
+		buffer.splice(0, buffer.length - MAX_BUFFER);
 	}
 }
 
-/**
- * 上报通用用户行为事件到 /access。
- *
- * @param actionType  事件类型，例如 "start_test" / "answer" / "submit"
- * @param actionData  事件附加数据，可选
- * @param extra       额外的顶层字段，可选
- */
+function flushForUnload() {
+	if (buffer.length === 0) return;
+	const batch = buffer.splice(0);
+	try {
+		const { url, blob } = sendBatch(batch);
+		navigator.sendBeacon(url, blob);
+	} catch {}
+}
+
 export function report(
 	actionType: string,
 	actionData?: unknown,
 	extra?: Record<string, unknown>,
 ) {
-	post("/access", {
+	ensureListeners();
+	startTimer();
+
+	buffer.push({
 		...basePayload(),
 		actionType,
 		actionData: actionData ?? null,
 		...extra,
 	});
+
+	if (buffer.length >= BATCH_SIZE) {
+		flush();
+	}
 }
 
-/**
- * 上报测试结果统计到 /stat（用于后台分析）。
- */
 export function submitStat(data: Record<string, unknown>) {
-	post("/stat", {
-		...basePayload(),
-		...data,
-	});
+	flush();
+	try {
+		const url = new URL(import.meta.env.VITE_BACKEND_URL);
+		url.pathname = "/stat";
+		fetch(url, {
+			method: "POST",
+			body: JSON.stringify({ ...basePayload(), ...data }),
+			headers: { "Content-Type": "application/json" },
+		}).catch(() => {});
+	} catch {}
 }
