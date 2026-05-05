@@ -48,22 +48,23 @@ function IntroScreen() {
 				</p>
 
 				<div className="flex-1 flex flex-col items-center pt-5 pb-3 z-10">
-					<div className="flex flex-col items-center gap-2">
+					<div className="flex flex-col items-center gap-3">
 						<a
 							href="https://www.bilibili.com/video/BV1of9hBQEsw"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="text-primary text-xs font-semibold hover:underline inline-flex items-center gap-1"
+							className="text-primary font-semibold text-base hover:underline inline-flex items-center gap-1"
 							onClick={() => report("link_click", { link: "关注作者_首页" })}
 						>
 							<Tv className="size-4" />
 							关注作者 / 反馈问题
 						</a>
-						<a href="https://qm.qq.com/q/eV1JhoeM0g" onClick={() => report("link_click", { link: "交流群_首页" })} className="text-primary text-xs font-semibold">
+						<a href="https://qm.qq.com/q/eV1JhoeM0g" onClick={() => report("link_click", { link: "交流群_首页" })}
+							className="text-primary text-base font-semibold">
 							加入VBTI交流群：747501305
 						</a>
 					</div>
-					<p className="mt-2 text-muted-foreground text-[11px]">
+					<p className="mt-6 text-muted-foreground text-[11px]">
 						版本：v{pkg.version} &nbsp;&nbsp;| &nbsp;&nbsp;bgm：拼凑的断音 - Toa
 					</p>
 				</div>
