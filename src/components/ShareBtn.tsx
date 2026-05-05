@@ -10,7 +10,7 @@ interface ShareBtnProps {
 const SHARE_URL = "https://vbti-test.com";
 
 export function ShareBtn({ characterName, mbti }: ShareBtnProps) {
-    const shareText = `我的灵魂歌姬是「${characterName}」！${mbti}型人格，来看看你的是谁？`;
+    const shareText = `和我共鸣的灵魂歌姬是「${characterName}」！${mbti}型人格，来看看你的是谁？`;
 
     const handleShare = async () => {
         const fullText = `${shareText} ${SHARE_URL}`;

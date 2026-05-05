@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import QRCode from "qrcode";
 import { generateCardPalette } from "@/core/color";
 import { report } from "@/lib/telemetry";
+import { CARD_IMG_MAP } from "@/data/imgMap";
 
 const CARD_URL = "https://vbti-test.com";
 
@@ -36,7 +37,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 
 	const generateCard = useCallback(() => {
 		report("generate_card")
-		const imgSrc = character.image.replace("/character", "/cardprofile");
+		const imgSrc = CARD_IMG_MAP[character.image]
 		if (!imgSrc) {
 			setError("角色图片加载失败");
 			return;
@@ -44,6 +45,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 
 		const img = new Image();
 		img.crossOrigin = "anonymous";
+		img.referrerPolicy = "no-referrer"
 		img.src = imgSrc;
 
 		img.onload = async () => {
@@ -128,7 +130,6 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 				ctx.textAlign = "left";
 				let lineY = descY + 20;
 				for (let j = 0; j < Math.min(lines.length, 4); j++) {
-					console.log(lines[j]);
 					ctx.fillText(lines[j], 30, lineY);
 					lineY += 18;
 				}
@@ -212,7 +213,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 							className="max-w-90 max-h-[70vh] rounded-xl"
 						/>
 						<div className="flex gap-3">
-							<Button onClick={handleDownload}>保存到本地</Button>
+							<Button style={{ background: palette.accent }} onClick={handleDownload}>保存到本地</Button>
 							<Button variant="outline" onClick={onClose}>
 								关闭
 							</Button>

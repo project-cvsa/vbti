@@ -30,9 +30,10 @@ const staffData = [
 interface StaffModalProps {
 	open: boolean;
 	onClose: () => void;
+	primaryText: string;
 }
 
-export function StaffModal({ open, onClose }: StaffModalProps) {
+export function StaffModal({ open, onClose, primaryText }: StaffModalProps) {
 	return (
 		<Dialog
 			open={open}
@@ -51,7 +52,7 @@ export function StaffModal({ open, onClose }: StaffModalProps) {
 					{staffData.map((section) => {
 						return (
 							<div key="">
-								<span className="font-bold text-primary">{section.role}</span>
+								<span className="font-bold" style={{ color: primaryText }}>{section.role}</span>
 								<br />
 								{section.names.map((name) => (
 									<span

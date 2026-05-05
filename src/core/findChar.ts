@@ -42,7 +42,7 @@ export function findMatchCharacterRaw(answers: Answers): [string, Dist] {
 	}
 	// 随便->这种最难猜了，给一个通用的
 	else {
-		dist = adjustMBTI(mbti, dist, weightMbti * 100);
+		dist = adjustMBTI(mbti, dist, weightMbti / 10);
 		dist = adjustCharacterPref(answers, dist, weightChar / 15);
 		dist = adjustLangPref(answers, dist);
 		dist = determineLang(answers, dist);

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { resultCharacterAtom, goToIntroAtom, restartTestAtom, answersAtom, fingerprintAtom } from "@/state/atoms";
 import { characters } from "@/data/characters";
@@ -13,6 +13,8 @@ import { computeMBTI } from "@/core/mbti";
 import { DATA_VERSION } from "@/data/ver";
 import * as pkg from "../../../package.json";
 import { report, submitStat } from "@/lib/telemetry";
+import { generateResultPalette, type ResultPalette } from "@/core/color";
+import { CHAR_IMG_MAP } from "@/data/imgMap";
 
 interface SongInfo {
 	name: string;
@@ -35,6 +37,11 @@ export default function ResultScreen() {
 
 	const character = resultCharacter ? characters[resultCharacter] : null;
 
+	const palette: ResultPalette | null = useMemo(
+		() => (character?.color ? generateResultPalette(character.color) : null),
+		[character?.color]
+	);
+
 	useEffect(() => {
 		if (window._bgmAudio) {
 			window._bgmAudio.pause();
@@ -47,6 +54,21 @@ export default function ResultScreen() {
 		const mbti = computeMBTI(answers);
 		submitStat({ answers, resultCharacter, mbti, dataVer: DATA_VERSION, appVer: pkg.version });
 	}, [resultCharacter, answers, thumbmark]);
+
+	useEffect(() => {
+		if (!palette) return;
+
+		const mq = window.matchMedia("(max-width: 768px)");
+		const applyBg = () => {
+			document.body.style.background = mq.matches ? palette.bodyBgSolid : palette.bodyBg;
+		};
+		applyBg();
+		mq.addEventListener("change", applyBg);
+		return () => {
+			document.body.style.background = "";
+			mq.removeEventListener("change", applyBg);
+		};
+	}, [palette]);
 
 	useEffect(() => {
 		if (!character) return;
@@ -114,45 +136,77 @@ export default function ResultScreen() {
 		})
 		.filter((s) => s.name && s.bv);
 
-	const isDev = import.meta.env.DEV || window.location.pathname === "/dev";
+	const isDev = import.meta.env.MODE === "development" || window.location.pathname === "/dev";
 
 	return (
 		<Card className="mt-6 md:p-6 ring-none ring-transparent shadow-none md:bg-white">
+			{palette && (
+				<style>{`
+					.result-song-pill {
+						background-color: ${palette.pill};
+						color: ${palette.text};
+						border-color: ${palette.line};
+					}
+					.result-song-pill:hover {
+						background-color: ${palette.pillHover};
+					}
+					.result-accent-btn {
+						background-color: ${palette.accent} !important;
+						color: ${palette.accentForeground} !important;
+					}
+					.result-accent-btn:hover {
+						background-color: ${palette.accentHover} !important;
+						color: ${palette.accentForeground} !important;
+					}
+				`}</style>
+			)}
 			<div className="flex flex-col md:grid md:grid-cols-[0.9fr_1.5fr] gap-6 items-start">
 				{/* Desktop poster */}
-				<div className="hidden md:flex flex-col items-center text-center rounded-2xl p-5 bg-accent-20">
+				<div className="hidden md:flex flex-col items-center text-center rounded-2xl p-5 bg-accent-20"
+					style={palette ? { backgroundColor: palette.cardBg } : undefined}>
 					<img
-						src={character.image ?? ""}
+						src={CHAR_IMG_MAP[character.image] ?? ""}
 						alt={resultCharacter}
+						referrerPolicy="no-referrer"
 						className="w-full max-w-65 max-h-[25rem] object-contain"
 					/>
-					<div className="mt-3 text-muted-foreground text-sm">
+					<div className="mt-3 text-sm text-muted-foreground"
+						style={palette ? { color: palette.muted } : undefined}>
 						「{character.caption}」
 					</div>
 				</div>
 
-				<div className="flex flex-col gap-4 text-accent-foreground">
+				<div className="flex flex-col gap-4 text-accent-foreground"
+					style={palette ? { color: palette.text } : undefined}>
 					<div>
-						<div className="text-sm text-primary tracking-wider mb-1">
+						<div className="text-sm text-primary tracking-wider mb-1"
+							style={palette ? { color: palette.accent } : undefined}>
 							✨ 你的灵魂歌姬已降临{" "}
 						</div>
-						<h2 className="text-[clamp(32px,5vw,48px)] leading-tight tracking-tight">
+						<h2 className="text-[2.7rem] leading-tight tracking-tight">
 							{resultCharacter}
 						</h2>
-						<span className="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-primary-10
-						 border border-primary-30 text-primary font-bold text-xs mt-2.5">
+						<span className="inline-flex items-center gap-2 rounded-full px-4 py-2 border font-bold text-xs mt-2.5 bg-primary-10 border-primary-30 text-primary"
+							style={palette ? {
+								backgroundColor: palette.badgeBg,
+								borderColor: palette.badgeBorder,
+								color: palette.accent,
+							} : undefined}>
 							{`歌手MBTI推测：${character.mbti}`}
 						</span>
 					</div>
 
 					{/* Mobile poster */}
-					<div className="md:hidden flex flex-col items-center text-center py-5 rounded-lg bg-white-70">
+					<div className="md:hidden flex flex-col items-center text-center py-5 rounded-lg bg-white-70"
+						style={palette ? { backgroundColor: palette.cardBg } : undefined}>
 						<img
-							src={character.image ?? ""}
+							src={CHAR_IMG_MAP[character.image] ?? ""}
 							alt={resultCharacter}
+							referrerPolicy="no-referrer"
 							className="w-full max-w-100 max-h-[25rem] object-contain"
 						/>
-						<div className="mt-3 text-muted-foreground text-sm">
+						<div className="mt-3 text-sm text-muted-foreground"
+							style={palette ? { color: palette.muted } : undefined}>
 							「{character.caption}」
 						</div>
 					</div>
@@ -182,7 +236,8 @@ export default function ResultScreen() {
 						</div>
 
 						{musicPlaying && songs.length > 0 && (
-							<div className="text-xs text-muted-foreground mb-2">
+							<div className="text-xs text-muted-foreground mb-2"
+								style={palette ? { color: palette.muted } : undefined}>
 								当前播放：{songs[0].name}
 							</div>
 						)}
@@ -195,15 +250,15 @@ export default function ResultScreen() {
 									target="_blank"
 									onClick={() => report("link_click", { link: `歌曲观看-${song.bv}`, bvid: song.bv })}
 									rel="noopener noreferrer"
-									className="inline-flex items-center px-4 py-2 rounded-full border bg-accent 
-									text-xs font-semibold no-underline transition-colors hover:bg-accent-70 border-accent-foreground/10"
+									className="inline-flex items-center px-4 py-2 rounded-full border text-xs font-semibold no-underline transition-colors result-song-pill"
 								>
 									{song.name}
 								</a>
 							))}
 						</div>
-						<div className="text-xs text-muted-foreground mt-2">
-							点击歌曲前往B站观看
+						<div className="text-xs text-muted-foreground mt-2"
+							style={palette ? { color: palette.muted } : undefined}>
+							↑点击歌曲前往B站观看
 						</div>
 					</div>
 				</div>
@@ -211,7 +266,12 @@ export default function ResultScreen() {
 
 			<div className="flex justify-between gap-3 flex-wrap mt-5 items-center">
 				<div className="flex gap-2">
-					<Button onClick={() => { report("go_home"); goToIntro(); }}>回到首页</Button>
+					<Button
+						onClick={() => { report("go_home"); goToIntro(); }}
+						className="result-accent-btn"
+					>
+						回到首页
+					</Button>
 					<Button variant="outline" onClick={() => { report("restart_test"); restartTest(); }}>
 						重新测试
 					</Button>
@@ -223,17 +283,24 @@ export default function ResultScreen() {
 						</Button>
 					)}
 					<ShareBtn characterName={resultCharacter} mbti={character.mbti} />
-					<Button onClick={() => { report("card_open"); setCardOpen(true); }}>生成灵魂卡片</Button>
+					<Button
+						onClick={() => { report("card_open"); setCardOpen(true); }}
+						className="result-accent-btn"
+					>
+						生成灵魂卡片
+					</Button>
 				</div>
 			</div>
 
-			<div className="mt-5 pt-5 border-t border-accent-foreground/10">
+			<div className="mt-5 pt-5 border-t border-accent-foreground/10"
+				style={palette ? { borderColor: palette.line } : undefined}>
 				<div className="text-center mb-4">
 					<a
 						href="https://www.bilibili.com/video/BV1of9hBQEsw"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-primary font-semibold hover:underline inline-flex items-center gap-1"
+						className="font-semibold hover:underline inline-flex items-center gap-1"
+						style={palette ? { color: palette.accent } : undefined}
 						onClick={() => report("link_click", { link: "关注作者_结果页" })}
 					>
 						<Tv className="size-4" />
@@ -244,6 +311,7 @@ export default function ResultScreen() {
 					<Button
 						variant="link"
 						className="inline-flex items-center gap-1"
+						style={palette ? { color: palette.accent } : undefined}
 						onClick={() => { report("staff_view"); setStaffOpen(true); }}
 					>
 						<Heart className="size-4" />
@@ -251,7 +319,8 @@ export default function ResultScreen() {
 					</Button>
 				</div>
 				<div className="text-center mb-4">
-					<span className="text-primary text-sm font-semibold">
+					<span className="text-sm font-semibold"
+						style={palette ? { color: palette.accent } : undefined}>
 						加入VBTI交流群：747501305
 					</span>
 				</div>
@@ -266,7 +335,8 @@ export default function ResultScreen() {
 							onClick={() => report("link_click", { link: "2026夏浪派对" })}
 						>
 							<img
-								src="/banner/xlpd-banner.webp"
+								src="https://i1.hdslb.com/bfs/new_dyn/f99551c63cbf8036ccde5ddfb7d9c606600004959.png@1e_1c.webp"
+								referrerPolicy="no-referrer"
 								alt="2026夏浪派对"
 								className="w-full block"
 							/>
@@ -279,7 +349,8 @@ export default function ResultScreen() {
 							onClick={() => report("link_click", { link: "中V周刊" })}
 						>
 							<img
-								src="/banner/zk-banner.webp"
+								src="https://i1.hdslb.com/bfs/new_dyn/d841bbcf4ca849f8a1fc9aae7172adcb600004959.png@1e_1c.webp"
+								referrerPolicy="no-referrer"
 								alt="中V周刊"
 								className="w-full block"
 							/>
@@ -292,7 +363,8 @@ export default function ResultScreen() {
 							onClick={() => report("link_click", { link: "术力口音乐大赛" })}
 						>
 							<img
-								src="/banner/shulikou.webp"
+								src="https://i1.hdslb.com/bfs/new_dyn/b43ff8af258fcc0fa90fcaf9ceb24a5d600004959.png@1e_1c.webp"
+								referrerPolicy="no-referrer"
 								alt="术力口音乐大赛"
 								className="w-full block"
 							/>
@@ -305,7 +377,8 @@ export default function ResultScreen() {
 							onClick={() => report("link_click", { link: "Vsinger创作激励" })}
 						>
 							<img
-								src="/banner/Vsinger.webp"
+								src="https://i1.hdslb.com/bfs/new_dyn/faccd3bad0ed1417f8ff684f1268a917600004959.png@1e_1c.webp"
+								referrerPolicy="no-referrer"
 								alt="Vsinger创作激励"
 								className="w-full block"
 							/>
@@ -314,7 +387,7 @@ export default function ResultScreen() {
 				</div>
 			</div>
 
-			<StaffModal open={staffOpen} onClose={() => setStaffOpen(false)} />
+			<StaffModal open={staffOpen} onClose={() => setStaffOpen(false)} primaryText={palette?.accent ?? "#00a795"} />
 
 			<SoulCardModal
 				open={cardOpen}

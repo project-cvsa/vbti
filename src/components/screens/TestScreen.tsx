@@ -110,7 +110,7 @@ export default function TestScreen() {
 		resolveCharacter(answers, null);
 	}, [answers, submitting, resolveCharacter, answeredCount]);
 
-	const isDev = import.meta.env.DEV || window.location.pathname === "/dev";
+	const isDev = import.meta.env.MODE === "development" || window.location.pathname === "/dev";
 
 	return (
 		<div className="mt-6 p-6 max-md:p-0 max-md:mt-0 bg-white rounded-2xl max-md:bg-transparent max-md:rounded-none">

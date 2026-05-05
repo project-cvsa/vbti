@@ -132,6 +132,22 @@ export interface CardPalette {
 	line: string;
 }
 
+export interface ResultPalette {
+	bodyBg: string;
+	bodyBgSolid: string;
+	accent: string;
+	accentHover: string;
+	accentForeground: string;
+	text: string;
+	muted: string;
+	cardBg: string;
+	pill: string;
+	pillHover: string;
+	badgeBg: string;
+	badgeBorder: string;
+	line: string;
+}
+
 /**
  * Generate a canvas card colour palette from a character's hex colour.
  * Preserves hue while mapping lightness/chroma to predefined roles.
@@ -161,6 +177,38 @@ export function generateCardPalette(hexColor: string): CardPalette {
 		text: adjust(0.32, 0.05),
 		muted: adjust(0.48, 0.03),
 		pill: adjust(0.87, 0.06),
+		line: adjust(0.92, 0.03),
+	};
+}
+
+export function generateResultPalette(hexColor: string): ResultPalette {
+	const rgb = hexToRgb(hexColor);
+	const [, , h] = rgb2oklch(rgb);
+	const hue = Number.isNaN(h) ? 180 : h;
+
+	const adjust = (targetL: number, targetC: number): string => {
+		const rgbResult = oklch2rgb([targetL, targetC, hue]);
+		const clamped: [number, number, number] = [
+			Math.max(0, Math.min(1, rgbResult[0])),
+			Math.max(0, Math.min(1, rgbResult[1])),
+			Math.max(0, Math.min(1, rgbResult[2])),
+		];
+		return rgbToHex(clamped);
+	};
+
+	return {
+		bodyBg: adjust(0.97, 0.007),
+		bodyBgSolid: adjust(0.97, 0.007),
+		accent: adjust(0.64, 0.14),
+		accentHover: adjust(0.72, 0.12),
+		accentForeground: "#ffffff",
+		text: adjust(0.32, 0.05),
+		muted: adjust(0.48, 0.03),
+		cardBg: adjust(0.99, 0.008),
+		pill: adjust(0.95, 0.03),
+		pillHover: adjust(0.82, 0.08),
+		badgeBg: adjust(0.92, 0.045),
+		badgeBorder: adjust(0.82, 0.10),
 		line: adjust(0.92, 0.03),
 	};
 }
