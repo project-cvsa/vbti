@@ -63,6 +63,21 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 				if (!ctx) return;
 
 				ctx.scale(scale, scale);
+
+				const cardRadius = 16;
+				ctx.beginPath();
+				ctx.moveTo(cardRadius, 0);
+				ctx.lineTo(cardWidth - cardRadius, 0);
+				ctx.arcTo(cardWidth, 0, cardWidth, cardRadius, cardRadius);
+				ctx.lineTo(cardWidth, cardHeight - cardRadius);
+				ctx.arcTo(cardWidth, cardHeight, cardWidth - cardRadius, cardHeight, cardRadius);
+				ctx.lineTo(cardRadius, cardHeight);
+				ctx.arcTo(0, cardHeight, 0, cardHeight - cardRadius, cardRadius);
+				ctx.lineTo(0, cardRadius);
+				ctx.arcTo(0, 0, cardRadius, 0, cardRadius);
+				ctx.closePath();
+				ctx.clip();
+
 				ctx.fillStyle = palette.bg;
 				ctx.fillRect(0, 0, cardWidth, cardHeight);
 				const imgMaxW = 350;
