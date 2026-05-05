@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useAtom, useSetAtom, useAtomValue } from "jotai";
 import type { Answers } from "@/core/types";
 import {
@@ -27,6 +27,7 @@ import ProgressBar from "@/components/test/ProgressBar";
 import QuestionCard from "@/components/test/QuestionCard";
 import ProbDistPanel from "@/components/test/ProbDistPanel";
 import { SecretQuestionModal } from "@/components/modals/SecretQuestionModal";
+import { QuestionZeroModal } from "@/components/modals/QuestionZeroModal";
 import { computeMBTI } from "@/core/mbti";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { report } from "@/lib/telemetry";
@@ -50,6 +51,17 @@ export default function TestScreen() {
 	const answered = Object.keys(answers).length;
 	const currentQuestion = questions[currentIdx];
 	const savedAnswer = answers[currentQuestion.id];
+
+	const q0Answered = answers["q0"] !== undefined;
+
+	useEffect(() => {
+		if (q0Answered && currentIdx === 0) {
+			setCurrentIdx(1);
+		}
+	}, [q0Answered, currentIdx, setCurrentIdx]);
+
+	const progressAnswered = answered - (q0Answered ? 1 : 0);
+	const progressTotal = total - 1;
 
 	const mbtiResult = computeMBTI(answers);
 
@@ -114,7 +126,7 @@ export default function TestScreen() {
 
 	return (
 		<div className="mt-6 p-6 max-md:p-0 max-md:mt-0 bg-white rounded-2xl max-md:bg-transparent max-md:rounded-none">
-			<ProgressBar answered={answered} total={total} />
+			<ProgressBar answered={progressAnswered} total={progressTotal} />
 
 			<div className="flex flex-col md:flex-row gap-5 mt-4 max-md:mt-2">
 				<div className="flex-1 min-w-0">
@@ -132,7 +144,7 @@ export default function TestScreen() {
 							<Button
 								variant="outline"
 								className="nav-btn px-5 py-3 rounded-2xl font-semibold"
-								disabled={currentIdx === 0}
+								disabled={currentIdx <= 1}
 								onClick={() => {
 									report("nav_prev", { from: currentIdx, to: currentIdx - 1 });
 									setCurrentIdx((i) => i - 1);
@@ -249,6 +261,20 @@ export default function TestScreen() {
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
+
+			<QuestionZeroModal
+				open={!q0Answered}
+				question={questions[0]}
+				onSelect={(index) => {
+					setAnswers((prev) => ({ ...prev, q0: index }));
+					report("answer", { questionId: "q0", optionIndex: index });
+					setCurrentIdx(1);
+				}}
+				onBack={() => {
+					report("abandon_test", { answeredCount: 0 });
+					setScreen("intro");
+				}}
+			/>
 
 			{isDev && (
 				<div className="w-full shrink-0 md:sticky md:top-4 self-start">
