@@ -215,6 +215,8 @@ export default function ResultScreen() {
 						<div className="text-lg font-bold mb-1">灵魂解读</div>
 						<div className="text-base leading-relaxed whitespace-pre-wrap">
 							{character.desc}
+							<br/>
+							<a href={character.url} className="text-muted-foreground">→点击了解关于ta的更多</a>
 						</div>
 					</div>
 
