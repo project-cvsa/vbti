@@ -193,6 +193,7 @@ export default function ResultScreen() {
 									key={song.bv}
 									href={`https://www.bilibili.com/video/${song.bv}`}
 									target="_blank"
+									onClick={() => report("link_click", { link: `歌曲观看-${song.bv}`, bvid: song.bv })}
 									rel="noopener noreferrer"
 									className="inline-flex items-center px-4 py-2 rounded-full border bg-accent 
 									text-xs font-semibold no-underline transition-colors hover:bg-accent-70 border-accent-foreground/10"
@@ -233,6 +234,7 @@ export default function ResultScreen() {
 						target="_blank"
 						rel="noopener noreferrer"
 						className="text-primary font-semibold hover:underline inline-flex items-center gap-1"
+						onClick={() => report("link_click", { link: "关注作者_结果页" })}
 					>
 						<Tv className="size-4" />
 						关注作者 / 反馈问题
@@ -261,6 +263,7 @@ export default function ResultScreen() {
 							target="_blank"
 							rel="noopener noreferrer"
 							className="block rounded-xl overflow-hidden border"
+							onClick={() => report("link_click", { link: "2026夏浪派对" })}
 						>
 							<img
 								src="/banner/xlpd-banner.webp"
@@ -273,6 +276,7 @@ export default function ResultScreen() {
 							target="_blank"
 							rel="noopener noreferrer"
 							className="block rounded-xl overflow-hidden border"
+							onClick={() => report("link_click", { link: "中V周刊" })}
 						>
 							<img
 								src="/banner/zk-banner.webp"
@@ -285,6 +289,7 @@ export default function ResultScreen() {
 							target="_blank"
 							rel="noopener noreferrer"
 							className="block rounded-xl overflow-hidden border"
+							onClick={() => report("link_click", { link: "术力口音乐大赛" })}
 						>
 							<img
 								src="/banner/shulikou.webp"
@@ -297,6 +302,7 @@ export default function ResultScreen() {
 							target="_blank"
 							rel="noopener noreferrer"
 							className="block rounded-xl overflow-hidden border"
+							onClick={() => report("link_click", { link: "Vsinger创作激励" })}
 						>
 							<img
 								src="/banner/Vsinger.webp"

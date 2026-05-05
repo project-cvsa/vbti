@@ -54,6 +54,7 @@ function IntroScreen() {
 							target="_blank"
 							rel="noopener noreferrer"
 							className="text-primary text-xs font-semibold hover:underline inline-flex items-center gap-1"
+							onClick={() => report("link_click", { link: "关注作者_首页" })}
 						>
 							<Tv className="size-4" />
 							关注作者 / 反馈问题
