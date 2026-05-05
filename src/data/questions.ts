@@ -410,7 +410,7 @@ export const questions: Question[] = [
 			{ label: "《达拉崩吧》——洗脑第一名。（原来这是术曲！x）🐉", value: "S", lang: "CN" },
 			{ label: "《霜雪千年》——入坑经典，余音绕梁。🐉", value: "S", lang: "CN" },
 			{ label: "《告死鸟》——推歌我只推最新的。✍️", value: "N", lang: "CN" },
-			{ label: "我主要还是听日术曲", value: "JP", lang: "JP" },
+			{ label: "我主要还是听日术曲", value: "", lang: "JP" },
 		],
 	},
 	{
@@ -420,7 +420,7 @@ export const questions: Question[] = [
 			{ label: "《Melt》——奇迹的起源，入坑首选。🎵", value: "S", lang: "JP" },
 			{ label: "《千本樱》——就算不听术力口的人也大概率听过。🌸", value: "S", lang: "JP" },
 			{ label: "《脑蚀》——只听最新最潮的。🎧", value: "N", lang: "JP" },
-			{ label: "我主要还是听中术曲", value: "CN", lang: "CN" },
+			{ label: "我主要还是听中术曲", value: "", lang: "CN" },
 		],
 	},
 	{
