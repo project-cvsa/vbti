@@ -59,9 +59,9 @@ function IntroScreen() {
 							<Tv className="size-4" />
 							关注作者 / 反馈问题
 						</a>
-						<span className="text-primary text-xs font-semibold">
+						<a href="https://qm.qq.com/q/eV1JhoeM0g" onClick={() => report("link_click", { link: "交流群_首页" })} className="text-primary text-xs font-semibold">
 							加入VBTI交流群：747501305
-						</span>
+						</a>
 					</div>
 					<p className="mt-2 text-muted-foreground text-[11px]">
 						版本：v{pkg.version} &nbsp;&nbsp;| &nbsp;&nbsp;bgm：拼凑的断音 - Toa

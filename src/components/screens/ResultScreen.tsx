@@ -139,7 +139,7 @@ export default function ResultScreen() {
 	const isDev = import.meta.env.MODE === "development" || window.location.pathname === "/dev";
 
 	return (
-		<Card className="mt-6 md:p-6 ring-none ring-transparent shadow-none md:bg-white">
+		<Card className="md:p-6 ring-none ring-transparent shadow-none md:bg-white">
 			{palette && (
 				<style>{`
 					.result-song-pill {
@@ -179,9 +179,9 @@ export default function ResultScreen() {
 				<div className="flex flex-col gap-4 text-accent-foreground"
 					style={palette ? { color: palette.text } : undefined}>
 					<div>
-						<div className="text-sm text-primary tracking-wider mb-1"
+						<div className="text-base text-primary tracking-wider mb-1"
 							style={palette ? { color: palette.accent } : undefined}>
-							✨ 你的灵魂歌姬已降临{" "}
+							✨ 你的灵魂歌姬已降临
 						</div>
 						<h2 className="text-[2.7rem] leading-tight tracking-tight">
 							{resultCharacter}
@@ -212,15 +212,15 @@ export default function ResultScreen() {
 					</div>
 
 					<div>
-						<div className="text-sm font-bold mb-1">灵魂解读</div>
-						<div className="text-sm leading-relaxed whitespace-pre-wrap">
+						<div className="text-lg font-bold mb-1">灵魂解读</div>
+						<div className="text-base leading-relaxed whitespace-pre-wrap">
 							{character.desc}
 						</div>
 					</div>
 
 					<div>
 						<div className="flex items-center gap-3 mb-2">
-							<span className="text-sm font-bold">推荐歌单</span>
+							<span className="text-base font-bold">推荐歌单</span>
 							<Button
 								variant="outline"
 								size="icon-sm"
@@ -319,10 +319,10 @@ export default function ResultScreen() {
 					</Button>
 				</div>
 				<div className="text-center mb-4">
-					<span className="text-sm font-semibold"
+					<a href="https://qm.qq.com/q/eV1JhoeM0g" onClick={() => report("link_click", { link: "交流群_结果页" })} className="text-sm font-semibold"
 						style={palette ? { color: palette.accent } : undefined}>
 						加入VBTI交流群：747501305
-					</span>
+					</a>
 				</div>
 				<div className="text-center mt-5">
 					<div className="text-lg font-bold mb-3">你是谁？请关注更多V家资讯！</div>
