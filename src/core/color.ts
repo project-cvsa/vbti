@@ -203,7 +203,7 @@ export function generateResultPalette(hexColor: string): ResultPalette {
 		accentHover: adjust(0.72, 0.12),
 		accentForeground: "#ffffff",
 		text: adjust(0.32, 0.05),
-		muted: adjust(0.48, 0.03),
+		muted: adjust(0.6, 0.03),
 		cardBg: adjust(0.99, 0.008),
 		pill: adjust(0.95, 0.03),
 		pillHover: adjust(0.82, 0.08),

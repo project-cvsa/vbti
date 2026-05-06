@@ -2,6 +2,8 @@ import { atom } from "jotai";
 import type { Answers, CharacterProbDistribution, Screen } from "@/core/types";
 import { findMatchCharacterRaw } from "@/core/findChar";
 import { questions } from "@/data/questions";
+import { characters } from "@/data/characters";
+import { generateResultPalette, type ResultPalette } from "@/core/color";
 
 export const currentScreenAtom = atom<Screen>("intro");
 
@@ -50,3 +52,11 @@ export const probDistAtom = atom<CharacterProbDistribution | null>((get) => {
 
 // null 代表无法生成指纹，undefined代表未设置
 export const fingerprintAtom = atom<string | null | undefined>(undefined);
+
+export const resultPaletteAtom = atom<ResultPalette | null>((get) => {
+	const resultCharacter = get(resultCharacterAtom);
+	if (!resultCharacter) return null;
+	const character = characters[resultCharacter];
+	if (!character?.color) return null;
+	return generateResultPalette(character.color);
+});

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import { resultCharacterAtom, goToIntroAtom, restartTestAtom, answersAtom, fingerprintAtom } from "@/state/atoms";
+import { resultCharacterAtom, resultPaletteAtom, goToIntroAtom, restartTestAtom, answersAtom, fingerprintAtom } from "@/state/atoms";
 import { characters } from "@/data/characters";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -13,8 +13,8 @@ import { computeMBTI } from "@/core/mbti";
 import { DATA_VERSION } from "@/data/ver";
 import * as pkg from "../../../package.json";
 import { report, submitStat } from "@/lib/telemetry";
-import { generateResultPalette, type ResultPalette } from "@/core/color";
 import { CHAR_IMG_MAP } from "@/data/imgMap";
+import { confirm } from "@/components/ui/confirm";
 
 interface SongInfo {
 	name: string;
@@ -37,10 +37,7 @@ export default function ResultScreen() {
 
 	const character = resultCharacter ? characters[resultCharacter] : null;
 
-	const palette: ResultPalette | null = useMemo(
-		() => (character?.color ? generateResultPalette(character.color) : null),
-		[character?.color]
-	);
+	const palette = useAtomValue(resultPaletteAtom);
 
 	useEffect(() => {
 		if (window._bgmAudio) {
@@ -221,6 +218,7 @@ export default function ResultScreen() {
 								target="_blank"
 								rel="noopener noreferrer"
 								className="text-muted-foreground"
+								style={{color: palette?.muted}}
 								onClick={() => report("link_click", { link: "百科", character })}
 							>
 								→点击了解关于ta的更多
@@ -277,12 +275,30 @@ export default function ResultScreen() {
 			<div className="flex justify-between gap-3 flex-wrap mt-5 items-center">
 				<div className="flex gap-2">
 					<Button
-						onClick={() => { report("go_home"); goToIntro(); }}
+						onClick={async () => {
+							const confirmed = await confirm({
+								title: "确认回到首页？",
+								description: "当前结果将会丢失。"
+							})
+							if (!confirmed) return;
+							report("go_home");
+							goToIntro();
+						}}
 						className="result-accent-btn"
 					>
 						回到首页
 					</Button>
-					<Button variant="outline" onClick={() => { report("restart_test"); restartTest(); }}>
+					<Button
+						variant="outline"
+						onClick={async () => {
+							const confirmed = await confirm({
+								title: "确认重新测试？",
+								description: "当前结果将会丢失。"
+							})
+							if (!confirmed) return;
+							report("restart_test");
+							restartTest();
+						}}>
 						重新测试
 					</Button>
 				</div>
@@ -338,11 +354,11 @@ export default function ResultScreen() {
 					<div className="text-lg font-bold mb-3">你是谁？请关注更多V家资讯！</div>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
 						<a
-							href="https://www.bilibili.com/opus/1190997869366083605"
+							href="https://www.bilibili.com/opus/1197677402486996998"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="block rounded-xl overflow-hidden border"
-							onClick={() => report("link_click", { link: "2026夏浪派对" })}
+							onClick={() => report("link_click", { link: "2026夏浪派对_新" })}
 						>
 							<img
 								src="https://i1.hdslb.com/bfs/new_dyn/f99551c63cbf8036ccde5ddfb7d9c606600004959.png@1e_1c.webp"
