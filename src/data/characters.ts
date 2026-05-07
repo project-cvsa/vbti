@@ -114,7 +114,7 @@ export const characters: Record<string, Character> = {
 		popularity: 90,
 		mbti: "INTP",
 		desc: "你就像言和一样，外表看起来酷酷的，甚至有点高冷，但内心其实非常温柔。作为中文V家第二位虚拟歌姬，言和拥有偏中性的声线和帅气又有些中二的女孩子设定，内心十分温柔，正如名字的寓意一样——言辞温和。你不喜欢张扬，但有自己的坚持和底线。你有独特的魅力，干净利落，不拖泥带水，让人觉得可靠又安心。或许你不善言辞，但你的行动足以证明一切。⚔️",
-		bgm: "Side by Side | BV13E421P7W2\r\n冠世一战 | BV17t411y7ZG\r\n逆浪千秋 | BV1BW411s7g3\r\n谁杀死了知更鸟 | BV11s411V7Ny",
+		bgm: "Side by Side | BV13E421P7W2\r\n冠世一战 | BV17t411y7D2\r\n逆浪千秋 | BV1BW411s7g3\r\n谁杀死了知更鸟 | BV11s411V7Ny",
 		music: "/music/yanhe.m4a",
 		shortDesc:
 			"外表看起来酷酷的，甚至有点高冷，但内心其实非常温柔。你不喜欢张扬，但有自己的坚持和底线，让人觉得可靠又安心。就像她的《Side by Side》唱到的——“无法再掩盖，也没人能够再替代～”",
