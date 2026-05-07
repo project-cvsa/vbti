@@ -470,7 +470,7 @@ export const questions: Question[] = [
 			{ label: "一定是那个最元气的角色！💪", value: "EF" },
 			{ label: "可能是那个温柔治愈的角色吧。🌸", value: "IF" },
 			{ label: "随便，测到什么是什么。🤷", value: "IP" },
-			{ label: "我希望是那个最冷门、最被低估的角色——我觉得ta才最像我。💎", value: "INF" },
+			{ label: "一定是那个最可爱的角色！🥰", value: "INF" },
 		],
 	},
 ];
