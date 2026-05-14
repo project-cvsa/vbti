@@ -190,7 +190,7 @@ export const questions: Question[] = [
 		options: [
 			{ label: "前排围观吃瓜，看谁能吵赢。🍿", value: "EP" },
 			{ label: "上去劝架！“大家别吵了，都是热爱术力口的人。”🤝", value: "EFJ" },
-			{ label: "心里不太舒服但没必要吵架，默默划走了。😔", value: "IP" },
+			{ label: "完全不在乎，划走了。👋", value: "IP" },
 			{ label: "分析双方论点，在心里默默判断哪边更有道理，但不发言。🤔", value: "ITJ" },
 		],
 	},
@@ -200,7 +200,7 @@ export const questions: Question[] = [
 		options: [
 			{ label: "见怪不怪，耐着性子给路人科普虚拟歌手的定义和优秀歌曲。📖", value: "ITJ" },
 			{ label: "直接开麦回击，引用经典曲目论证什么才是灵魂。🔥", value: "ETJ" },
-			{ label: "心里很不舒服但不想吵架，默默点了踩然后划走。😔", value: "IFP" },
+			{ label: "心里不太舒服但没必要吵架，默默划走了。😔", value: "IFP" },
 			{ label: "一笑而过。表示尊重理解，有这时间还是自己去听首新歌吧。🎧", value: "INTP" },
 		],
 	},
@@ -362,7 +362,7 @@ export const questions: Question[] = [
 				lang: "CN",
 			},
 			{
-				label: "听点比我还emo的歌，比如《心做し》《少女A》，以毒攻毒。",
+				label: "听点比我还emo的歌，比如《心做し》《少女A》，以毒攻毒。💔",
 				value: "IP",
 				lang: "JP",
 			},
@@ -376,7 +376,7 @@ export const questions: Question[] = [
 			{ label: "分享歌单链接到旧同好群，问一句“还有人记得这些歌吗？”📢", value: "EFP" },
 			{ label: "快速扫一眼，挑几首印象深的听一下，剩下的关掉。⏩", value: "ITP" },
 			{
-				label: "立刻开始考古这个P主的近况，发现ta也已经停更很久了，又emo了。🔍",
+				label: "立刻开始考古这个P主的近况，发现ta也已经停更很久了，又emo了。💔",
 				value: "INFJ",
 			},
 		],
@@ -409,7 +409,7 @@ export const questions: Question[] = [
 		text: "如果你只能给朋友安利一首中文V家歌曲，你会选？",
 		options: [
 			{ label: "《达拉崩吧》——洗脑第一名。（原来这是术曲！x）🐉", value: "S", lang: "CN" },
-			{ label: "《霜雪千年》——入坑经典，余音绕梁。🐉", value: "S", lang: "CN" },
+			{ label: "《霜雪千年》——入坑经典，余音绕梁。❄️", value: "S", lang: "CN" },
 			{ label: "《告死鸟》——推歌我只推最新的。✍️", value: "N", lang: "CN" },
 			{ label: "我主要还是听日术曲", value: "", lang: "JP" },
 		],
@@ -432,14 +432,14 @@ export const questions: Question[] = [
 			{ label: "旋律——好听才是硬道理！🎼", value: "SP" },
 			{ label: "歌词——歌词戳心才会单曲循环。📝", value: "NF" },
 			{ label: "调教——调教好坏决定一首歌的灵魂。🎛️", value: "T" },
-			{ label: "PV——魔性/唯美画面会让我印象深刻", value: "S" },
+			{ label: "PV——魔性/唯美画面会让我印象深刻。🎬", value: "S" },
 		],
 	},
 	{
 		id: "q36",
 		text: "如果把V家歌曲比作食物，你的歌单更接近？",
 		options: [
-			{ label: "火锅——万物皆可涮，什么风格都听，越杂越香。", value: "EP" },
+			{ label: "火锅——万物皆可涮，什么风格都听，越杂越香。🍲", value: "EP" },
 			{ label: "清粥小菜——不需要重口味，清淡温暖就足够治愈。🥣", value: "I" },
 			{ label: "挚爱甜点——甜就完事了，生活需要糖分和可爱。🍰", value: "ES" },
 			{ label: "深夜泡面——不是什么大餐，但刚好填满当下的饥饿。🍜", value: "IP" },
