@@ -6,8 +6,10 @@
 	"scripts": {
 		"dev": "bunx --bun vite",
 		"build": "bunx --bun vite build",
+		"build:rednote": "bunx --bun vite build --mode rednote --outDir dist-rednote",
 		"lint": "bunx --bun biome lint",
 		"preview": "bunx --bun vite preview",
+		"preview:rednote": "bunx --bun vite preview --outDir dist-rednote",
 		"format": "bunx --bun biome format --write .",
 		"test": "bunx --bun vitest run"
 	},

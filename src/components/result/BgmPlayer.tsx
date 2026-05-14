@@ -4,6 +4,8 @@ import { Music, VolumeX } from "lucide-react";
 import type { ResultPalette } from "@/core/color";
 import { report } from "@/lib/telemetry";
 
+const isRedNote = import.meta.env.MODE === "rednote";
+
 interface SongInfo {
 	name: string;
 	bv: string;
@@ -107,12 +109,14 @@ export function BgmPlayer({ music, bgm, palette }: BgmPlayerProps) {
 					</a>
 				))}
 			</div>
-			<div
-				className="text-xs text-muted-foreground mt-2"
-				style={palette ? { color: palette.muted } : undefined}
-			>
-				↑点击歌曲前往B站观看
-			</div>
+			{!isRedNote && (
+				<div
+					className="text-xs text-muted-foreground mt-2"
+					style={palette ? { color: palette.muted } : undefined}
+				>
+					↑点击歌曲前往B站观看
+				</div>
+			)}
 		</div>
 	);
 }

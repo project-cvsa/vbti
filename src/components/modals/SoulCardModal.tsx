@@ -7,7 +7,10 @@ import { generateCardPalette } from "@/core/color";
 import { report } from "@/lib/telemetry";
 import { CARD_IMG_MAP } from "@/data/imgMap";
 
-const CARD_URL = "https://vbti-test.com";
+const isRedNote = import.meta.env.MODE === "rednote";
+const CARD_URL = isRedNote
+	? "https://fe.xiaohongshu.com/ditto/vincent/6d1debc890b64bf3ad66ff5284edad05?naviHidden=yes&fullscreen=true&source=splash"
+	: "https://vbti-test.com";
 
 const DEFAULT_PALETTE = {
 	bg: "#f6fbfa",
@@ -36,8 +39,8 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 	);
 
 	const generateCard = useCallback(() => {
-		report("generate_card")
-		const imgSrc = CARD_IMG_MAP[character.image]
+		report("generate_card");
+		const imgSrc = CARD_IMG_MAP[character.image];
 		if (!imgSrc) {
 			setError("角色图片加载失败");
 			return;
@@ -45,7 +48,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 
 		const img = new Image();
 		img.crossOrigin = "anonymous";
-		img.referrerPolicy = "no-referrer"
+		img.referrerPolicy = "no-referrer";
 		img.src = imgSrc;
 
 		img.onload = async () => {
@@ -179,7 +182,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 				ctx.fillStyle = palette.muted;
 				ctx.font = "12px sans-serif";
 				ctx.textAlign = "center";
-				ctx.fillText("VBTI · 测测你的灵魂歌姬 分享给更多朋友", 205, qrY + 83)
+				ctx.fillText("VBTI · 测测你的灵魂歌姬 分享给更多朋友", 205, qrY + 83);
 
 				const dataURL = canvas.toDataURL();
 				setCardDataURL(dataURL);
@@ -234,7 +237,9 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 							className="max-w-90 max-h-[70vh] rounded-xl"
 						/>
 						<div className="flex gap-3">
-							<Button style={{ background: palette.accent }} onClick={handleDownload}>保存到本地</Button>
+							<Button style={{ background: palette.accent }} onClick={handleDownload}>
+								保存到本地
+							</Button>
 							<Button variant="outline" onClick={onClose}>
 								关闭
 							</Button>
