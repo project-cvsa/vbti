@@ -1,13 +1,24 @@
 import { useEffect, useState, useCallback } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import { resultCharacterAtom, resultPaletteAtom, goToIntroAtom } from "@/state/atoms";
-import { restartTestAtom, answersAtom, fingerprintAtom } from "@/state/atoms";
+import {
+	resultCharacterAtom,
+	resultPaletteAtom,
+	goToIntroAtom,
+	restartTestAtom,
+	answersAtom,
+	fingerprintAtom,
+} from "@/state/atoms";
 import { characters } from "@/data/characters";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { StaffModal, SoulCardModal, AnswersModal } from "@/components/modals";
-import { CharacterHero } from "@/components/result";
-import { BgmPlayer, ResultActions, ResultFooter, Palette } from "@/components/result";
+import {
+	CharacterHero,
+	BgmPlayer,
+	ResultActions,
+	ResultFooter,
+	Palette,
+} from "@/components/result";
 import { computeMBTI } from "@/core/mbti";
 import { DATA_VERSION } from "@/data/ver";
 import * as pkg from "../../../package.json";

@@ -100,7 +100,8 @@ export function BgmPlayer({ music, bgm, palette }: BgmPlayerProps) {
 							report("link_click", { link: `歌曲观看-${song.bv}`, bvid: song.bv })
 						}
 						rel="noopener noreferrer"
-						className="inline-flex items-center px-4 py-2 rounded-full border text-xs font-semibold no-underline transition-colors result-song-pill"
+						className="inline-flex items-center px-4 py-2 rounded-full border 
+						text-xs font-semibold no-underline transition-colors result-song-pill"
 					>
 						{song.name}
 					</a>
