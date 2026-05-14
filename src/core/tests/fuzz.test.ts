@@ -7,6 +7,9 @@ import { uniformFloat64 } from "pure-rand/distribution/uniformFloat64";
 import { computeMBTI } from "../mbti";
 import type { Answers } from "@/core/types";
 
+/** Generic count/probability dictionary used internally in fuzz tests */
+type CountMap = Record<string, number>;
+
 const seed = 1099;
 const rng = xoroshiro128plus(seed);
 
@@ -84,7 +87,7 @@ it("Q0 preference simulations", () => {
 		};
 	}
 
-	function printCharReport(title: string, charCounts: Answers, totalN: number) {
+	function printCharReport(title: string, charCounts: CountMap, totalN: number) {
 		console.log(`\n=== ${title} (n=${totalN}) ===\n`);
 		const sorted = Object.entries(charCounts).sort(([, a], [, b]) => b! - a!);
 		let rank = 0;
@@ -98,7 +101,7 @@ it("Q0 preference simulations", () => {
 		}
 	}
 
-	function entropy(dist: Answers): number {
+	function entropy(dist: CountMap): number {
 		let h = 0;
 		for (const p of Object.values(dist)) {
 			if (p! > 0) h -= p! * Math.log2(p!);
@@ -111,9 +114,9 @@ it("Q0 preference simulations", () => {
 		const generator = fixedAnswerGenerator(questions[0].id, opt.index);
 		const optionSets = generate(FULL_SETS, generator);
 
-		const charCounts: Answers = {};
-		const mbtiCounts: Answers = {};
-		const charProb: Answers = {};
+		const charCounts: CountMap = {};
+		const mbtiCounts: CountMap = {};
+		const charProb: CountMap = {};
 		const entropies: number[] = [];
 
 		for (const answers of optionSets) {

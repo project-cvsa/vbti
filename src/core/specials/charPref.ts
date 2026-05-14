@@ -40,9 +40,9 @@ export const adjustCharacterPref = (
 		dist = increaseChar(dist, "初音未来", weightChar);
 	}
 
-	// Q10: 特定条件 → 重音Teto
+	// Q10: 特定条件 → 重音Teto (multi-select: check if option 2 is selected)
 	const ans10 = answers[questions[10].id];
-	if (ans10 === 2) {
+	if (Array.isArray(ans10) ? ans10.includes(2) : ans10 === 2) {
 		dist = increaseChar(dist, "重音Teto", 1.3);
 	}
 

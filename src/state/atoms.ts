@@ -21,7 +21,8 @@ export const unansweredAtom = atom((get) => {
 	const unanswered = [];
 	for (let i = 0; i < questions.length; i += 1) {
 		const q = questions[i];
-		if (answers[q.id] === undefined) {
+		const ans = answers[q.id];
+		if (ans === undefined || (Array.isArray(ans) && ans.length === 0)) {
 			unanswered.push(i);
 		}
 	}

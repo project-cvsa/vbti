@@ -14,10 +14,13 @@ export const adjustLangPref = (answers: Answers, _dist: Dist): Dist => {
 			continue;
 		}
 		if (ans === undefined) continue;
-		if (q.options[ans].lang === "CN") {
-			dist = increaseCN(dist, weightLang);
-		} else if (q.options[ans].lang === "JP") {
-			dist = increaseJP(dist, weightLang);
+		const indices = Array.isArray(ans) ? ans : [ans];
+		for (const idx of indices) {
+			if (q.options[idx].lang === "CN") {
+				dist = increaseCN(dist, weightLang);
+			} else if (q.options[idx].lang === "JP") {
+				dist = increaseJP(dist, weightLang);
+			}
 		}
 	}
 

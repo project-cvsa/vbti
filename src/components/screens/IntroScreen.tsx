@@ -11,7 +11,7 @@ function IntroScreen() {
 
 	return (
 		<div className="flex flex-col justify-center items-center text-center mt-5">
-			<Card className="relative overflow-hidden w-full h-full bg-white max-md:px-4 py-10 md:py-20">
+			<Card className="relative overflow-hidden w-full h-full bg-white max-md:px-4 pt-10 md:pt-15 mt-10">
 				{/* Decorative gradient circle — desktop only */}
 				<div className="absolute right-[-5rem] top-[-5rem] w-48 h-48 rounded-full 
 				pointer-events-none bg-[linear-gradient(to_bottom,#00a79533,#00a79510)]" />

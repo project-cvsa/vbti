@@ -139,7 +139,8 @@ export const questions: Question[] = [
 	},
 	{
 		id: "q10",
-		text: "以下哪个场景是你可能会干的？",
+		type: "multi",
+		text: "【多选】以下哪个场景是你可能会干的？",
 		options: [
 			{ label: "在KTV点了术曲，发现全场只有我一个人嗨。🎤", value: "EP" },
 			{ label: "被问到“你喜欢听哪种歌”，脱口而出“术力口”，对方一脸懵。😶", value: "ITP" },
@@ -425,7 +426,8 @@ export const questions: Question[] = [
 	},
 	{
 		id: "q35",
-		text: "你听V家歌曲会更关注哪个部分？",
+		type: "multi",
+		text: "【多选】你听V家歌曲会更关注哪个部分？",
 		options: [
 			{ label: "旋律——好听才是硬道理！🎼", value: "SP" },
 			{ label: "歌词——歌词戳心才会单曲循环。📝", value: "NF" },

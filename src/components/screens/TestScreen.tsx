@@ -67,13 +67,24 @@ export default function TestScreen() {
 
 	const handleAnswer = useCallback(
 		(index: number) => {
-			setAnswers((prev) => ({
-				...prev,
-				[currentQuestion.id]: index,
-			}));
+			if (currentQuestion.type === "multi") {
+				setAnswers((prev) => {
+					const current = prev[currentQuestion.id];
+					const arr = Array.isArray(current) ? [...current] : [];
+					if (arr.includes(index)) {
+						return { ...prev, [currentQuestion.id]: arr.filter((i) => i !== index) };
+					}
+					return { ...prev, [currentQuestion.id]: [...arr, index] };
+				});
+			} else {
+				setAnswers((prev) => ({
+					...prev,
+					[currentQuestion.id]: index,
+				}));
+			}
 			report("answer", { questionId: currentQuestion.id, optionIndex: index });
 		},
-		[currentQuestion.id, setAnswers]
+		[currentQuestion.id, currentQuestion.type, setAnswers]
 	);
 
 	const resolveCharacter = useCallback(

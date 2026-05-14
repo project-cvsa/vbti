@@ -40,9 +40,12 @@ export function computeMBTI(answers: Answers): MBTIResult {
 		const ans = answers[q.id];
 		if (ans === undefined) continue;
 
-		const val = q.options[ans].value;
-		for (const v of val.split("")) {
-			scores[v as keyof MBTIScores] += 1;
+		const indices = Array.isArray(ans) ? ans : [ans];
+		for (const idx of indices) {
+			const val = q.options[idx].value;
+			for (const v of val.split("")) {
+				scores[v as keyof MBTIScores] += 1;
+			}
 		}
 	}
 

@@ -72,7 +72,7 @@ export default function ResultScreen() {
 
 		const audio = new Audio(character.music);
 		audio.loop = true;
-		audio.volume = 0.6;
+		audio.volume = 0.7;
 		audio.play().catch((e) => {
 			console.error(e);
 		});

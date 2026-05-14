@@ -14,10 +14,14 @@ export interface QuestionOption {
 export interface Question {
 	id: string;
 	text: string;
+	/** Whether this question allows multiple selections (default: "single") */
+	type?: "single" | "multi";
 	options: QuestionOption[];
 }
 
-export type Answers = Record<string, number | undefined>;
+/** Answer value: single-select stores a number index, multi-select stores number[] */
+export type AnswerValue = number | number[];
+export type Answers = Record<string, AnswerValue | undefined>;
 
 /** MBTI sub-scores for each dimension pole */
 export interface MBTIScores {
