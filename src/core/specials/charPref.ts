@@ -53,7 +53,7 @@ export const adjustCharacterPref = (
 	} else if (ans39 === 1) {
 		// 温柔治愈
 		dist = increaseChars(dist, ["GUMI", "IA", "东方栀子", "KAITO"], weightChar);
-	} else if (ans39 === 3) {
+	} else if (ans39 === 2) {
 		// 可爱
 		dist = increaseChars(dist, ["海伊", "诗岸", "俊达萌"], weightChar);
 	}
