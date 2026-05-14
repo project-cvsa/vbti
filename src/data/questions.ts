@@ -113,7 +113,7 @@ export const questions: Question[] = [
 	},
 	{
 		id: "q8",
-		text: "你去参加V家only展，你会怎样度过这一天？",
+		text: "如果你去参加一个only展，你会怎样度过这一天？",
 		options: [
 			{
 				label: "全场巡回集邮！能逮到的P主和coser全都要合影，能聊两句就更好了！📸",
@@ -129,7 +129,7 @@ export const questions: Question[] = [
 	},
 	{
 		id: "q9",
-		text: "你在圈子里是什么类型的粉丝？",
+		text: "你在圈子里是什么类型的角色？",
 		options: [
 			{ label: "传教士——到处安利，恨不得全世界都来听。📣", value: "EFJ" },
 			{ label: "老宅型——安静听歌，默默收藏，偶尔考古。📼", value: "ISP" },
@@ -165,7 +165,7 @@ export const questions: Question[] = [
 		text: "你在B站看到一个术力口视频，UP主搬运时没标P主名字也没放原链接，你会？",
 		options: [
 			{ label: "在评论区再次提醒并附上原链接，必须尊重创作者。✍️", value: "EFJ" },
-			{ label: "心里不舒服但不会说什么，默默去原链接那边支持一下。🤫", value: "IFP" },
+			{ label: "不会说什么，有机会的话默默去原链接那边支持一下。🤫", value: "IFP" },
 			{ label: "不标出处是底线问题，直接举办🚨", value: "ETJ" },
 			{
 				label: "看看UP主平时是不是都这样，如果是惯犯就举报，偶尔一次就提醒。🔍",
@@ -180,7 +180,7 @@ export const questions: Question[] = [
 			{ label: "虽然难过但尊重选择。创作是自由的，累了就该休息。🍃", value: "IFJ" },
 			{ label: "疯狂刷以前的投稿，一边看一边emo，感觉像失恋。😢", value: "IFP" },
 			{ label: "先难过三分钟，然后分析停更原因、找风格代餐。🤔", value: "ITJ" },
-			{ label: "开始自己学调校/写词/画图，想用自己的方式延续ta的风格。✍️", value: "INFJ" },
+			{ label: "开始自己学调校/写词/画图等技能，想用自己的方式延续ta的风格。✍️", value: "INFJ" },
 		],
 	},
 	{
@@ -189,7 +189,7 @@ export const questions: Question[] = [
 		options: [
 			{ label: "前排围观吃瓜，看谁能吵赢。🍿", value: "EP" },
 			{ label: "上去劝架！“大家别吵了，都是热爱术力口的人。”🤝", value: "EFJ" },
-			{ label: "完全不在乎，划走了。👋", value: "IP" },
+			{ label: "心里不太舒服但没必要吵架，默默划走了。😔", value: "IP" },
 			{ label: "分析双方论点，在心里默默判断哪边更有道理，但不发言。🤔", value: "ITJ" },
 		],
 	},
@@ -209,16 +209,16 @@ export const questions: Question[] = [
 		options: [
 			{ label: "在评论区理性留言，分析为什么你觉得这种风格不适合某些曲目。📝", value: "ETJ" },
 			{ label: "跟同好吐槽，但不会公开说——萝卜青菜各有所爱，尊重吧。🙊", value: "IFP" },
-			{ label: "想自己去调一首，用实际作品证明什么叫更好的风格。🎛️", value: "ITJ" },
-			{ label: "走开不听。反正风潮总会过去，静静等它退流行就行。🍵", value: "IP" },
+			{ label: "想自己去做一首，用实际作品证明什么叫更好的风格。🎛️", value: "ITJ" },
+			{ label: "划走不听就行。反正风潮总会过去，等它退流呗。🍵", value: "IP" },
 		],
 	},
 	{
 		id: "q17",
-		text: "你在评论区写了一段对这首歌的感受，结果有人回复“你根本没听懂这首歌”，你会？",
+		text: "你在评论区写了一段对这首歌的感受，结果有人回复“你没听懂这首歌”，你会？",
 		options: [
 			{ label: "认真回复，解释我为什么这么理解这首歌，欢迎理性讨论。📝", value: "ETJ" },
-			{ label: "有点不爽，但不想在评论区吵架，删了自己的评论就划走了。😐", value: "IFP" },
+			{ label: "有点不爽，但不想在评论区吵架，划走或者删了自己的评论。😐", value: "IFP" },
 			{ label: "不理他。每个人对歌的理解本来就不一样。😎", value: "ITP" },
 			{
 				label: "家访他的主页，点进看看他平时都转发什么、听什么，尝试理解他为什么这么说。🔍",
@@ -231,7 +231,7 @@ export const questions: Question[] = [
 		text: "有一首术曲火爆了全网，但你get不到它好听在哪，你会？",
 		options: [
 			{ label: "既然这么红肯定有它的道理，多听几遍说不定就洗脑中毒了。🎧", value: "SP" },
-			{ label: "默默划走，坚信听歌审美是主观的，没必要勉强自己。😎", value: "INP" },
+			{ label: "划走，坚信听歌审美是主观的，没必要勉强自己。😎", value: "INP" },
 			{
 				label: "去分析这首歌爆火的原因：是PV做得好？旋律洗脑？还是营销到位？🔍",
 				value: "NTJ",
@@ -267,7 +267,7 @@ export const questions: Question[] = [
 				label: "当然是殿堂曲！能上殿堂肯定有它的道理，先看看大家为什么喜欢。🔥",
 				value: "ESJ",
 			},
-			{ label: "冷门良曲。比起跟风，我更愿意做那个发现宝藏的人。💎", value: "INP" },
+			{ label: "冷门歌曲。比起跟风，我更愿意做那个发现宝藏的人。💎", value: "INP" },
 			{ label: "看封面和标题决定，眼缘最重要。👀", value: "SP" },
 			{ label: "先加进收藏夹或“稍后再看”，等有时间了再一起慢慢品。📑", value: "ITJ" },
 		],
@@ -284,17 +284,17 @@ export const questions: Question[] = [
 	},
 	{
 		id: "q23",
-		text: "明天就是截止日了，你的同人稿/混音/PV还没完成，你会？",
+		text: "明天就是截止日了，你的同人稿或小组作业还没完成，你会？",
 		options: [
 			{ label: "开足马力通宵肝完，死线就是第一生产力！🚀", value: "EP" },
-			{ label: "想办法跟策划/主办方求个情，晚几天应该没问题吧……😅", value: "FP" },
+			{ label: "想办法跟策划/主办方/老师求个情，晚几天应该没问题吧……😅", value: "FP" },
 			{ label: "早就做好了。我就是那种提前规划、绝不拖延的人。🗓️", value: "J" },
 			{ label: "先把能交的部分交上去，剩下的看反馈再补。⚡", value: "TP" },
 		],
 	},
 	{
 		id: "q24",
-		text: "你正在肝一个企划，突然电脑蓝屏了，之前没保存的进度全没了，你会？",
+		text: "你正在肝一个企划或者作业/论文，突然电脑蓝屏了，之前没保存的进度全没了，你会？",
 		options: [
 			{ label: "先骂三分钟，然后打开电脑重来一遍。💢", value: "EJ" },
 			{ label: "大脑空白三秒，缓过来后从头理清思路再开始。🧊", value: "IJ" },
@@ -304,7 +304,7 @@ export const questions: Question[] = [
 	},
 	{
 		id: "q25",
-		text: "如果要你完成一个术力口相关的创作项目，你更倾向？",
+		text: "如果要你完成一个术力口相关的创作项目，你首先会？",
 		options: [
 			{ label: "先干再说，边做边改，灵感在路上。🚲", value: "EP" },
 			{ label: "先构思清楚再动手，磨刀不误砍柴工。🔪", value: "IJ" },
@@ -330,8 +330,8 @@ export const questions: Question[] = [
 		text: "你发现你最喜欢的那首歌本周在周刊上的排名掉了好几名，你会？",
 		options: [
 			{ label: "立刻去再循环几遍，用行动把数据刷回来。📈", value: "ESJ" },
-			{ label: "有点失落但无所谓，这也正常，排名不代表歌的质量。💎", value: "IP" },
-			{ label: "去翻评论区看看最近是不是有什么争议导致热度下降。🔍", value: "ITP" },
+			{ label: "无所谓，这很正常，排名不代表歌的质量，也得让新歌上来。💎", value: "IP" },
+			{ label: "去翻评论区了解下最近是不是有什么原因导致热度下降。🔍", value: "ITP" },
 			{ label: "截图发到同好群：“家人们，给XXX冲冲榜。”📢", value: "EJ" },
 		],
 	},
