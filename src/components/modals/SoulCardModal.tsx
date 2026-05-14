@@ -55,7 +55,7 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 
 				const scale = 3;
 				const cardWidth = 400;
-				const cardHeight = 700;
+				const cardHeight = 730;
 				canvas.width = cardWidth * scale;
 				canvas.height = cardHeight * scale;
 
@@ -149,13 +149,14 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 					lineY += 18;
 				}
 
-				const qrY = cardHeight - 70;
+				const qrY = cardHeight - 100;
 				ctx.font = "10px sans-serif";
-				ctx.fillStyle = palette.muted;
+				ctx.fillStyle = palette.accent;
 				ctx.textAlign = "left";
 				ctx.font = "bold 15px sans-serif";
 				ctx.fillText("扫码测测", 190, qrY + 23);
 				ctx.font = "13px sans-serif";
+				ctx.fillStyle = palette.muted;
 				ctx.fillText("你的灵魂歌姬是谁？", 190, qrY + 45);
 
 				ctx.strokeStyle = palette.line;
@@ -174,6 +175,11 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 					color: { dark: palette.text, light: "#ffffff00" },
 				});
 				ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
+
+				ctx.fillStyle = palette.muted;
+				ctx.font = "12px sans-serif";
+				ctx.textAlign = "center";
+				ctx.fillText("VBTI · 测测你的灵魂歌姬 分享给更多朋友", 205, qrY + 83)
 
 				const dataURL = canvas.toDataURL();
 				setCardDataURL(dataURL);
