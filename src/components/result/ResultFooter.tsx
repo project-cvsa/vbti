@@ -40,6 +40,9 @@ function BiliUserPill({ img, name, uid }: { img: string; name: string; uid: stri
 			className="flex items-center gap-1.5 md:gap-3 bg-[#fef3f9] border-[#ffd9ee] rounded-full border 
 			md:px-7 md:py-2 w-fit px-4 py-1.5"
 			href={`https://space.bilibili.com/${uid}`}
+			target="_blank"
+			rel="noopener noreferrer"
+			onClick={() => report("link_click", { link: `B站链接_${name}` })}
 		>
 			<img
 				src={img}
