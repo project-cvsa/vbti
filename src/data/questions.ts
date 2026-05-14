@@ -1,6 +1,6 @@
 import type { Question } from "@/core/types";
 
-export const questions: Question[] = [
+const rawQuestions: Question[] = [
 	{
 		id: "q0",
 		text: "你希望能召唤出哪种灵魂歌姬？",
@@ -95,7 +95,10 @@ export const questions: Question[] = [
 			{ label: "不知疲倦的小狗，永远在奔跑，在雨中也不曾停下。🐶", value: "ES" },
 			{ label: "安静观察的猫，有自己的小世界，偶尔才让人靠近。🐱", value: "IN" },
 			{ label: "下辈子就做在深海独自游弋的鲸，用只有同类能听懂的频率歌唱。🐋", value: "IN" },
-			{ label: "做一只萤火虫就好，在夜里自己发光，不用照亮全世界，能照亮眼前就好。🌟", value: "S" },
+			{
+				label: "做一只萤火虫就好，在夜里自己发光，不用照亮全世界，能照亮眼前就好。🌟",
+				value: "S",
+			},
 		],
 	},
 	{
@@ -181,7 +184,10 @@ export const questions: Question[] = [
 			{ label: "虽然难过但尊重选择。创作是自由的，累了就该休息。🍃", value: "IFJ" },
 			{ label: "疯狂刷以前的投稿，一边看一边emo，感觉像失恋。😢", value: "IFP" },
 			{ label: "先难过三分钟，然后分析停更原因、找风格代餐。🤔", value: "ITJ" },
-			{ label: "开始自己学调校/写词/画图等技能，想用自己的方式延续ta的风格。✍️", value: "INFJ" },
+			{
+				label: "开始自己学调校/写词/画图等技能，想用自己的方式延续ta的风格。✍️",
+				value: "INFJ",
+			},
 		],
 	},
 	{
@@ -244,10 +250,26 @@ export const questions: Question[] = [
 		id: "q19",
 		text: "如果要用一首术力口歌曲来表达你现在的感情观，你会选？",
 		options: [
-			{ label: "《牵一半》——牵起一人的手，画一道真心，交给ta去保管，珍惜并走下去。🤝", value: "F", lang: "CN" },
-			{ label: "《心空》——爱的太过，伤得太深，只得到  比烟火短的热。💔", value: "F", lang: "CN" },
-			{ label: "《Just Be Friends》——如果感情已耗尽，那就成熟地退回朋友关系。👋", value: "T", lang: "JP" },
-			{ label: "《忧郁的心情》——暗恋是一场内心纠结又甜蜜的独角戏，每一句口是心非，都是想被你察觉的信号。🌧️💗", value: "F", lang: "JP" },
+			{
+				label: "《牵一半》——牵起一人的手，画一道真心，交给ta去保管，珍惜并走下去。🤝",
+				value: "F",
+				lang: "CN",
+			},
+			{
+				label: "《心空》——爱的太过，伤得太深，只得到  比烟火短的热。💔",
+				value: "F",
+				lang: "CN",
+			},
+			{
+				label: "《Just Be Friends》——如果感情已耗尽，那就成熟地退回朋友关系。👋",
+				value: "T",
+				lang: "JP",
+			},
+			{
+				label: "《忧郁的心情》——暗恋是一场内心纠结又甜蜜的独角戏，每一句口是心非，都是想被你察觉的信号。🌧️💗",
+				value: "F",
+				lang: "JP",
+			},
 		],
 	},
 	{
@@ -307,7 +329,10 @@ export const questions: Question[] = [
 		id: "q25",
 		text: "你发现自己很喜欢的一首冷门术曲突然被翻了出来，热度涨了不少，你首先会？",
 		options: [
-			{ label: "立刻分享到同好群/动态，或者留言评论，“这首宝藏歌曲终于被发现了！”📢", value: "E" },
+			{
+				label: "立刻分享到同好群/动态，或者留言评论，“这首宝藏歌曲终于被发现了！”📢",
+				value: "E",
+			},
 			{ label: "去翻这首歌的评论区，看看新来的听众都在说什么。🔍", value: "J" },
 			{ label: "不急着凑热闹。把这首歌翻出来自己再听几遍，自己好好回味欣赏。🎧", value: "P" },
 			{ label: "心情有点复杂。既开心它被发现了，又担心被滥用或变了味。💧", value: "I" },
@@ -340,10 +365,19 @@ export const questions: Question[] = [
 		id: "q28",
 		text: "你喜欢的歌姬的生日快到了，你更倾向于怎样庆祝？",
 		options: [
-			{ label: "我要参与！在同好群里一起商量主题、写文案、做生贺图，亲自动手才够意思。🎨", value: "E" },
+			{
+				label: "我要参与！在同好群里一起商量主题、写文案、做生贺图，亲自动手才够意思。🎨",
+				value: "E",
+			},
 			{ label: "转发生贺图、生贺曲或热情地留下评论，和大家一起庆祝！📢", value: "E" },
-			{ label: "自己主动去找，听听生贺曲、看看贺图，点赞收藏，在心里祝 ta 生日快乐🎁", value: "I" },
-			{ label: "不会特地去找，随缘刷到，但刷到后会看看，默默欣赏、可能会点点赞。☕", value: "I" },
+			{
+				label: "自己主动去找，听听生贺曲、看看贺图，点赞收藏，在心里祝 ta 生日快乐🎁",
+				value: "I",
+			},
+			{
+				label: "不会特地去找，随缘刷到，但刷到后会看看，默默欣赏、可能会点点赞。☕",
+				value: "I",
+			},
 		],
 	},
 	{
@@ -476,3 +510,19 @@ export const questions: Question[] = [
 		],
 	},
 ];
+
+// 没闲心写正经的深拷贝了，这么搞应该没问题，出bug再说吧
+const redNoteQuestions: Question[] = JSON.parse(JSON.stringify(rawQuestions));
+
+redNoteQuestions[12].text = "你刷到一个术力口视频，UP主搬运时没标P主名字也没放原链接，你会？";
+
+redNoteQuestions[21].text =
+	"你打开软件，发现首页同时推了一首殿堂曲和一首播放不高但看着不错的冷门歌曲，你会先点哪个？";
+
+redNoteQuestions[22].text = "你刷到一个新的术力口企划/活动预告，你很喜欢它的主题，你会？";
+
+redNoteQuestions[37].options[0].label = "平台首页推荐，算法懂我。📱";
+
+const isRedNote = import.meta.env.MODE === "rednote";
+
+export const questions = isRedNote ? redNoteQuestions : rawQuestions;
