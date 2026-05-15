@@ -7,6 +7,7 @@
 		"dev": "bunx --bun vite",
 		"build": "bunx --bun vite build",
 		"build:rednote": "bunx --bun vite build --mode rednote --outDir dist-rednote",
+		"build:bili": "bunx --bun vite build --mode bilibili --outDir dist-bili",
 		"lint": "bunx --bun biome lint",
 		"preview": "bunx --bun vite preview",
 		"preview:rednote": "bunx --bun vite preview --outDir dist-rednote",

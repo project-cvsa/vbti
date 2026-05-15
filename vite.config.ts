@@ -12,59 +12,63 @@ import tailwindcss from "tailwindcss";
 import legacy from '@vitejs/plugin-legacy';
 
 // https://vite.dev/config/
-export default defineConfig({
-	plugins: [
-		react(),
-		babel({ presets: [reactCompilerPreset()] }),
-		legacy({
-			targets: "chrome >= 67, edge >= 79, firefox >= 75, safari >= 14",
-		}),
-	],
-	resolve: {
-		alias: {
-			"@": path.resolve(__dirname, "./src"),
+export default defineConfig(({ mode }) => {
+	const isBili = mode === "bilibili";
+	return {
+		base: isBili ? "./" : "/",
+		plugins: [
+			react(),
+			babel({ presets: [reactCompilerPreset()] }),
+			legacy({
+				targets: "chrome >= 67, edge >= 79, firefox >= 75, safari >= 14",
+			}),
+		],
+		resolve: {
+			alias: {
+				"@": path.resolve(__dirname, "./src"),
+			},
 		},
-	},
-	css: {
-		postcss: {
-			plugins: [
-				tailwindcss(),
-				layer(),
-				postcssPresetEnv({
-					"browsers": [
-						"chrome >= 67, edge >= 79, firefox >= 75, safari >= 14"
-					]
-				}),
-				postcssColorMixFunction(),
-				minmax(),
-				rangePolyfill(),
-			],
+		css: {
+			postcss: {
+				plugins: [
+					tailwindcss(),
+					layer(),
+					postcssPresetEnv({
+						"browsers": [
+							"chrome >= 67, edge >= 79, firefox >= 75, safari >= 14"
+						]
+					}),
+					postcssColorMixFunction(),
+					minmax(),
+					rangePolyfill(),
+				],
+			},
 		},
-	},
-	build: {
-		rolldownOptions: {
-			output: {
-				codeSplitting: {
-					groups: [
-						{
-							name: 'react-vendor',
-							test: /node_modules[\\/]react/,
-							priority: 20,
-						},
-						{
-							name: 'vendor',
-							test: /node_modules/,
-							priority: 10,
-						},
-						{
-							name: 'common',
-							minShareCount: 2,
-							minSize: 10000,
-							priority: 5,
-						},
-					],
+		build: {
+			rolldownOptions: {
+				output: {
+					codeSplitting: {
+						groups: [
+							{
+								name: 'react-vendor',
+								test: /node_modules[\\/]react/,
+								priority: 20,
+							},
+							{
+								name: 'vendor',
+								test: /node_modules/,
+								priority: 10,
+							},
+							{
+								name: 'common',
+								minShareCount: 2,
+								minSize: 10000,
+								priority: 5,
+							},
+						],
+					}
 				}
 			}
 		}
-	}
+}
 });
