@@ -4,7 +4,7 @@ import { Music, VolumeX } from "lucide-react";
 import type { ResultPalette } from "@/core/color";
 import { report } from "@/lib/telemetry";
 
-const isRedNote = import.meta.env.MODE === "rednote";
+const isRedNote = import.meta.env.MODE.startsWith("rednote");
 
 interface SongInfo {
 	name: string;
@@ -109,6 +109,7 @@ export function BgmPlayer({ music, bgm, palette }: BgmPlayerProps) {
 					</a>
 				))}
 			</div>
+			
 			{!isRedNote && (
 				<div
 					className="text-xs text-muted-foreground mt-2"

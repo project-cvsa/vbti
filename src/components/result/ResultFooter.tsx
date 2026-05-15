@@ -7,7 +7,9 @@ interface ResultFooterProps {
 	onOpenStaff: () => void;
 }
 
-const promoItems = [
+const isRedNote = import.meta.env.MODE.startsWith("rednote");
+
+const rawPromoItems = [
 	{
 		href: "https://www.bilibili.com/opus/1197677402486996998",
 		src: "https://i1.hdslb.com/bfs/new_dyn/f99551c63cbf8036ccde5ddfb7d9c606600004959.png@1e_1c.webp",
@@ -33,6 +35,35 @@ const promoItems = [
 		link: "Vsinger创作激励",
 	},
 ];
+
+const redNotePromoItems = [
+	{
+		href: "http://xhslink.com/o/9IViBKtWvol",
+		src: "https://i1.hdslb.com/bfs/new_dyn/f99551c63cbf8036ccde5ddfb7d9c606600004959.png@1e_1c.webp",
+		alt: "2026夏浪派对",
+		link: "小红书结果页bannner_2026夏浪派对",
+	},
+	{
+		href: "https://www.xiaohongshu.com/explore/69e4abf100000000230164f2?xsec_token=ABYqjOkh4ifIwX1gfxe3GGBSGCCSfVovarvOPeXXyOgMs=&xsec_source=pc_user",
+		src: "https://i0.hdslb.com/bfs/new_dyn/84b5c6e424e7391f87a4f3c18e586e8d600004959.png@1e_1c.webp",
+		alt: "中V档案馆",
+		link: "小红书结果页bannner_中V档案馆",
+	},
+	{
+		href: "https://xhslink.com/m/3T6xSw8FAda?xhsshare=&appuid=6011a241000000000100218d&apptime=1778831654&share_id=89f527dc5d7f4f948c333d9524dab36d&share_channel=copy_link",
+		src: "https://i0.hdslb.com/bfs/new_dyn/2c53a1f65ff26a34d03b78587cbd1295600004959.jpg@1e_1c.webp",
+		alt: "来小红书找点V看",
+		link: "小红书结果页bannner_找点V看",
+	},
+	{
+		href: "https://fe.xiaohongshu.com/ditto/vincent/4a1f3f9e2b974549998227053fe4c856?naviHidden=yes&fullscreen=true&source=splash",
+		src: "https://i0.hdslb.com/bfs/new_dyn/dd20b4dfbb0b90bb35f78152128fa14f600004959.jpg@1e_1c.webp",
+		alt: "小红书千声百态声音大赛",
+		link: "小红书结果页bannner_千声百态声音大赛",
+	},
+];
+
+const promoItems = isRedNote ? redNotePromoItems : rawPromoItems;
 
 function BiliUserPill({ img, name, uid }: { img: string; name: string; uid: string }) {
 	return (
@@ -110,7 +141,6 @@ function BiliLinks() {
 }
 
 function RedNoteLinks() {
-	const isRedNote = import.meta.env.MODE === "rednote";
 	if (!isRedNote) return;
 	return (
 		<div className="flex flex-col items-center mt-5 mb-8">
@@ -140,7 +170,6 @@ function RedNoteLinks() {
 }
 
 export function ResultFooter({ palette, onOpenStaff }: ResultFooterProps) {
-	const isRedNote = import.meta.env.MODE === "rednote";
 	return (
 		<div
 			className="mt-5 pt-5 border-t border-accent-foreground/10"

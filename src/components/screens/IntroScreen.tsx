@@ -10,7 +10,7 @@ import { RedNote } from "../icon/RedNote";
 function IntroScreen() {
 	const restart = useSetAtom(restartTestAtom);
 
-	const isRedNote = import.meta.env.MODE === "rednote";
+	const isRedNote = import.meta.env.MODE.startsWith("rednote");
 
 	return (
 		<div className="flex flex-col justify-center items-center text-center md:mt-5">

@@ -7,7 +7,7 @@ import { generateCardPalette } from "@/core/color";
 import { report } from "@/lib/telemetry";
 import { CARD_IMG_MAP } from "@/data/imgMap";
 
-const isRedNote = import.meta.env.MODE === "rednote";
+const isRedNote = import.meta.env.MODE.startsWith("rednote");
 const CARD_URL = isRedNote
 	? "https://fe.xiaohongshu.com/ditto/vincent/6d1debc890b64bf3ad66ff5284edad05?naviHidden=yes&fullscreen=true&source=splash"
 	: "https://vbti-test.com";
