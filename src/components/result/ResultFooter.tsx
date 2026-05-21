@@ -1,6 +1,7 @@
 import { Heart, Tv } from "lucide-react";
 import type { ResultPalette } from "@/core/color";
 import { report } from "@/lib/telemetry";
+import { AuthorSocialGroups } from "./AuthorLinks";
 
 interface ResultFooterProps {
 	palette: ResultPalette | null;
@@ -177,6 +178,7 @@ export function ResultFooter({ palette, onOpenStaff }: ResultFooterProps) {
 		>
 			<BiliLinks />
 			<RedNoteLinks />
+			<AuthorSocialGroups palette={palette} />
 			<div
 				className="flex items-center justify-center gap-3 flex-wrap text-sm font-semibold mb-4"
 				style={palette ? { color: palette.accent } : undefined}
