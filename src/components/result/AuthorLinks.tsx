@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import type { ResultPalette } from "@/core/color";
 import { report } from "@/lib/telemetry";
 
@@ -15,12 +14,20 @@ const PlatformIconConfig = {
 	Bilibili: {
 		bg: "bg-[#f0f9ff]",
 		text: "text-[#00aeec]",
-		component: <Bili />,
+		component: (
+			<div className="text-[22px]">
+				<Bili />
+			</div>
+		),
 	},
 	RedNote: {
 		bg: "bg-[#fff0f3]",
 		text: "text-[#ff2442]",
-		component: <RedNote />,
+		component: (
+			<div className="text-[28px]">
+				<RedNote />
+			</div>
+		),
 	},
 	Weibo: {
 		bg: "bg-[#fdf0ed]",
@@ -34,18 +41,14 @@ const PlatformIconConfig = {
 	},
 };
 
-function VerticalSocialRow({
-	name,
+function SocialIconLink({
 	link,
 	platform,
 	label,
-	palette,
 }: {
-	name: string;
 	link: string;
 	platform: string;
 	label: string;
-	palette: ResultPalette | null;
 }) {
 	const config = PlatformIconConfig[platform as keyof typeof PlatformIconConfig];
 
@@ -54,33 +57,13 @@ function VerticalSocialRow({
 			href={link}
 			target="_blank"
 			rel="noopener noreferrer"
-			className="flex items-center justify-between p-4 border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 group w-full"
+			className={`size-12 flex items-center justify-center rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:scale-105 transition-all duration-200 flex-shrink-0 ${config?.bg || "bg-gray-50"}`}
 			onClick={() => report("link_click", { link: label })}
 		>
-			<div className="flex items-center gap-4">
-				<div
-					className={`size-11 flex items-center justify-center rounded-xl overflow-hidden flex-shrink-0 ${config?.bg || "bg-gray-50"}`}
-				>
-					<div
-						className={`text-2xl flex items-center justify-center ${config?.text || "text-gray-600"}`}
-					>
-						{config?.component}
-					</div>
-				</div>
-				<span className="text-lg font-medium text-gray-800 group-hover:text-black transition-colors">
-					{name}
-				</span>
-			</div>
 			<div
-				className="flex items-center gap-1 text-[#2d6a4f] font-medium bg-[#f0f7f4] px-4 py-1.5 rounded-full text-sm group-hover:bg-[#e1efe9] transition-colors"
-				style={
-					palette?.accent
-						? { color: palette.accent, backgroundColor: `${palette.accent}10` }
-						: undefined
-				}
+				className={`text-2xl flex items-center justify-center ${config?.text || "text-gray-600"}`}
 			>
-				<span>前往</span>
-				<ArrowUpRight className="size-3.5" />
+				{config?.component}
 			</div>
 		</a>
 	);
@@ -135,23 +118,21 @@ export function AuthorSocialGroups({ palette }: AuthorSocialGroupsProps) {
 	];
 
 	return (
-		<div>
-			<div className="text-center font-semibold text-2xl">主要制作者</div>
+		<div className="mb-10">
+			<div className="text-center font-semibold text-xl mb-2">主要制作者</div>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-6">
 				{authorGroups.map((group) => (
-					<div key={group.id} className="flex flex-col gap-3.5">
-						<h3 className="text-xl text-center mb-1">
+					<div key={group.id} className="flex flex-col items-center gap-3">
+						<h3 className="text-lg text-center text-gray-800 font-medium">
 							{group.title}
 						</h3>
-						<div className="flex flex-col gap-2.5">
+						<div className="flex items-center justify-center gap-4 w-full">
 							{group.links.map((item) => (
-								<VerticalSocialRow
+								<SocialIconLink
 									key={item.name}
-									name={item.name}
 									link={item.link}
 									platform={item.platform}
 									label={`${group.title}_${item.name}链接`}
-									palette={palette}
 								/>
 							))}
 						</div>
