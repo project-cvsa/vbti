@@ -48,7 +48,9 @@ export function CharacterHero({ children }: CharacterHeroProps) {
 					>
 						✨ 你的灵魂歌姬已降临
 					</div>
-					<h2 className="text-[2.7rem] leading-tight tracking-tight">{resultCharacter}</h2>
+					<h2 className="text-[2.7rem] leading-tight tracking-tight">
+						{resultCharacter}
+					</h2>
 					<span
 						className="inline-flex items-center gap-2 rounded-full px-4 py-2 border font-bold text-xs mt-2.5 bg-primary-10 border-primary-30 text-primary"
 						style={
@@ -82,11 +84,7 @@ export function CharacterHero({ children }: CharacterHeroProps) {
 						「{character.caption}」
 					</div>
 				</div>
-				<div
-					style={palette ? { color: palette.text } : undefined}
-				>
-					{children}
-				</div>
+				<div style={palette ? { color: palette.text } : undefined}>{children}</div>
 			</div>
 		</div>
 	);

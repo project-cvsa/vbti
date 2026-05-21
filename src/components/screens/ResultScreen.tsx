@@ -86,7 +86,7 @@ export default function ResultScreen() {
 			</Card>
 		);
 	}
-	
+
 	function MoreInfoLink() {
 		if (!character || !resultCharacter) return;
 		if (!isBili) {

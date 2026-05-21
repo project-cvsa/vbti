@@ -6,23 +6,22 @@ function opacityVariants(baseColors) {
 	const steps = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95];
 
 	Object.entries(baseColors).forEach(([name, value]) => {
-		if (typeof value === 'string') {
+		if (typeof value === "string") {
 			variants[name] = { DEFAULT: value };
-			steps.forEach(step => {
+			steps.forEach((step) => {
 				variants[name][step] = `${value.slice(0, value.length - 1)} / ${step}%)`;
 			});
-		} else if (typeof value === 'object' && value !== null) {
+		} else if (typeof value === "object" && value !== null) {
 			variants[name] = {};
 			Object.entries(value).forEach(([subKey, subValue]) => {
-				if (typeof subValue !== 'string')
-					return
-				if (subKey === 'DEFAULT') {
+				if (typeof subValue !== "string") return;
+				if (subKey === "DEFAULT") {
 					variants[name].DEFAULT = subValue;
 				} else {
 					variants[name][subKey] = subValue;
 				}
-				steps.forEach(step => {
-					variants[name][subKey === 'DEFAULT' ? step : `${subKey}-${step}`] =
+				steps.forEach((step) => {
+					variants[name][subKey === "DEFAULT" ? step : `${subKey}-${step}`] =
 						`${subValue.slice(0, subValue.length - 1)} / ${step}%)`;
 				});
 			});
@@ -74,10 +73,7 @@ const baseColors = {
 };
 
 export default {
-	content: [
-		"./index.html",
-		"./src/**/*.{js,ts,jsx,tsx}",
-	],
+	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
 			colors: opacityVariants(baseColors),
@@ -97,4 +93,4 @@ export default {
 		},
 	},
 	plugins: [],
-}
+};

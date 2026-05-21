@@ -208,7 +208,7 @@ export function generateResultPalette(hexColor: string): ResultPalette {
 		pill: adjust(0.95, 0.03),
 		pillHover: adjust(0.82, 0.08),
 		badgeBg: adjust(0.92, 0.045),
-		badgeBorder: adjust(0.82, 0.10),
+		badgeBorder: adjust(0.82, 0.1),
 		line: adjust(0.92, 0.03),
 	};
 }

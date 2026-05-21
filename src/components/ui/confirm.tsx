@@ -70,7 +70,7 @@ export function confirm({
 				cancelText={cancelText}
 				variant={variant}
 				onResolve={finish}
-			/>,
+			/>
 		);
 	});
 }
@@ -112,7 +112,11 @@ function ConfirmDialog({
 					<Button variant="outline" onClick={() => close(false)}>
 						{cancelText}
 					</Button>
-					<Button variant={variant} style={{ backgroundColor: palette?.accent }} onClick={() => close(true)}>
+					<Button
+						variant={variant}
+						style={{ backgroundColor: palette?.accent }}
+						onClick={() => close(true)}
+					>
 						{confirmText}
 					</Button>
 				</DialogFooter>

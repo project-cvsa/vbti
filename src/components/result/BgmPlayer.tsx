@@ -109,7 +109,7 @@ export function BgmPlayer({ music, bgm, palette }: BgmPlayerProps) {
 					</a>
 				))}
 			</div>
-			
+
 			{!isRedNote && (
 				<div
 					className="text-xs text-muted-foreground mt-2"

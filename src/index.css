@@ -6,7 +6,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
 	@apply text-foreground;
 	background: radial-gradient(circle at top right, #e0f0f5 0, #c8ede8 40%, #b0e8e7 100%);
@@ -21,7 +20,6 @@ html {
 }
 
 @keyframes bounce-note {
-
 	0%,
 	100% {
 		transform: translateY(0);

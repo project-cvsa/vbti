@@ -14,7 +14,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你的性格如初音未来一般，是世界的焦点，也是创作的源泉。你有极强的共情力和创造力，内心深处藏着理想主义的光芒。你不需要刻意讨好谁，因为你本身就足够闪耀。就像她的《world is mine》唱到的——“要像公主一样对待我～”",
 		tags: "#世界歌姬 #创造力的中心 #永远16岁 #大家的未来",
-		url: "https://zh.moegirl.org.cn/%E5%88%9D%E9%9F%B3%E6%9C%AA%E6%9D%A5"
+		url: "https://zh.moegirl.org.cn/%E5%88%9D%E9%9F%B3%E6%9C%AA%E6%9D%A5",
 	},
 	GUMI: {
 		caption: "温柔又坚强的失恋女神",
@@ -29,7 +29,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你就像GUMI，温柔俏皮的外表下，藏着一颗历经风雨却依然坚强的心。你善解人意，愿意倾听别人的故事，也用自己的方式治愈他人。就像她的《马赛克卷》唱到的——“为了不互相接触而作茧自缚，这也是命运不是吗～”",
 		tags: "#失恋女神 #温柔坚强 #胡萝卜 #绿发歌姬",
-		url: "https://zh.moegirl.org.cn/Megpoid"
+		url: "https://zh.moegirl.org.cn/Megpoid",
 	},
 	重音Teto: {
 		caption: "恶作剧与反差萌的红色奇美拉",
@@ -44,7 +44,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你就像重音Teto，从愚人节玩笑到真正的歌姬，你的人生充满了反差与惊喜。别人以为你在开玩笑的时候，你已经悄悄做到了别人做不到的事。就像她的《医学》唱到的——“若一切变得轻而易举，那么所有问题都会遭到埋没～”",
 		tags: "#愚人节诞生的奇迹 #红色钻头 #奇美拉 #UTAU代表",
-		url: "https://zh.moegirl.org.cn/%E9%87%8D%E9%9F%B3Teto"
+		url: "https://zh.moegirl.org.cn/%E9%87%8D%E9%9F%B3Teto",
 	},
 	洛天依: {
 		caption: "灵动治愈的中华歌姬",
@@ -59,7 +59,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你就像洛天依，温柔敏感，内心细腻，能敏锐地感知他人的情绪。你可能有些内向，但你的温柔与善良总能在不经意间治愈身边的人。就像她的《勾指起誓》唱到的——“所以让我再靠近一点点，因为你太温暖～”",
 		tags: "#小八 #天然呆 #治愈系声线 #吃货属性",
-		url: "https://zh.moegirl.org.cn/%E6%B4%9B%E5%A4%A9%E4%BE%9D"
+		url: "https://zh.moegirl.org.cn/%E6%B4%9B%E5%A4%A9%E4%BE%9D",
 	},
 	可不: {
 		caption: "捉摸不透的无机质少女",
@@ -74,7 +74,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你就像可不，身上充满了可能性与不可解的神秘气质。你不喜欢被定义，也不喜欢被束缚，对世界有着自己独特的理解方式，有时候你也不懂你自己。就像她的《伪物》唱到的——“这世上没有比假花更艳丽的花朵～”",
 		tags: "#可能性不可解 #神秘 #白发异色瞳 #音乐同位体",
-		url: "https://zh.moegirl.org.cn/%E5%8F%AF%E4%B8%8D"
+		url: "https://zh.moegirl.org.cn/%E5%8F%AF%E4%B8%8D",
 	},
 	乐正绫: {
 		caption: "元气满满的集团大小姐",
@@ -89,7 +89,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"活力四射，元气满满！你是一个行动派，想到什么就去做，从不拖泥带水。你直来直去，这份率真正是你最迷人的地方。就像她的《太阳是什么颜色》唱到的——“无需为今天计划，把心事都放下，请跟着节奏调整步伐～”",
 		tags: "#活力元气 #不拘小节 #行动派 #大小姐气场",
-		url: "https://zh.moegirl.org.cn/%E4%B9%90%E6%AD%A3%E7%BB%AB"
+		url: "https://zh.moegirl.org.cn/%E4%B9%90%E6%AD%A3%E7%BB%AB",
 	},
 	镜音铃: {
 		caption: "热烈活泼的傲娇女孩",
@@ -104,7 +104,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你是一个充满反差魅力的人——有时元气满满，有时又内敛深沉。双面性格让你在任何场合都能游刃有余。就像她的《少女A》唱到的——“为了让我作为我存在～”",
 		tags: "#双子 #元气+傲娇 #反差萌 #黄色系",
-		url: "https://zh.moegirl.org.cn/%E9%95%9C%E9%9F%B3%E9%93%83%C2%B7%E8%BF%9E"
+		url: "https://zh.moegirl.org.cn/%E9%95%9C%E9%9F%B3%E9%93%83%C2%B7%E8%BF%9E",
 	},
 	言和: {
 		caption: "帅气温柔的冰山美人",
@@ -119,7 +119,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"外表看起来酷酷的，甚至有点高冷，但内心其实非常温柔。你不喜欢张扬，但有自己的坚持和底线，让人觉得可靠又安心。就像她的《Side by Side》唱到的——“无法再掩盖，也没人能够再替代～”",
 		tags: "#外表帅气 #小天使 #中二病 #言辞温和",
-		url: "https://zh.moegirl.org.cn/%E8%A8%80%E5%92%8C"
+		url: "https://zh.moegirl.org.cn/%E8%A8%80%E5%92%8C",
 	},
 	镜音连: {
 		caption: "率真与凌厉并存的正太",
@@ -134,7 +134,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"表面上可能是腼腆温柔的青春期少年，但内心深处藏着成熟甚至腹黑的一面。反差感让人捉摸不透，但这正是你的魅力所在。就像他的《逃避法律摇滚》唱到的——“一年到头都得意忘形起来吧～”",
 		tags: "#镜音连 #腹黑成熟 #正太音 #黄色系",
-		url: "https://zh.moegirl.org.cn/%E9%95%9C%E9%9F%B3%E9%93%83%C2%B7%E8%BF%9E"
+		url: "https://zh.moegirl.org.cn/%E9%95%9C%E9%9F%B3%E9%93%83%C2%B7%E8%BF%9E",
 	},
 	心华: {
 		caption: "细腻温婉的偶像高中生",
@@ -149,7 +149,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"活泼开朗，乐观向上！你总是能把快乐传递给身边的人，用你的笑容感染世界。就像她的《冻夏》唱到的——“你留下我的身影，留给某夜的梦境，能够载着你飞行～”",
 		tags: "#活泼可爱 #字典娘 #高中生偶像 #开朗率真",
-		url: "https://zh.moegirl.org.cn/%E5%BF%83%E5%8D%8E"
+		url: "https://zh.moegirl.org.cn/%E5%BF%83%E5%8D%8E",
 	},
 	星尘: {
 		caption: "坚定强大的银河少女",
@@ -164,7 +164,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"温柔、细腻、带一点害羞，但是内核强大。你可能不善言辞，但你的内心有一个丰富的世界，懂得在安静中绽放自己的光芒。就像她的《星愿StarWish》唱到的——“漫天的繁星会照亮你的视野，我也会一直陪伴在你身边，永不分别～”",
 		tags: "#害羞 #空灵声线 #杨桃精 #治愈系 #强大内核",
-		url: "https://zh.moegirl.org.cn/%E6%98%9F%E5%B0%98(%E5%B9%B3%E8%A1%8C%E5%9B%9B%E7%95%8C)"
+		url: "https://zh.moegirl.org.cn/%E6%98%9F%E5%B0%98(%E5%B9%B3%E8%A1%8C%E5%9B%9B%E7%95%8C)",
 	},
 	乐正龙牙: {
 		caption: "高冷外表下的热烈鼓手",
@@ -179,7 +179,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"高冷是你的保护色，你是独当一面的人，愿意对在意的人付出一切。就像他的《In your breath》唱到的——“为你创造这个新宇宙，是我存在的理由～”",
 		tags: "#总裁 #龙十万 #高冷外貌 #阴阳头#鼓手",
-		url: "https://zh.moegirl.org.cn/%E4%B9%90%E6%AD%A3%E9%BE%99%E7%89%99"
+		url: "https://zh.moegirl.org.cn/%E4%B9%90%E6%AD%A3%E9%BE%99%E7%89%99",
 	},
 	徵羽摩柯: {
 		caption: "天才少年全能技术宅",
@@ -194,7 +194,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"聪明，专注的你一直都熠熠闪光。你是最特别的那一个，是不可替代的存在。就像他的《虚拟少年》唱到的——“我的人间，你走不到天涯～”",
 		tags: "#天才少年 #技术宅拯救世界 #键盘操盘天下#小天神",
-		url: "https://zh.moegirl.org.cn/%E5%BE%B5%E7%BE%BD%E6%91%A9%E6%9F%AF"
+		url: "https://zh.moegirl.org.cn/%E5%BE%B5%E7%BE%BD%E6%91%A9%E6%9F%AF",
 	},
 	墨清弦: {
 		caption: "冷静知性的迟钝美人",
@@ -209,7 +209,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你理性，冷静。擅长分析逻辑清晰，在混乱中常常保持冷静的头脑，这是你的魅力所在。就像她的《ACE》唱到的——“爱我光芒四射～”",
 		tags: "#冷静知性 #紫发御姐 #慢半拍 #气质美人",
-		url: "https://zh.moegirl.org.cn/%E5%A2%A8%E6%B8%85%E5%BC%A6"
+		url: "https://zh.moegirl.org.cn/%E5%A2%A8%E6%B8%85%E5%BC%A6",
 	},
 	巡音流歌: {
 		caption: "成熟优雅的大姐姐",
@@ -224,7 +224,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你自带从容不迫的气场，能跟身边人打成一片，常常让大家放下防备跟你开心的一起玩。就像她的《Lukaluka★night fever》唱到的——“我比任何人都还要了解你，所以就交给我吧~”",
 		tags: "#成熟御姐 #粉发蓝瞳 #章鱼 #包容大气",
-		url: "https://zh.moegirl.org.cn/%E5%B7%A1%E9%9F%B3%E6%B5%81%E6%AD%8C"
+		url: "https://zh.moegirl.org.cn/%E5%B7%A1%E9%9F%B3%E6%B5%81%E6%AD%8C",
 	},
 	KAITO: {
 		caption: "天然呆的冰淇淋大哥",
@@ -239,7 +239,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你内心强大，是团队里的大哥，时刻留意着他人的情绪。就像他的《暖暖的kaito》唱到的——“今天也依旧想让你会心而笑～”",
 		tags: "#本体围巾 #天然呆 #温柔大哥 #冰淇淋控",
-		url: "https://zh.moegirl.org.cn/KAITO"
+		url: "https://zh.moegirl.org.cn/KAITO",
 	},
 	MEIKO: {
 		caption: "豪爽利落的大姐头",
@@ -254,7 +254,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你豪爽，帅气讲义气，爽朗大方，是可靠的大姐头。就像她的《Nostalogic》唱到的——“不会褪去色彩的~”",
 		tags: "#短发 #豪爽大姐 #酒豪 #大姐大气场",
-		url: "https://zh.moegirl.org.cn/MEIKO"
+		url: "https://zh.moegirl.org.cn/MEIKO",
 	},
 	诗岸: {
 		caption: "慢热天然呆的迷糊妹妹",
@@ -269,7 +269,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你温柔，包容，不张扬。默默感染着大家，让大家忍不住依靠你。就像她的《寓言预见遇见你的那刻》唱到的——“我的桃心士兵正迈出整齐步伐，占领你的王国～”",
 		tags: "#可爱萌  #治愈 #包容万象#吃苹果",
-		url: "https://zh.moegirl.org.cn/%E8%AF%97%E5%B2%B8"
+		url: "https://zh.moegirl.org.cn/%E8%AF%97%E5%B2%B8",
 	},
 	赤羽: {
 		caption: "生来炙热的火羽凤凰",
@@ -284,7 +284,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你炽热，坚定，是永远不会熄灭的火焰，遇到什么困难都会迎难而上，甚至是期待新的挑战。就像她的《万象霜天》唱到的——“身在局中又怎知晓全貌，此地更高～”",
 		tags: "#火羽 #赤草鸡 #燃曲女王 #赤红之羽",
-		url: "https://zh.moegirl.org.cn/%E8%B5%A4%E7%BE%BD"
+		url: "https://zh.moegirl.org.cn/%E8%B5%A4%E7%BE%BD",
 	},
 	苍穹: {
 		caption: "知性沉稳的大姐姐",
@@ -299,7 +299,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你的大气，深邃，不拘一格，自成一片天空，就像她的《弈》唱到的——“纵历尽万般沧桑，誓要对天赢一场~”",
 		tags: "#自由的风 #自成天空 #大气磅礴 #沉稳",
-		url: "https://zh.moegirl.org.cn/%E8%8B%8D%E7%A9%B9(%E5%B9%B3%E8%A1%8C%E5%9B%9B%E7%95%8C)"
+		url: "https://zh.moegirl.org.cn/%E8%8B%8D%E7%A9%B9(%E5%B9%B3%E8%A1%8C%E5%9B%9B%E7%95%8C)",
 	},
 	海伊: {
 		caption: "梦幻直率的海洋",
@@ -314,7 +314,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你神秘，多变，表面看着安静温柔，内心住着一个有趣的灵魂，只有真正潜入你内心的人才能触及到真实的你，就像她的《STOP》唱到的——“我的诗句，是无法传递的共情～”",
 		tags: "#海蜇皮 #深海歌姬 #空灵神秘 #蓝调时刻",
-		url: "https://zh.moegirl.org.cn/%E6%B5%B7%E4%BC%8A"
+		url: "https://zh.moegirl.org.cn/%E6%B5%B7%E4%BC%8A",
 	},
 	永夜: {
 		caption: "清醒孤独的艺术家",
@@ -329,7 +329,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你有一颗复杂的心，喜欢在深夜独自思考，你享受孤独，就像她的《须臾永恒》唱到的——“醒时如梦醉时清～”",
 		tags: "#反面魅力 #清醒梦境 #孤独浪漫 #独特",
-		url: "https://zh.moegirl.org.cn/%E6%B0%B8%E5%A4%9CMinus"
+		url: "https://zh.moegirl.org.cn/%E6%B0%B8%E5%A4%9CMinus",
 	},
 	东方栀子: {
 		caption: "一颗真诚炙热的心",
@@ -344,7 +344,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你温柔，坚韧，历经风霜从未被击倒。你知道人生掌握在自己手中，不需要被他人左右，就像她的《我讲沐火而唱》唱到的——“沿途有未知风浪，也淋不湿希望～”",
 		tags: "#涅槃重生 #UTAU代表 #中国初代虚拟偶像 #爱能创造奇迹",
-		url: "https://zh.moegirl.org.cn/%E4%B8%9C%E6%96%B9%E6%A0%80%E5%AD%90"
+		url: "https://zh.moegirl.org.cn/%E4%B8%9C%E6%96%B9%E6%A0%80%E5%AD%90",
 	},
 	俊达萌: {
 		caption: "傲娇倔强的枝豆精灵",
@@ -359,7 +359,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你外表傲娇，内在柔软，常常嘴硬心软。总是用自己满不在乎的方式传达善意，就像她的《俊达派对之夜》唱到的——“俊达之行，始于足下～”",
 		tags: "#枝豆妖精 #傲娇萝莉 #毛豆精 #高精力",
-		url: "https://zh.moegirl.org.cn/%E4%BF%8A%E8%BE%BE%E8%90%8C"
+		url: "https://zh.moegirl.org.cn/%E4%BF%8A%E8%BE%BE%E8%90%8C",
 	},
 	结月缘: {
 		caption: "人间辩论诵读姬",
@@ -374,7 +374,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你说话逻辑清晰毫无破绽，喜欢智力上的交锋。追求真理的过程让你感到满足，就像她的《啾噜哩啦·啾噜哩啦·哒哒哒！》唱到的——“最后直到只剩一个人为止，都不会停下～”",
 		tags: "#辩论家 #冒兜 #高智商话痨 #逻辑狂魔",
-		url: "https://zh.moegirl.org.cn/%E7%BB%93%E6%9C%88%E7%BC%98"
+		url: "https://zh.moegirl.org.cn/%E7%BB%93%E6%9C%88%E7%BC%98",
 	},
 	歌爱雪: {
 		caption: "天真努力小学生",
@@ -389,7 +389,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你看起来天真软萌，但是身体里住着一个认真努力的灵魂。你可能还不太自信，但是日复一日的坚持已经让你熠熠闪光了，就像她的《别走》唱到的——“不可以哭，不可以哭～”",
 		tags: "#小学生歌姬 #认真努力 #软萌声线 #冰霜之心",
-		url: "https://zh.moegirl.org.cn/%E6%AD%8C%E7%88%B1%E9%9B%AA"
+		url: "https://zh.moegirl.org.cn/%E6%AD%8C%E7%88%B1%E9%9B%AA",
 	},
 	"V flower": {
 		caption: "叛逆不羁的中性之花",
@@ -401,9 +401,10 @@ export const characters: Record<string, Character> = {
 		desc: "你的性格就像v flower，酷、飒，骨子里的不羁与生俱来。v flower拥有独特的中性嗓音和强烈的摇滚风格，是V家中最具有攻击性和穿透力的声线之一。她的不同版本声库形象如同绽放的热烈花朵，又是孤傲的高岭之花，又美又刃。你不喜欢被规则束缚，有自己的审美和态度。你可能不是传统意义上的“好脾气”，但你的直率、飒爽和忠于自我的风格，让真正欣赏你的人爱到骨子里。你不讨好世界，世界却忍不住关注你。🌺",
 		bgm: "再见宣言 | BV1194y197Re\r\n猛毒 | BV17s41137mU\r\nCharles | BV1gs41147c8\r\n阿吽的节奏 | BV14x411b7SE",
 		music: "/music/vflower.m4a",
-		shortDesc: "你骨子里的不羁与生俱来，你不喜欢被规则束缚，有自己的审美和态度。就像她的《再见宣言》唱到的——“不要被无止境的焦虑蒙蔽～”",
+		shortDesc:
+			"你骨子里的不羁与生俱来，你不喜欢被规则束缚，有自己的审美和态度。就像她的《再见宣言》唱到的——“不要被无止境的焦虑蒙蔽～”",
 		tags: "#摇滚 #中性嗓音 #叛逆 #孤傲",
-		url: "https://zh.moegirl.org.cn/V_flower"
+		url: "https://zh.moegirl.org.cn/V_flower",
 	},
 	IA: {
 		caption: "清澈透明的天使歌姬",
@@ -418,7 +419,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"你清澈透明，内心世界丰富深邃，你的存在就是穿过云层的光一样特别，就像她的《明日的夜空戒哨班》唱到的——“若一起只能以梦作结，那就让我去改变昨天吧～”",
 		tags: "#透明感 #羽毛歌姬 #高音域 #鸭鸭天使",
-		url: "https://zh.moegirl.org.cn/IA"
+		url: "https://zh.moegirl.org.cn/IA",
 	},
 	牧心: {
 		caption: "外冷内热的少年",
@@ -433,7 +434,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"外表清冷疏离，内心却藏着一团温柔的火。你给人的第一印象是可靠，但只要真正走进你的世界，就会发现那里其实温暖如春。就像他的《明日》唱到的——“当流星划破这寂静夜空，而云的涟漪是温柔的风～”",
 		tags: "#外冷内热 #赤诚 #清澈声线 #少年",
-		url: "https://zh.moegirl.org.cn/%E7%89%A7%E5%BF%83"
+		url: "https://zh.moegirl.org.cn/%E7%89%A7%E5%BF%83",
 	},
 	神威乐步: {
 		caption: "武士道精神的帅气大哥",
@@ -448,7 +449,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"帅气、沉稳，坚守着自己的武士道。你把忠诚和厚道视为信条，对认同的人可以付出一切。你的强大从不写在脸上，而是藏在每一次拔刀与收鞘之间。就像他的《Dancing☆Samurai》唱到的——“只要有韵律环绕，就是快乐的人生～”",
 		tags: "#武士 #帅气大哥 #和风美人 #长发",
-		url: "https://zh.moegirl.org.cn/Gackpoid"
+		url: "https://zh.moegirl.org.cn/Gackpoid",
 	},
 	足立零: {
 		caption: "努力的无机质少女",
@@ -463,7 +464,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"带着一丝机器人的认真感，默默在喧嚣的角落按自己的逻辑运行。你或许跟不上这个世界的所有规则，但一旦理解了，就会做到最好。就像她的《热异常》唱到的——“若要是有能施予拯救的理想乡在就好了～”",
 		tags: "#有口无心 #机器人 #永恒生命 #无机质",
-		url: "https://zh.moegirl.org.cn/%E8%B6%B3%E7%AB%8B%E9%9B%B6"
+		url: "https://zh.moegirl.org.cn/%E8%B6%B3%E7%AB%8B%E9%9B%B6",
 	},
 	lily: {
 		caption: "特立独行的摇滚女王",
@@ -478,7 +479,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"自信果决，天生就是要站在舞台中央的指挥官。你不喜欢拖泥带水，更讨厌低效。有人觉得你强势，但你知道：在混乱中指明方向，远比犹豫更有用。就像她的《WAVE》唱到的——“已经不再容许 停滞不前了～”",
 		tags: "#指挥官 #摇滚女王 #电子舞曲 #特立独行",
-		url: "https://zh.moegirl.org.cn/Lily(VOCALOID)"
+		url: "https://zh.moegirl.org.cn/Lily(VOCALOID)",
 	},
 	音街鳗: {
 		caption: "关西腔吐槽役的元气少女",
@@ -493,7 +494,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"元气十足，自带笑点。你的吐槽总能精准戳中要害，是人群里绝对的氛围担当。不管走到哪，你都能用幽默感化解尴尬。就像她的《野兽之舞》唱到的——“想逍遥自在地生活着～”",
 		tags: "#关西腔 #吐槽担当 #鱼形帽子 #元气满满",
-		url: "https://zh.moegirl.org.cn/%E9%9F%B3%E8%A1%97%E9%B3%97"
+		url: "https://zh.moegirl.org.cn/%E9%9F%B3%E8%A1%97%E9%B3%97",
 	},
 	起礼: {
 		caption: "自由快乐的小鸟",
@@ -508,7 +509,7 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"热情、自由，脑袋里总有一千个新点子。虽然计划可能只完成了一半，但你的热情总能感染身边所有人。三分钟的热度，也能点亮三分钟的世界。就像她的《向阳鸟》唱到的——“传说里追逐太阳的少年怀抱着热焰～”",
 		tags: "#竞选者 #起氏双子 #热情小鸟 #灵感永动机",
-		url: "https://zh.moegirl.org.cn/%E8%B5%B7%E7%A4%BC"
+		url: "https://zh.moegirl.org.cn/%E8%B5%B7%E7%A4%BC",
 	},
 	起复: {
 		caption: "秩序至上的小鸟执事",
@@ -523,6 +524,6 @@ export const characters: Record<string, Character> = {
 		shortDesc:
 			"严谨、靠谱，凡事有交代。你信奉秩序，讨厌失控，只要把事情交给你，就一定会有最好的结果。你的可靠，是这个世界最稀缺的品质。就像他的《浮光、羽隙、花信风》唱到的——“展翅翱翔划过边界～”",
 		tags: "#执事 #起氏双子 #秩序理性 #原则至上",
-		url: "https://zh.moegirl.org.cn/%E8%B5%B7%E5%A4%8D"
+		url: "https://zh.moegirl.org.cn/%E8%B5%B7%E5%A4%8D",
 	},
 };

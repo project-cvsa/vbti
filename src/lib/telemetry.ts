@@ -76,8 +76,8 @@ function flush() {
 					buffer.splice(0, count);
 				}
 			})
-			.catch(() => { });
-	} catch { }
+			.catch(() => {});
+	} catch {}
 
 	if (buffer.length > MAX_BUFFER) {
 		buffer.splice(0, buffer.length - MAX_BUFFER);
@@ -90,18 +90,14 @@ function flushForUnload() {
 	try {
 		const { url, blob } = sendBatch(batch);
 		navigator.sendBeacon(url, blob);
-	} catch { }
+	} catch {}
 }
 
-export function report(
-	actionType: string,
-	actionData?: unknown,
-	extra?: Record<string, unknown>,
-) {
+export function report(actionType: string, actionData?: unknown, extra?: Record<string, unknown>) {
 	if (actionType === "link_click") {
 		flush();
 	}
-	
+
 	ensureListeners();
 	startTimer();
 
@@ -117,7 +113,7 @@ export function report(
 	}
 }
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function submitStat(data: Record<string, unknown>) {
 	flush();
@@ -129,11 +125,11 @@ export async function submitStat(data: Record<string, unknown>) {
 			body: JSON.stringify({ ...basePayload(), ...data }),
 			headers: { "Content-Type": "application/json" },
 		}).catch(async () => {
-			await sleep(2000)
-			submitStat(data)
+			await sleep(2000);
+			submitStat(data);
 		});
 	} catch {
-		await sleep(2000)
-		submitStat(data)
+		await sleep(2000);
+		submitStat(data);
 	}
 }

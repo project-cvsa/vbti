@@ -1,6 +1,12 @@
 import type { Question } from "@/core/types";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogDescription,
+} from "@/components/ui/dialog";
 
 interface QuestionZeroModalProps {
 	question: Question;
@@ -36,7 +42,9 @@ export function QuestionZeroModal({ question, onSelect, onBack, open }: Question
 							<span className="font-extrabold text-primary text-base shrink-0">
 								{optionLabels[i]}
 							</span>
-							<span className="text-sm leading-relaxed whitespace-normal">{opt.label}</span>
+							<span className="text-sm leading-relaxed whitespace-normal">
+								{opt.label}
+							</span>
 						</Button>
 					))}
 				</div>

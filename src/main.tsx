@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { Result } from "./pages/Result.tsx";
 import { Toaster } from "@/components/ui/sonner";
-import { onFCP, onLCP, onTTFB, type Metric } from 'web-vitals';
+import { onFCP, onLCP, onTTFB, type Metric } from "web-vitals";
 import { report } from "./lib/telemetry.ts";
 import { isDev } from "./lib/utils.ts";
 
@@ -18,7 +18,7 @@ function sendToAnalytics(metric: Metric) {
 
 	console.log(body);
 
-	report("performance_report", body)
+	report("performance_report", body);
 }
 
 onTTFB(sendToAnalytics);

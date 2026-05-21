@@ -7,7 +7,12 @@ const staffData = [
 	{ role: "技术支持", names: ["中V档案馆"] },
 	{
 		role: "核心内容协力",
-		names: ["特瑞嗷", "周刊虚拟歌手中文曲排行榜（失落的分别，物质的量_mol）", "变大河河", "诺诺小熊猫"],
+		names: [
+			"特瑞嗷",
+			"周刊虚拟歌手中文曲排行榜（失落的分别，物质的量_mol）",
+			"变大河河",
+			"诺诺小熊猫",
+		],
 	},
 	{
 		role: "测试感谢",
@@ -22,7 +27,7 @@ const staffData = [
 			"侨汣",
 			"绿洲计划",
 			"-朝尘-",
-			"诐狐"
+			"诐狐",
 		],
 	},
 ];
@@ -44,15 +49,16 @@ export function StaffModal({ open, onClose, primaryText }: StaffModalProps) {
 			<DialogContent className="max-w-md">
 				<DialogHeader>
 					<DialogTitle className="inline-flex items-center gap-2 text-lg font-bold">
-						♥️
-						Staff与测试人员感谢
+						♥️ Staff与测试人员感谢
 					</DialogTitle>
 				</DialogHeader>
 				<ScrollArea className="max-h-[80vh]">
 					{staffData.map((section) => {
 						return (
 							<div key="">
-								<span className="font-bold" style={{ color: primaryText }}>{section.role}</span>
+								<span className="font-bold" style={{ color: primaryText }}>
+									{section.role}
+								</span>
 								<br />
 								{section.names.map((name) => (
 									<span

@@ -65,7 +65,9 @@ function QuestionCard({ question, questionIndex, savedAnswer, onAnswer }: Questi
 									{isChecked && <Check className="w-3.5 h-3.5" strokeWidth={3} />}
 								</div>
 								<span className="flex items-center gap-2 min-w-0">
-									<span className="font-extrabold text-primary shrink-0">{code}</span>
+									<span className="font-extrabold text-primary shrink-0">
+										{code}
+									</span>
 									<span className="text-sm leading-relaxed">{opt.label}</span>
 								</span>
 							</label>
@@ -95,7 +97,9 @@ function QuestionCard({ question, questionIndex, savedAnswer, onAnswer }: Questi
 							>
 								<RadioGroupItem value={String(i)} />
 								<span className="flex items-center gap-2 min-w-0">
-									<span className="font-extrabold text-primary shrink-0">{code}</span>
+									<span className="font-extrabold text-primary shrink-0">
+										{code}
+									</span>
 									<span className="text-sm leading-relaxed">{opt.label}</span>
 								</span>
 							</label>

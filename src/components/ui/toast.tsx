@@ -1,4 +1,4 @@
-import { toast as sonnerToast } from 'sonner';
+import { toast as sonnerToast } from "sonner";
 
 interface ToastProps {
 	id: string | number;
@@ -8,12 +8,7 @@ interface ToastProps {
 /** I recommend abstracting the toast function
  *  so that you can call it without having to use toast.custom everytime. */
 export function toast(str: string) {
-	return sonnerToast.custom((id) => (
-		<Toast
-			id={id}
-			title={str}
-		/>
-	), { position: "top-center" });
+	return sonnerToast.custom((id) => <Toast id={id} title={str} />, { position: "top-center" });
 }
 
 /** A fully custom toast that still maintains the animations and interactions. */

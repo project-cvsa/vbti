@@ -7,11 +7,12 @@ import type { Plugin } from "postcss";
 export const rangeToLegacy = (params: string): string => {
 	// 1. 处理双端区间: (20rem <= width <= 50rem)
 	// 匹配: [数值1] [符号1] [属性] [符号2] [数值2]
-	const complexRangeRegex = /\(\s*([^\s<>]+)\s*(<=|<)\s*(width|height)\s*(<=|<)\s*([^\s<>]+)\s*\)/g;
+	const complexRangeRegex =
+		/\(\s*([^\s<>]+)\s*(<=|<)\s*(width|height)\s*(<=|<)\s*([^\s<>]+)\s*\)/g;
 
 	let processed = params.replace(complexRangeRegex, (_, val1, op1, prop, op2, val2) => {
-		const minPart = op1 === '<=' ? `(min-${prop}: ${val1})` : `(min-${prop}: ${val1})`; // 注: 严格大于通常在此简写
-		const maxPart = op2 === '<=' ? `(max-${prop}: ${val2})` : `(max-${prop}: ${val2})`;
+		const minPart = op1 === "<=" ? `(min-${prop}: ${val1})` : `(min-${prop}: ${val1})`; // 注: 严格大于通常在此简写
+		const maxPart = op2 === "<=" ? `(max-${prop}: ${val2})` : `(max-${prop}: ${val2})`;
 		return `${minPart} and ${maxPart}`;
 	});
 
@@ -21,11 +22,11 @@ export const rangeToLegacy = (params: string): string => {
 
 	processed = processed.replace(simpleRangeRegex, (_, prop, op, value) => {
 		switch (op) {
-			case '>=':
-			case '>':
+			case ">=":
+			case ">":
 				return `(min-${prop}: ${value})`;
-			case '<=':
-			case '<':
+			case "<=":
+			case "<":
 				return `(max-${prop}: ${value})`;
 			default:
 				return _;
@@ -37,11 +38,11 @@ export const rangeToLegacy = (params: string): string => {
 
 	processed = processed.replace(reverseRangeRegex, (_, value, op, prop) => {
 		switch (op) {
-			case '<=':
-			case '<':
+			case "<=":
+			case "<":
 				return `(min-${prop}: ${value})`;
-			case '>=':
-			case '>':
+			case ">=":
+			case ">":
 				return `(max-${prop}: ${value})`;
 			default:
 				return _;
