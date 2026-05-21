@@ -98,6 +98,10 @@ export function report(
 	actionData?: unknown,
 	extra?: Record<string, unknown>,
 ) {
+	if (actionType === "link_click") {
+		flush();
+	}
+	
 	ensureListeners();
 	startTimer();
 

@@ -11,6 +11,7 @@
 		"lint": "bunx --bun biome lint",
 		"preview": "bunx --bun vite preview",
 		"preview:rednote": "bunx --bun vite preview --outDir dist-rednote",
+		"preview:bili": "bunx --bun vite preview --outDir dist-bili",
 		"format": "bunx --bun biome format --write .",
 		"test": "bunx --bun vitest run"
 	},

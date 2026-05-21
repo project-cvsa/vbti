@@ -24,6 +24,10 @@ import { DATA_VERSION } from "@/data/ver";
 import * as pkg from "../../../package.json";
 import { report, submitStat } from "@/lib/telemetry";
 import { confirm } from "@/components/ui/confirm";
+import { charVideos } from "@/data/charVideos";
+import { isDev } from "@/lib/utils";
+
+const isBili = import.meta.env.MODE === "bilibili";
 
 export default function ResultScreen() {
 	const answers = useAtomValue(answersAtom);
@@ -82,8 +86,37 @@ export default function ResultScreen() {
 			</Card>
 		);
 	}
-
-	const isDev = import.meta.env.MODE === "development" || window.location.pathname === "/dev";
+	
+	function MoreInfoLink() {
+		if (!character || !resultCharacter) return;
+		if (!isBili) {
+			return (
+				<a
+					href={character.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-muted-foreground"
+					style={{ color: palette?.muted }}
+					onClick={() => report("link_click", { link: "百科", character })}
+				>
+					→点击了解关于ta的更多
+				</a>
+			);
+		} else {
+			return (
+				<a
+					href={charVideos[resultCharacter]}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-muted-foreground"
+					style={{ color: palette?.muted }}
+					onClick={() => report("link_click", { link: "角色介绍_哔哩哔哩", character })}
+				>
+					→点击了解关于ta的更多
+				</a>
+			);
+		}
+	}
 
 	return (
 		<Card className="md:p-6 ring-none ring-transparent shadow-none md:bg-white">
@@ -94,16 +127,7 @@ export default function ResultScreen() {
 				<div className="text-base leading-relaxed whitespace-pre-wrap">
 					{character.desc}
 					<br />
-					<a
-						href={character.url}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="text-muted-foreground"
-						style={{ color: palette?.muted }}
-						onClick={() => report("link_click", { link: "百科", character })}
-					>
-						→点击了解关于ta的更多
-					</a>
+					<MoreInfoLink />
 				</div>
 				<BgmPlayer music={character.music} bgm={character.bgm} palette={palette} />
 			</CharacterHero>

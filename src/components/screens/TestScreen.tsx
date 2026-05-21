@@ -31,6 +31,7 @@ import { QuestionZeroModal } from "@/components/modals/QuestionZeroModal";
 import { computeMBTI } from "@/core/mbti";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { report } from "@/lib/telemetry";
+import { isDev } from "@/lib/utils";
 
 export default function TestScreen() {
 	const [answers, setAnswers] = useAtom(answersAtom);
@@ -132,8 +133,6 @@ export default function TestScreen() {
 		setSubmitting(false);
 		resolveCharacter(answers, null);
 	}, [answers, submitting, resolveCharacter, answeredCount]);
-
-	const isDev = import.meta.env.MODE === "development" || window.location.pathname === "/dev";
 
 	return (
 		<div className="mt-6 p-6 max-md:p-0 max-md:mt-0 bg-white rounded-2xl max-md:bg-transparent max-md:rounded-none">

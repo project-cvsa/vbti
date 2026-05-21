@@ -7,6 +7,7 @@ import { Result } from "./pages/Result.tsx";
 import { Toaster } from "@/components/ui/sonner";
 import { onFCP, onLCP, onTTFB, type Metric } from 'web-vitals';
 import { report } from "./lib/telemetry.ts";
+import { isDev } from "./lib/utils.ts";
 
 function sendToAnalytics(metric: Metric) {
 	const body = {
@@ -24,7 +25,7 @@ onTTFB(sendToAnalytics);
 onFCP(sendToAnalytics);
 onLCP(sendToAnalytics);
 
-const isDev = import.meta.env.MODE === "development";
+console.log(isDev);
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
@@ -32,7 +33,6 @@ createRoot(document.getElementById("root")!).render(
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />} />
-				<Route path="/dev" element={<App />} />
 				{isDev && <Route path="/result/:character" element={<Result />} />}
 			</Routes>
 		</BrowserRouter>
