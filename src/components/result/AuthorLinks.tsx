@@ -1,14 +1,8 @@
-import type { ResultPalette } from "@/core/color";
 import { report } from "@/lib/telemetry";
-
 import { RedNote } from "../icon/RedNote";
 import { Weibo } from "../icon/Weibo";
 import { TikTok } from "../icon/TikTok";
 import { Bili } from "../icon/Bili";
-
-interface AuthorSocialGroupsProps {
-	palette: ResultPalette | null;
-}
 
 const PlatformIconConfig = {
 	Bilibili: {
@@ -69,7 +63,7 @@ function SocialIconLink({
 	);
 }
 
-export function AuthorSocialGroups({ palette }: AuthorSocialGroupsProps) {
+export function AuthorSocialGroups() {
 	const authorGroups = [
 		{
 			id: "mobai",

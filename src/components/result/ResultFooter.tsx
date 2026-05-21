@@ -178,7 +178,7 @@ export function ResultFooter({ palette, onOpenStaff }: ResultFooterProps) {
 		>
 			<BiliLinks />
 			<RedNoteLinks />
-			<AuthorSocialGroups palette={palette} />
+			<AuthorSocialGroups />
 			<div
 				className="flex items-center justify-center gap-3 flex-wrap text-sm font-semibold mb-4"
 				style={palette ? { color: palette.accent } : undefined}
