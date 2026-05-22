@@ -64,6 +64,11 @@ function SocialIconLink({
 }
 
 export function AuthorSocialGroups() {
+	const isRedNote = import.meta.env.MODE.startsWith("rednote");
+	const isBili = import.meta.env.MODE.startsWith("bili");
+	if (isRedNote || isBili) {
+		return;
+	}
 	const authorGroups = [
 		{
 			id: "mobai",
