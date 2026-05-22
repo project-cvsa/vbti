@@ -11,6 +11,7 @@ function IntroScreen() {
 	const restart = useSetAtom(restartTestAtom);
 
 	const isRedNote = import.meta.env.MODE.startsWith("rednote");
+	const isBili = import.meta.env.MODE.startsWith("bili");
 
 	return (
 		<div className="flex flex-col justify-center items-center text-center md:mt-5">
@@ -68,17 +69,24 @@ function IntroScreen() {
 							<Tv className="size-4" />
 							关注作者 / 反馈问题
 						</a>
-						<a
-							href={
-								isRedNote
-									? "https://www.xiaohongshu.com/sns/invitation/group-chat?groupId=137918761994270474&token=cKP5q0aXvIumpbJytEljLdVVKYzqKXZS3lkin_umraCD85KEM89WPOT0jl_KUa8fHlWWxo4C-ox2pHuY2YAF4Dx27ZhDlyz8f1E6oSrsTjs"
-									: "https://qm.qq.com/q/eV1JhoeM0g"
-							}
-							onClick={() => report("link_click", { link: "交流群_首页" })}
-							className="text-primary text-base font-semibold"
-						>
-							{isRedNote ? "加入VBTI交流群" : "加入VBTI交流群：747501305"}
-						</a>
+						{!isBili && (
+							<a
+								href={
+									isRedNote
+										? "https://www.xiaohongshu.com/sns/invitation/group-chat?groupId=137918761994270474&token=cKP5q0aXvIumpbJytEljLdVVKYzqKXZS3lkin_umraCD85KEM89WPOT0jl_KUa8fHlWWxo4C-ox2pHuY2YAF4Dx27ZhDlyz8f1E6oSrsTjs"
+										: "https://qm.qq.com/q/eV1JhoeM0g"
+								}
+								onClick={() => report("link_click", { link: "交流群_首页" })}
+								className="text-primary text-base font-semibold"
+							>
+								{isRedNote ? "加入VBTI交流群" : "加入VBTI交流群：747501305"}
+							</a>
+						)}
+						{isBili && (
+							<span className="inline-flex items-center gap-1 hover:underline">
+								加入VBTI交流群：747501305
+							</span>
+						)}
 					</div>
 					<p className="mt-6 text-muted-foreground text-[11px]">
 						版本：v{pkg.version} &nbsp;&nbsp;| &nbsp;&nbsp;bgm：拼凑的断音 - Toa

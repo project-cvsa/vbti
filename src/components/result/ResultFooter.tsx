@@ -9,6 +9,7 @@ interface ResultFooterProps {
 }
 
 const isRedNote = import.meta.env.MODE.startsWith("rednote");
+const isBili = import.meta.env.MODE.startsWith("bili");
 
 const rawPromoItems = [
 	{
@@ -197,6 +198,7 @@ export function ResultFooter({ palette, onOpenStaff }: ResultFooterProps) {
 					<Tv className="size-4" />
 					关注作者 / 反馈问题
 				</a>
+
 				<span className="opacity-0 md:opacity-50">·</span>
 				<button
 					type="button"
@@ -210,19 +212,26 @@ export function ResultFooter({ palette, onOpenStaff }: ResultFooterProps) {
 					Staff与测试人员感谢
 				</button>
 				<span className="opacity-0 md:opacity-50">·</span>
-				<a
-					href={
-						isRedNote
-							? "https://www.xiaohongshu.com/sns/invitation/group-chat?groupId=137918761994270474&token=cKP5q0aXvIumpbJytEljLdVVKYzqKXZS3lkin_umraCD85KEM89WPOT0jl_KUa8fHlWWxo4C-ox2pHuY2YAF4Dx27ZhDlyz8f1E6oSrsTjs"
-							: "https://qm.qq.com/q/eV1JhoeM0g"
-					}
-					target="_blank"
-					rel="noopener noreferrer"
-					className="inline-flex items-center gap-1 hover:underline"
-					onClick={() => report("link_click", { link: "交流群_结果页" })}
-				>
-					{isRedNote ? "加入VBTI交流群" : "加入VBTI交流群：747501305"}
-				</a>
+				{!isBili && (
+					<a
+						href={
+							isRedNote
+								? "https://www.xiaohongshu.com/sns/invitation/group-chat?groupId=137918761994270474&token=cKP5q0aXvIumpbJytEljLdVVKYzqKXZS3lkin_umraCD85KEM89WPOT0jl_KUa8fHlWWxo4C-ox2pHuY2YAF4Dx27ZhDlyz8f1E6oSrsTjs"
+								: "https://qm.qq.com/q/eV1JhoeM0g"
+						}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="inline-flex items-center gap-1 hover:underline"
+						onClick={() => report("link_click", { link: "交流群_结果页" })}
+					>
+						{isRedNote ? "加入VBTI交流群" : "加入VBTI交流群：747501305"}
+					</a>
+				)}
+				{isBili && (
+					<span className="inline-flex items-center gap-1 hover:underline">
+						加入VBTI交流群：747501305
+					</span>
+				)}
 			</div>
 
 			<div className="text-center mt-5">
