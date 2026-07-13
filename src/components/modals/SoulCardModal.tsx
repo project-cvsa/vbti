@@ -6,6 +6,7 @@ import QRCode from "qrcode";
 import { generateCardPalette } from "@/core/color";
 import { report } from "@/lib/telemetry";
 import { CARD_IMG_MAP } from "@/data/imgMap";
+import { toast } from "../ui/toast";
 
 const isRedNote = import.meta.env.MODE.startsWith("rednote");
 const CARD_URL = isRedNote
@@ -204,13 +205,23 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 		}
 	}, [open, generateCard]);
 
-	const handleDownload = () => {
+	const handleDownload = async () => {
 		if (!cardDataURL) return;
 		report("download_card", { characterName });
-		const link = document.createElement("a");
-		link.download = `VBTI_灵魂卡片_${characterName}.png`;
-		link.href = cardDataURL;
-		link.click();
+		try {
+			const supportSavingToAlbum = await window?.toy?.isSupport("saveImageToAlbum");
+			if (supportSavingToAlbum) {
+				const result = await window?.toy?.saveImageToAlbum({ url: cardDataURL });
+				if (result.localPath) {
+					toast("海报已保存到相册");
+				}
+			} else {
+				const link = document.createElement("a");
+				link.download = `VBTI_灵魂卡片_${characterName}.png`;
+				link.href = cardDataURL;
+				link.click();
+			}
+		} catch {}
 	};
 
 	return (
@@ -237,7 +248,12 @@ export function SoulCardModal({ open, onClose, characterName, character }: SoulC
 							className="max-w-90 max-h-[70vh] rounded-xl"
 						/>
 						<div className="flex gap-3">
-							<Button style={{ background: palette.accent }} onClick={handleDownload}>
+							<Button
+								style={{ background: palette.accent }}
+								onClick={async () => {
+									await handleDownload();
+								}}
+							>
 								保存到本地
 							</Button>
 							<Button variant="outline" onClick={onClose}>
